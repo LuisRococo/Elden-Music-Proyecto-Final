@@ -7,3 +7,6 @@ Creamos una carpeta llamada controladores donde pondremos el codigo que la ruta 
 
 https://www.youtube.com/watch?v=fG0p5WONxGg
 https://victorroblesweb.es/2018/01/17/controladores-y-rutas-en-nodejs-api-rest-node-js/
+
+*****JWT TOKEN
+con jwt en el login, vamos a sign un pedazo de informacion como token y se lo mandamos al cliente

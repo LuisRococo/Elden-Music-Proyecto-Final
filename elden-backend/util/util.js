@@ -1,4 +1,4 @@
-function getErrorAnswer(status = 500, error = "Something went bad") {
+function getErrorAnswer(status = 500, error = "Something went wrong :c") {
   return {
     status: status,
     error: error

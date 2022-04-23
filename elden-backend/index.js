@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
   res.send({ welcome: "Welcome to Elden Music API !!!" });
 });
 
-app.use("/users", userRouter);
+app.use("/api/users", userRouter);
 
 //error handler middleware
 app.use((error, req, res, next) => {
