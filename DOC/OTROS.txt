@@ -1,0 +1,9 @@
+*****Rutas y controladores
+normalmente dividimos el codigo entre la ruta y lo que la ruta hace.
+Creamos una carpeta llamada controladores donde pondremos el codigo que la ruta hara
+
+-El maestro simplemente creo una funcion dentro del (req, res) de la ruta
+*tutos de internet dicen que pongas la (req, res) en otro modulo como controlador
+
+https://www.youtube.com/watch?v=fG0p5WONxGg
+https://victorroblesweb.es/2018/01/17/controladores-y-rutas-en-nodejs-api-rest-node-js/
