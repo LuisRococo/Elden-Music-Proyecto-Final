@@ -3,11 +3,13 @@ const mongoose = require("mongoose");
 const connectDatabase = require("./src/db/dbConnect");
 const userRouter = require("./src/routes/userRoute");
 const genreRouter = require("./src/routes/genreRoute");
+const singerRouter = require("./src/routes/singerRoute");
 const { getErrorAnswer } = require("./src/util/util");
 
 //CONFIGURE
 const port = 8000;
 const app = express();
+const apiRouter = express.Router();
 
 app.use(
   express.urlencoded({
@@ -21,8 +23,10 @@ app.get("/", (req, res) => {
   res.send({ welcome: "Welcome to Elden Music API !!!" });
 });
 
-app.use("/api/users", userRouter);
-app.use("/api/genres", genreRouter);
+apiRouter.use("/users", userRouter);
+apiRouter.use("/genres", genreRouter);
+apiRouter.use("/singers", singerRouter);
+app.use("/api", apiRouter);
 
 //error handler middleware
 app.use((error, req, res, next) => {
@@ -31,7 +35,6 @@ app.use((error, req, res, next) => {
 });
 
 //INIT
-
 app.listen(port, async () => {
   await connectDatabase();
   console.log(`Servidor activo en http://localhost:${port}`);
