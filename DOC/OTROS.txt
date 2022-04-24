@@ -9,4 +9,11 @@ https://www.youtube.com/watch?v=fG0p5WONxGg
 https://victorroblesweb.es/2018/01/17/controladores-y-rutas-en-nodejs-api-rest-node-js/
 
 *****JWT TOKEN
-con jwt en el login, vamos a sign un pedazo de informacion como token y se lo mandamos al cliente
+1. con jwt en el login, vamos a sign un pedazo de informacion como token y se lo mandamos al cliente
+2. crear una funcion para veridifcar el token que sea un tipo de middleware que se pone sobre las rutas a proteger
+3. obtener el token, verificar y amndar error o next() si no valido o exito
+
+
+*****SESSION ID vs JWT
+en session el usuario se loggea y en el server se guarda un id para saber que usuario esta loggeado,
+dn jwt no es necesario eso

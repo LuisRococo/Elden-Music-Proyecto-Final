@@ -1,8 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const connectDatabase = require("./src/db/dbConnect");
-const userRouter = require("./routes/userRoute");
-const { getErrorAnswer } = require("./util/util");
+const userRouter = require("./src/routes/userRoute");
+const genreRouter = require("./src/routes/genreRoute");
+const { getErrorAnswer } = require("./src/util/util");
 
 //CONFIGURE
 const port = 8000;
@@ -21,9 +22,11 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/users", userRouter);
+app.use("/api/genres", genreRouter);
 
 //error handler middleware
 app.use((error, req, res, next) => {
+  console.log(error);
   res.status(500).send(getErrorAnswer());
 });
 

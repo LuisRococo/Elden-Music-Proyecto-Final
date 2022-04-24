@@ -1,9 +1,7 @@
-const { User } = require("../src/db/models/userModel");
+const { User } = require("../db/models/userModel");
 const { getSuccessAnswer, getErrorAnswer } = require("../util/util");
 const jwt = require("jsonwebtoken");
-
-const AUTH_SECRET_KEY =
-  "186b85d865d676b96f4d9317fa337455a13501aec3a0af062576885b57bc5a5e";
+const { AUTH_SECRET_KEY } = require("../util/secrets");
 
 async function registerUser(req, res, next) {
   try {
