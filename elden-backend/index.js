@@ -1,5 +1,4 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const connectDatabase = require("./src/db/dbConnect");
 const userRouter = require("./src/routes/userRoute");
 const genreRouter = require("./src/routes/genreRoute");
@@ -38,6 +37,9 @@ app.use((error, req, res, next) => {
 
 //INIT
 app.listen(port, async () => {
-  await connectDatabase();
+  const conn = await connectDatabase();
+  const [rows] = await conn.execute("SELECT 1 + 1 + 1 AS solution", [2]);
+  await conn.end();
+  console.log(rows);
   console.log(`Servidor activo en http://localhost:${port}`);
 });

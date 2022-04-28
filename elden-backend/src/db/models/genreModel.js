@@ -1,10 +1,10 @@
-const { model, Schema } = require("mongoose");
+// const { model, Schema } = require("mongoose");
 
-const genreSchema = new Schema({
-  _id: { type: String, required: true },
-  description: { type: String, required: true }
-});
+// const genreSchema = new Schema({
+//   _id: { type: String, required: true },
+//   description: { type: String, required: true }
+// });
 
-const GenreModel = model("genres", genreSchema);
+// const GenreModel = model("genres", genreSchema);
 
-module.exports.Genre = GenreModel;
+module.exports.Genre = null;

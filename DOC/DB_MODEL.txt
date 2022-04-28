@@ -1,1 +1,74 @@
-Lo que haremos sera hacer una referencia entre cada tablan (el plan original).
+--tbl_user:
+id_user
+user_name
+password
+email
+is_admin
+*id_actual_address (tbl_user_addres)
+
+--tbl_user_address
+id_address
+id_user
+adress
+
+--tbl_song
+id_song
+song_name
+duration (seconds)
+file
+preview_file
+price
+
+*id_album (tbl_album)
+(lista de artistas)
+(release_date)
+
+--tbl_artist
+id_artist
+artist_name,
+nationality
+
+!(quizas agregarle imagen del artista)
+(albunes)
+(canciones mas escuhadas, top 5)
+
+--tbl_top_artist_songs
+id_artist (tbl_artist)
+id_song (tbl_song)
+
+--tbl_album
+id_album
+name
+image
+release_date
+is_single
+price
+
+(generos)
+(lista de canciones)
+
+--tbl_album_song
+id_album (tbl_album)
+id_song (tbl_song)
+
+--tbl_album_genre
+id_album (tbl_album)
+id_genre (tbl_genre)
+
+--tbl_genre
+id_genre
+name
+
+--tbl_user_songs
+id_user (tbl_user)
+id_song (tbl_song)
+
+--tbl_playlist
+id_playlist
+id_user (tbl_user)
+
+--tbl_playlist_songs
+id_playlist (tbl_playlist)
+id_song (tbl_song)
+
+

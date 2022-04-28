@@ -1,9 +1,16 @@
-const { Schema, model, connect } = require("mongoose");
+const { MYSQL_CONFIG } = require("../util/secrets");
+const mysql = require("mysql2/promise");
 
-const DB_PORT = 27017;
-const DB_NAME = "EldenMusic";
+const { dbHost, dbPort, dbName, dbUser, dbPassword } = MYSQL_CONFIG;
 
-module.exports = async function connectDatabase() {
-  await connect(`mongodb://localhost:${DB_PORT}/${DB_NAME}`);
-  console.log("Conectado a mongoDB");
+module.exports = async function getDataBaseConnection() {
+  const connection = await mysql.createConnection({
+    host: dbHost,
+    user: dbUser,
+    password: dbPassword,
+    database: dbName,
+    port: dbPort
+  });
+
+  return connection;
 };
