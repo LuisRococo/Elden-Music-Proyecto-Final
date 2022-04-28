@@ -4,6 +4,7 @@ const connectDatabase = require("./src/db/dbConnect");
 const userRouter = require("./src/routes/userRoute");
 const genreRouter = require("./src/routes/genreRoute");
 const singerRouter = require("./src/routes/singerRoute");
+const albumRouter = require("./src/routes/albumRouter");
 const { getErrorAnswer } = require("./src/util/util");
 
 //CONFIGURE
@@ -26,6 +27,7 @@ app.get("/", (req, res) => {
 apiRouter.use("/users", userRouter);
 apiRouter.use("/genres", genreRouter);
 apiRouter.use("/singers", singerRouter);
+apiRouter.use("/albums", albumRouter);
 app.use("/api", apiRouter);
 
 //error handler middleware

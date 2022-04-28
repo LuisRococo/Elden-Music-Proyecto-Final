@@ -1,8 +1,1 @@
---users
-*id
-*username
-*email
-*password
-*isAdmin
-
---
+Lo que haremos sera hacer una referencia entre cada tablan (el plan original).
