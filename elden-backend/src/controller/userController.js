@@ -1,15 +1,20 @@
-const { User } = require("../db/models/userModel");
 const { getSuccessAnswer, getErrorAnswer } = require("../util/util");
 const jwt = require("jsonwebtoken");
 const { AUTH_SECRET_KEY } = require("../util/secrets");
+const getDataBaseConnection = require("../db/dbConnect");
 
 async function registerUser(req, res, next) {
   try {
     const { userName, email, password } = req.body;
     const isAdmin = false;
-    const newUser = new User({ userName, email, password, isAdmin });
 
-    await newUser.save();
+    const conn = await getDataBaseConnection();
+    conn.execute(
+      "insert into tbl_user (user_name, email, password, is_admin) values (?, ?, ?, ?)",
+      [userName, email, password, isAdmin]
+    );
+    await conn.end();
+
     res.json(getSuccessAnswer());
   } catch (error) {
     next(error);
@@ -44,17 +49,17 @@ async function login(req, res, next) {
 
     const token = jwt.sign(
       {
-        _id: user._id,
-        userName: user.userName,
+        _id: user.id_user,
+        userName: user.user_name,
         email: user.email,
-        isAdmin: user.isAdmin
+        isAdmin: user.is_admin
       },
       AUTH_SECRET_KEY,
       { expiresIn: "3h" }
     );
 
     user = {
-      userName: user.userName,
+      userName: user.user_name,
       token
     };
 
@@ -67,13 +72,27 @@ async function login(req, res, next) {
 }
 
 async function checkLoginUserName(userName, password) {
-  const user = await User.findOne({ userName });
+  const conn = await getDataBaseConnection();
+  const [rows] = await conn.execute(
+    "select * from tbl_user where user_name = ? limit 1",
+    [userName]
+  );
+  await conn.end();
+
+  const user = rows[0];
   if (user && user.password === password) return user;
   return null;
 }
 
 async function checkLoginEmail(email, password) {
-  const user = await User.findOne({ email });
+  const conn = await getDataBaseConnection();
+  const [rows] = await conn.execute(
+    "select * from tbl_user where email = ? limit 1",
+    [email]
+  );
+  await conn.end();
+
+  const user = rows[0];
   if (user && user.password === password) return user;
   return null;
 }

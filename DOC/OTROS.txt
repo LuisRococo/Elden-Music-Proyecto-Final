@@ -21,3 +21,6 @@ dn jwt no es necesario eso
 *****DOCKER
 https://morioh.com/p/d8d9e7732952
 ese link para iniciar tablas en docker
+
+*****TAMANO CANCION
+For normal quality, songs typically should be 3 to 4 megabytes.

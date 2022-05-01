@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Ayudante</title>
+
+</head>
+
+<body>
+
+    <h1>AYUDANTE</h1>
+
+    <h2>SUBIR IMAGEN</h2>
+    <hr>
+
+    <form action="" method="post" id="image-form">
+        <label for="">Seleccione una imagen</label>
+        <input type="file" name="imagen" id="imagen-input">
+        <input type="submit" value="Subir imagen">
+    </form>
+
+    <h3>Imagen Regresada</h3>
+    <img width="400px" src="" alt="" id="imagen-regresada">
+
+    <hr>
+
+    <h2>SUBIR AUDIO</h2>
+    <hr>
+
+    <form action="" method="post" id="cancion-form">
+        <label for="Seleccione un audio"></label>
+        <input type="file" name="cancion" id="cancion-input">
+        <input type="submit" value="Subir imagen">
+    </form>
+
+    <h3>Cancion Regresada</h3>
+    <audio id="audio-comp" src="" preload="auto" controls></audio>
+
+
+    <script src="./logic.js"></script>
+
+</body>
+
+</html>
