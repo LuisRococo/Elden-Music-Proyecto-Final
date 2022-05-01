@@ -5,11 +5,13 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import NavBar from "./components/general/NavBar";
 import HomePage from "./pages/HomePage";
 import AdminPage from "./pages/AdminPage";
+import Player from "./components/general/player/Player";
 
 function App() {
   return (
     <Router>
       <NavBar />
+      <Player />
 
       <Routes>
         <Route path="/" element={<HomePage />} />
