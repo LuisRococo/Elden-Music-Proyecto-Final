@@ -1,5 +1,4 @@
 const express = require("express");
-const connectDatabase = require("./src/db/dbConnect");
 const userRouter = require("./src/routes/userRoute");
 const genreRouter = require("./src/routes/genreRoute");
 const singerRouter = require("./src/routes/singerRoute");
@@ -37,14 +36,10 @@ app.use("/api", apiRouter);
 //error handler middleware
 app.use((error, req, res, next) => {
   console.log(error);
-  res.status(500).send(getErrorAnswer());
+  res.status(500).send(getErrorAnswer(500));
 });
 
 //INIT
 app.listen(port, async () => {
-  // const conn = await connectDatabase();
-  // const [rows] = await conn.execute("SELECT 1 + 1 + 1 AS solution", [2]);
-  // await conn.end();
-  // console.log(rows);
   console.log(`Servidor activo en http://localhost:${port}`);
 });

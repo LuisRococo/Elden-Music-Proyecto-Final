@@ -1,10 +1,20 @@
-const { Singer } = require("../db/models/singerModel");
-const { getErrorAnswer } = require("../util/util");
+const { getErrorAnswer, getSuccessAnswer } = require("../util/util");
+const getDataBaseConnection = require("../db/dbConnect");
 
 async function getSingers(req, res, next) {
   try {
-    const singers = await Singer.find();
-    res.json(singers);
+    const jsonRes = {};
+    const conn = await getDataBaseConnection();
+    const [rows] =
+      await conn.execute(`select json_arrayagg (result) as res from (
+      select json_object (
+        "id", u.id_genre
+      ) as result
+      from tbl_genre as u
+    ) as result`);
+
+    await conn.end();
+    res.json(rows[0]);
   } catch (error) {
     next(error);
   }
@@ -12,16 +22,19 @@ async function getSingers(req, res, next) {
 
 async function createSinger(req, res, next) {
   try {
-    const { name, lastName, stageName, image, nationality } = req.body;
-    let newSinger = new Singer({
-      name,
-      lastName,
-      stageName,
-      image,
-      nationality
-    });
-    newSinger = await newSinger.save();
-    res.json(newSinger);
+    const { singerName, stageName, nationality, image } = req.body;
+    const conn = await getDataBaseConnection();
+    await conn.execute("insert into tbl_file (file) values (?)", [image]);
+    let [rows] = await conn.execute("select LAST_INSERT_ID() as 'idImage'");
+    const idImage = rows[0].idImage;
+
+    [rows] = await conn.execute(
+      "insert into tbl_singer (singer_name, nationality, id_image, stage_name) values (?, ?, ?, ?)",
+      [singerName, nationality, idImage]
+    );
+
+    await conn.end();
+    res.json(getSuccessAnswer());
   } catch (error) {
     next(error);
   }
@@ -45,15 +58,19 @@ async function getSinger(req, res, next) {
 
 async function deleteSinger(req, res, next) {
   try {
-    const { _id } = req.body;
+    const { idSinger } = req.body;
 
-    if (!_id) {
+    if (!idSinger) {
       res.status(400).json(getErrorAnswer(400, "Identificator is needed"));
       return;
     }
 
-    const singer = await Singer.findByIdAndDelete(_id, { new: true });
-    res.json(singer);
+    const conn = await getDataBaseConnection();
+    await conn.execute("delete from tbl_singer where id_singer = ?", [
+      idSinger
+    ]);
+
+    res.json(getSuccessAnswer());
   } catch (error) {
     next(error);
   }
@@ -61,7 +78,8 @@ async function deleteSinger(req, res, next) {
 
 async function updateSinger(req, res, next) {
   try {
-    const { _id, name, lastName, stageName, image, nationality } = req.body;
+    const { idSinger, singerName, lastName, stageName, image, nationality } =
+      req.body;
 
     if (!_id) {
       res.status(400).json(getErrorAnswer(400, "Identificator is needed"));

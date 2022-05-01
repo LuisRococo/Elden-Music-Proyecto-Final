@@ -9,7 +9,7 @@ async function registerUser(req, res, next) {
     const isAdmin = false;
 
     const conn = await getDataBaseConnection();
-    conn.execute(
+    await conn.execute(
       "insert into tbl_user (user_name, email, password, is_admin) values (?, ?, ?, ?)",
       [userName, email, password, isAdmin]
     );
