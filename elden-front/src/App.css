@@ -1,6 +1,24 @@
 * {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --main_color: #d16e17;
+}
+
+.hidden {
+  display: none !important;
+}
+/*ERROR MSJ*/
+.error-msj {
+  position: absolute;
+  left: 0; 
+  right: 0; 
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
 }
 
 /*REPRODUCTOR*/
@@ -19,4 +37,107 @@
 
 .player-btn__img {
   width: 100%;
+}
+
+/*AUTH*/
+.auth-pg{
+  min-height: 100vh;
+  display: flex;
+  background-color: var(--main_color);
+}
+
+.auth-page__comp {
+  background-color: var(--main_color);
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.auth-pg__decor {
+  flex: 1;
+  background-image: url("https://images.alphacoders.com/598/598655.png");
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-card {
+  padding: 30px;
+  background-color: rgb(236, 236, 236);
+  border-radius: 8px;
+  max-width: 500px;
+  width: 400px;
+  margin-top: 20px;
+}
+
+.auth-pg__form{
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-pg__form button{
+  margin-bottom: 15px;
+}
+
+/*AUTH MESSAGE*/
+.auth-pg__decor-cont {
+  border-width: 3px;
+  border-radius: 10px;
+  border-color: white;
+  padding: 30px;
+  color: white;
+  border-style: solid;
+  width: 400px;
+  min-width: 200px;
+  text-align: center;
+}
+
+.auth-pg__decor-cont h3{
+  font-weight: bold;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.auth-pg__decor-cont p {
+  font-size: 1.3rem;
+}
+
+/*MUSIC*/
+.logo-comp{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-comp__img {
+  width: 65px;
+  margin-right: 10px;
+}
+
+.logo-comp p{
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+/*NAV BAR*/
+.logo-comp--nv{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+}
+
+.logo-comp__img--nv {
+  width: 50px;
+  margin-right: 5px;
+}
+
+.logo-comp--nv p{
+  font-size: 1.3rem;
+  font-weight: bold;
 }

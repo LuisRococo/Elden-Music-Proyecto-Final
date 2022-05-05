@@ -28,3 +28,73 @@ For normal quality, songs typically should be 3 to 4 megabytes.
 *****REDUX
 Las actions alimentan el store (no del todo pues la mayoria de info viene de api)
 _El comando para enviar una action es store.dispatch()
+
+*****PAGINAS
+--Home
+    Vera:
+    Intro
+    Algunos albunes
+    canciones
+    relleno
+    footer
+
+--login
+--registro
+
+--Album
+    Vera:
+    album info, artista (con link a su pagina de artista)
+    canciones
+    Tendra boton comprar todo el album
+    Tendra boton de comprar canciones individual (quizas al precionar comprar saldra pop-up, eligira direccion)
+
+--artista
+    Vera:
+    Info artista
+    albunes
+    top canciones
+
+--Mis canciones
+    canciones organizadas por albunes
+    son canciones compradas
+
+--busqueda
+    Vera:
+    Buscar (opcion: nque buscar? = album o cancion )
+    (escoger que pondra en el input: nombre, género, álbum o artista)
+    (checkbox para ordenar por fecha o no)
+
+--playlist
+    -ver playlists
+    -crear playlist
+    -entrar a cada una
+    -correr playlist
+
+--playlist-cancion
+    -ver canciones de esa playlist
+    -agregar mas canciones
+    -ordenar des o asc dependiendo de fecha de salida
+
+---ADMINS---
+barra de menu IZQ
+--cualquier user
+    -mis canciones
+    -relacionado a playlist
+
+--solo ADMINS
+    -agregar artista
+        tambien agregar canciones al artista
+            y hacer crud con sus canciones
+
+*****Ideas
+
+--estado para mensajito de error arriaba
+--como no usamos tarjeta, poner mensajes y ref al comprar de que como empezamos estamos dando las cosas gratis
+
+*****DOCKER
+https://www.section.io/engineering-education/build-and-dockerize-a-full-stack-react-app-with-nodejs-and-nginx/
+
+
+*****COLORS
+primary: #a015e6
+(otra opicion #de243d)

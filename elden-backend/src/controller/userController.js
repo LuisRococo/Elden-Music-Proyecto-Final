@@ -2,18 +2,24 @@ const { getSuccessAnswer, getErrorAnswer } = require("../util/util");
 const jwt = require("jsonwebtoken");
 const { AUTH_SECRET_KEY } = require("../util/secrets");
 const getDataBaseConnection = require("../db/dbConnect");
+var crypto = require("crypto");
+const { getConnection } = require("../db/dbSequelizeconn");
+const User = require("../db/models/userModel");
 
 async function registerUser(req, res, next) {
   try {
     const { userName, email, password } = req.body;
     const isAdmin = false;
 
-    const conn = await getDataBaseConnection();
-    await conn.execute(
-      "insert into tbl_user (user_name, email, password, is_admin) values (?, ?, ?, ?)",
-      [userName, email, password, isAdmin]
-    );
-    await conn.end();
+    const sha256Hasher = crypto.createHmac("sha256", AUTH_SECRET_KEY);
+    const hashPassword = sha256Hasher.update(password).digest("base64");
+
+    await User.create({
+      user_name: userName,
+      email: email,
+      password: hashPassword,
+      is_admin: isAdmin,
+    });
 
     res.json(getSuccessAnswer());
   } catch (error) {
@@ -49,10 +55,10 @@ async function login(req, res, next) {
 
     const token = jwt.sign(
       {
-        _id: user.id_user,
-        userName: user.user_name,
+        id_user: user.id_user,
+        user_name: user.user_name,
         email: user.email,
-        isAdmin: user.is_admin
+        is_admin: user.is_admin,
       },
       AUTH_SECRET_KEY,
       { expiresIn: "3h" }
@@ -60,7 +66,7 @@ async function login(req, res, next) {
 
     user = {
       userName: user.user_name,
-      token
+      token,
     };
 
     res.json(user);
@@ -72,28 +78,30 @@ async function login(req, res, next) {
 }
 
 async function checkLoginUserName(userName, password) {
-  const conn = await getDataBaseConnection();
-  const [rows] = await conn.execute(
-    "select * from tbl_user where user_name = ? limit 1",
-    [userName]
-  );
-  await conn.end();
+  const user = await User.findOne({
+    where: {
+      user_name: userName,
+    },
+  });
 
-  const user = rows[0];
-  if (user && user.password === password) return user;
+  const sha256Hasher = crypto.createHmac("sha256", AUTH_SECRET_KEY);
+  const hashPassword = sha256Hasher.update(password).digest("base64");
+
+  if (user && user.password === hashPassword) return user;
   return null;
 }
 
 async function checkLoginEmail(email, password) {
-  const conn = await getDataBaseConnection();
-  const [rows] = await conn.execute(
-    "select * from tbl_user where email = ? limit 1",
-    [email]
-  );
-  await conn.end();
+  const user = await User.findOne({
+    where: {
+      email: email,
+    },
+  });
 
-  const user = rows[0];
-  if (user && user.password === password) return user;
+  const sha256Hasher = crypto.createHmac("sha256", AUTH_SECRET_KEY);
+  const hashPassword = sha256Hasher.update(password).digest("base64");
+
+  if (user && user.password === hashPassword) return user;
   return null;
 }
 

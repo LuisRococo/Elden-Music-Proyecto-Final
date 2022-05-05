@@ -6,7 +6,7 @@ export default function Player() {
 
   return (
     <>
-      <PlayerBtn showPlayer={showPlayer} />
+      <PlayerBtn showPlayer={showPlayer} setShowPlayer={setShowPlayer} />
     </>
   );
 }
