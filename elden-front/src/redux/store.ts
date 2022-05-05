@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import errorReducer from "./reducers/errorReducer";
 import playerReducer from "./reducers/playerReducer";
 import tokenReducer from "./reducers/tokenReducer";
+import thunkMiddleware from 'redux-thunk'
 
 export const rootReduxer = combineReducers({
   player: playerReducer,
@@ -11,6 +12,7 @@ export const rootReduxer = combineReducers({
 
 const store = configureStore({
   reducer: rootReduxer,
+  middleware: [thunkMiddleware],
 });
 
 export default store;

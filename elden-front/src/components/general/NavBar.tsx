@@ -12,29 +12,47 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import LogoImg from "../../img/logo.png";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Link } from "@mui/material";
 import profileImg from "../../img/profile.png";
-
-const pages = [
-  {
-    name: "HOME",
-    url: "/",
-  },
-];
-
-const pagesUser = [
-  {
-    name: "My Songs",
-    url: "/",
-  },
-];
-const settings = ["Logout"];
+import { useDispatch, useSelector } from "react-redux";
+import { deleteToken } from "../../redux/reducers/tokenReducer";
+import { RootState } from "../../redux/store";
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const dispatch = useDispatch();
   let location = useLocation();
+  const navigate = useNavigate();
+  const token = useSelector((state: RootState) => state.token.token);
+
+  const pages = [
+    {
+      name: "HOME",
+      url: "/",
+    },
+  ];
+
+  const pagesUser = [
+    {
+      name: "My Songs",
+      url: "/",
+    },
+  ];
+
+  const settings = [
+    {
+      name: "Logout",
+      action: logout,
+    },
+  ];
+
+  function logout() {
+    handleCloseUserMenu();
+    dispatch(deleteToken());
+    navigate("/");
+  }
 
   function shouldBeHidden(actualLocation) {
     for (let index = 0; index < routesToHide.length; index++) {
@@ -169,8 +187,13 @@ const ResponsiveAppBar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <MenuItem
+                  key={"navbar-settings" + setting.name}
+                  onClick={() => {
+                    setting.action();
+                  }}
+                >
+                  <Typography textAlign="center">{setting.name}</Typography>
                 </MenuItem>
               ))}
             </Menu>

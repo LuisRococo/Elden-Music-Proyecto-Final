@@ -5,8 +5,10 @@ import { Button, SxProps, TextField } from "@mui/material";
 import LogoImg from "../../img/logo.png";
 import { fetchLogin } from "../../util/requests";
 import { hideError, showError } from "../../redux/reducers/errorReducer";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { addToken } from "../../redux/reducers/tokenReducer";
+import { RootState } from "../../redux/store";
 
 export default function LoginComp() {
   const [userName, setUserName] = useState("");
@@ -23,11 +25,14 @@ export default function LoginComp() {
       if (res.status !== 200) {
         dispatch(showError("Incorrect data - Check your info"));
       } else {
-        sessionStorage.setItem("auth", JSON.stringify(await res.json()));
+        dispatch(addToken(await res.json()));
+
         dispatch(hideError());
         navigate("/");
       }
     } catch (e) {
+      console.info(e);
+
       dispatch(showError("Unexpected error - Try later"));
     }
   }

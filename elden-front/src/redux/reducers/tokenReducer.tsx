@@ -6,11 +6,13 @@ export const tokenSlice = createSlice({
     token: null,
   },
   reducers: {
-    addToken: (state, action: PayloadAction<String>) => {
+    addToken: (state, action: PayloadAction<any>) => {
       state.token = action.payload;
+      sessionStorage.setItem("auth", JSON.stringify(action.payload));
     },
     deleteToken: (state) => {
       state.token = null;
+      sessionStorage.removeItem("auth");
     },
   },
 });
