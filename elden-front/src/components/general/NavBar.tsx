@@ -18,6 +18,7 @@ import profileImg from "../../img/profile.png";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteToken } from "../../redux/reducers/tokenReducer";
 import { RootState } from "../../redux/store";
+import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -165,39 +166,46 @@ const ResponsiveAppBar = () => {
           </Box>
 
           {token ? (
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src={profileImg} />
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <Box>
+                <IconButton size="large" aria-label="delete" onClick={() => {}}>
+                  <MenuRoundedIcon />
                 </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting) => (
-                  <MenuItem
-                    key={"navbar-settings" + setting.name}
-                    onClick={() => {
-                      setting.action();
-                    }}
-                  >
-                    <Typography textAlign="center">{setting.name}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
+              </Box>
+              <Box sx={{ flexGrow: 0, display: "flex" }}>
+                <Tooltip title="Open settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar alt="Remy Sharp" src={profileImg} />
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  {settings.map((setting) => (
+                    <MenuItem
+                      key={"navbar-settings" + setting.name}
+                      onClick={() => {
+                        setting.action();
+                      }}
+                    >
+                      <Typography textAlign="center">{setting.name}</Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </Box>
             </Box>
           ) : (
             <Box

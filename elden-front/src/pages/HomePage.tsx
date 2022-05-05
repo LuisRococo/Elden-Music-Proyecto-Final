@@ -4,7 +4,7 @@ import AdminMenu from "../components/admin/AdminMenu";
 export default function HomePage() {
   return (
     <div>
-      {/* <AdminMenu /> */}
+      <AdminMenu />
       HomePage
     </div>
   );

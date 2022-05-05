@@ -2,12 +2,14 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import errorReducer from "./reducers/errorReducer";
 import playerReducer from "./reducers/playerReducer";
 import tokenReducer from "./reducers/tokenReducer";
+import adminDrawerReducer from "./reducers/adminDrawerReducer";
 import thunkMiddleware from 'redux-thunk'
 
 export const rootReduxer = combineReducers({
   player: playerReducer,
   token: tokenReducer,
-  error: errorReducer
+  error: errorReducer,
+  drawer: adminDrawerReducer
 });
 
 const store = configureStore({
