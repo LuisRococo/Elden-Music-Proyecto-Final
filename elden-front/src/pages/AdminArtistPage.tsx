@@ -162,7 +162,7 @@ export default function AdminArtistPage() {
 
         <Divider sx={{ marginY: "40px" }} />
 
-        {artists ? (
+        {artists && artists.length !== 0 ? (
           <>
             {artists.map((artist, key) => {
               return (
