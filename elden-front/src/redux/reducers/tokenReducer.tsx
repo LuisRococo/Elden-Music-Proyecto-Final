@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const sessionToken = sessionStorage.getItem("auth");
+const sessionToken = localStorage.getItem("auth");
 const initialState = sessionToken ? JSON.parse(sessionToken) : null;
 
 export const tokenSlice = createSlice({
@@ -11,11 +11,11 @@ export const tokenSlice = createSlice({
   reducers: {
     addToken: (state, action: PayloadAction<any>) => {
       state.token = action.payload;
-      sessionStorage.setItem("auth", JSON.stringify(action.payload));
+      localStorage.setItem("auth", JSON.stringify(action.payload));
     },
     deleteToken: (state) => {
       state.token = null;
-      sessionStorage.removeItem("auth");
+      localStorage.removeItem("auth");
     },
   },
 });

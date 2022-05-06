@@ -2,15 +2,16 @@ const { getErrorAnswer, getSuccessAnswer } = require("../util/util");
 const getDataBaseConnection = require("../db/dbConnect");
 const Singer = require("../db/models/singerModel");
 const File = require("../db/models/fileModel");
+const Album = require("../db/models/albumModel");
 
 async function getSingers(req, res, next) {
   try {
     const response = await Singer.findAll({
-      // include: [
-      //   {
-      //     model: File,
-      //   },
-      // ],
+      include: [
+        {
+          model: Album,
+        },
+      ],
     });
     res.json(response);
   } catch (error) {
@@ -61,6 +62,7 @@ async function deleteSinger(req, res, next) {
     }
 
     const singer = await Singer.findOne({ where: { id_singer: idSinger } });
+    await Album.destroy({ where: { id_singer: singer.id_singer } });
     await Singer.destroy({ where: { id_singer: idSinger } });
     await File.destroy({ where: { id_file: singer.id_image } });
 

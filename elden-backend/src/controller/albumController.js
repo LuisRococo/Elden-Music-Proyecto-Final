@@ -1,9 +1,16 @@
-const { Album } = require("../db/models/albumModel");
-const { getErrorAnswer } = require("../util/util");
+const Album = require("../db/models/albumModel");
+const Singer = require("../db/models/singerModel");
+const { getErrorAnswer, getSuccessAnswer } = require("../util/util");
 
 async function getAlbums(req, res, next) {
   try {
-    const albums = await Album.find();
+    const albums = await Album.findAll({
+      include: [
+        {
+          model: Singer,
+        },
+      ],
+    });
     res.json(albums);
   } catch (error) {
     next(error);
@@ -12,20 +19,21 @@ async function getAlbums(req, res, next) {
 
 async function createAlbum(req, res, next) {
   try {
-    const { name, image, singer, releaseDate, price, genre, isSingle, stock } =
-      req.body;
-    let newAlbum = new Album({
-      name,
-      image,
-      singer,
-      releaseDate,
-      price,
-      genre,
-      isSingle,
-      stock
+    const { albumName, releaseDate, isSingle, idSinger } = req.body;
+
+    //CREATE IMAGE
+    const albumImageDb = await File.create({
+      file_content: image,
     });
-    newAlbum = await newAlbum.save();
-    res.json(newAlbum);
+
+    await Album.create({
+      album_name: albumName,
+      release_date: releaseDate,
+      is_single: isSingle,
+      id_singer: idSinger,
+      id_image: albumImageDb.id_image,
+    });
+    res.json(getSuccessAnswer(200, "Album created"));
   } catch (error) {
     next(error);
   }
@@ -63,41 +71,9 @@ async function deleteAlbum(req, res, next) {
   }
 }
 
-//aqui falta lo de checar la cant de canciones para cambiar el isSingle
-async function updateAlbum(req, res, next) {
-  try {
-    const {
-      _id,
-      name,
-      image,
-      singer,
-      releaseDate,
-      price,
-      genre,
-      isSingle,
-      stock
-    } = req.body;
-
-    if (!_id) {
-      res.status(400).json(getErrorAnswer(400, "Identificator is needed"));
-      return;
-    }
-
-    const album = await Album.findByIdAndUpdate(
-      _id,
-      { name, image, singer, releaseDate, price, genre, isSingle, stock },
-      { new: true }
-    );
-    res.json(album);
-  } catch (error) {
-    next(error);
-  }
-}
-
 module.exports = {
   getAlbums,
   createAlbum,
   getAlbum,
   deleteAlbum,
-  updateAlbum
 };

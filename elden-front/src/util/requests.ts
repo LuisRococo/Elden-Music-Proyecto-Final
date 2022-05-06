@@ -1,4 +1,6 @@
-import { URL_DIR } from "./other";
+import { getTokenPrepared, URL_DIR } from "./other";
+
+//AUTH
 
 export async function fetchLogin(userName, password) {
     const body = {
@@ -27,14 +29,17 @@ export async function fetchSignin(userName, password, email) {
 }
 
 //SINGERS
-export async function requestCreateSinger (singerName, stageName, nationality, image, token) {
+export async function requestCreateSinger (singerName, stageName, nationality, image) {
     const body = {
         singerName, stageName, nationality, image
     }
+
+    const token = getTokenPrepared();
+    
     const response = await fetch(URL_DIR + "/api/singers", {
         body: JSON.stringify(body),
         method: "POST",
-        headers: {     "Content-Type": "application/json", "authorization": "Bearer "+token   }
+        headers: {     "Content-Type": "application/json", "authorization": token   }
     });
 
     return response;
@@ -56,28 +61,55 @@ export async function fetchFileBase64 (idFile) {
     return response;
 }
 
-export async function requestDeleteSinger (idSinger, token) {
+export async function requestDeleteSinger (idSinger) {
     const body = {
         idSinger
     }
+    const token = getTokenPrepared();
     const response = await fetch(URL_DIR + "/api/singers", {
         body: JSON.stringify(body),
         method: "DELETE",
-        headers: {     "Content-Type": "application/json", "authorization": "Bearer "+token   }
+        headers: {     "Content-Type": "application/json", "authorization": token   }
     });
 
     return response;
 }
 
 
-export async function requestUpdateArtist (idSinger, singerName, stageName, nationality, image, token) {
+export async function requestUpdateArtist (idSinger, singerName, stageName, nationality, image) {
     const body = {
         idSinger, singerName, stageName, nationality, image
     }
+    const token = getTokenPrepared();
     const response = await fetch(URL_DIR + "/api/singers", {
         body: JSON.stringify(body),
         method: "PUT",
-        headers: {     "Content-Type": "application/json", "authorization": "Bearer "+token   }
+        headers: {     "Content-Type": "application/json", "authorization": token   }
+    });
+
+    return response;
+}
+
+//ALBUMS
+export async function fetchAlbums () {
+    const response = await fetch(URL_DIR + "/api/albums", {
+        method: "GET",
+    });
+
+    return response;
+}
+
+export async function requestCreateAlbums (albumName, releaseDate, isSingle, idSinger, image) {
+    const body = {
+        albumName, releaseDate, isSingle, idSinger, image
+    }
+
+    const token = getTokenPrepared();
+
+    const response = await fetch(URL_DIR + "/api/singers", {
+        body: JSON.stringify(body),
+        method: "POST",
+        headers: {     "Content-Type": "application/json", "authorization": token   }
     });
 
     return response;

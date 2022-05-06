@@ -59,6 +59,7 @@
 
 .auth-pg__decor {
   flex: 1;
+  background-color: #212121;
   background-image: url("https://images.alphacoders.com/598/598655.png");
   background-position: right;
   background-repeat: no-repeat;

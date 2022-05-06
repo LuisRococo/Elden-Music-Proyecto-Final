@@ -4,7 +4,7 @@ const Singer = require("./models/singerModel");
 
 //FILE
 File.hasMany(Singer, { foreignKey: "id_image" });
-File.hasMany(Albums, { foreignKey: "id_album" });
+File.hasMany(Album, { foreignKey: "id_album" });
 
 //SINGER
 Singer.belongsTo(File, {
@@ -12,7 +12,7 @@ Singer.belongsTo(File, {
   hooks: true,
   onDelete: "cascade",
 });
-Singer.hasMany(Albums, {
+Singer.hasMany(Album, {
   foreignKey: { name: "id_album", allowNull: false },
   hooks: true,
   onDelete: "cascade",

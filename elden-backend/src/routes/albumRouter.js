@@ -3,19 +3,17 @@ const {
   getAlbums,
   getAlbum,
   createAlbum,
-  updateAlbum,
-  deleteAlbum
+  deleteAlbum,
 } = require("../controller/albumController");
 const router = express.Router();
+const { verifyAdminAuth } = require("../util/auth");
 
 router.get("/", getAlbums);
 
 router.get("/", getAlbum);
 
-router.post("/", createAlbum);
+router.post("/", verifyAdminAuth, createAlbum);
 
-router.put("/", updateAlbum);
-
-router.delete("/", deleteAlbum);
+router.delete("/", verifyAdminAuth, deleteAlbum);
 
 module.exports = router;

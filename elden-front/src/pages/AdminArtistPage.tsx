@@ -61,8 +61,8 @@ export default function AdminArtistPage() {
         artistName,
         stageName,
         artistNationality,
-        base64Img,
-        token.token
+        base64Img
+        // token.token
       );
 
       if (res.status === 200) {
@@ -89,8 +89,7 @@ export default function AdminArtistPage() {
         artistUpdate.artistName,
         artistUpdate.stageName,
         artistUpdate.artistNationality,
-        base64Img,
-        token.token
+        base64Img
       );
 
       if (res.status === 200) {
@@ -106,7 +105,7 @@ export default function AdminArtistPage() {
   }
 
   async function deleteSinger(idSinger) {
-    const res = await requestDeleteSinger(idSinger, token.token);
+    const res = await requestDeleteSinger(idSinger);
     if (res.status === 200) {
       getAllSingers();
       dispatch(showSuccess("Artist deleted"));

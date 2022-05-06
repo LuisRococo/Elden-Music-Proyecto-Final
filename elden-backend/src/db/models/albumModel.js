@@ -12,6 +12,10 @@ const Album = sequelize.define(
       autoIncrement: true,
       primaryKey: true,
     },
+    album_name: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+    },
     release_date: {
       type: DataTypes.DATE,
       defaultValue: Sequelize.NOW,

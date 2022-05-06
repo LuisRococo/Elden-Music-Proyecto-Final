@@ -1,3 +1,5 @@
+import store from "../redux/store";
+
 const URL_DIR = "http://localhost:8000";
 
 async function toBase64(file) {
@@ -9,7 +11,12 @@ async function toBase64(file) {
     });
   }
 
+  function getTokenPrepared () {
+    return "Bearer " + store.getState().token?.token?.token;
+  }
+
 export {
     URL_DIR,
-    toBase64
+    toBase64,
+    getTokenPrepared
 }
