@@ -1,6 +1,6 @@
 import React from "react";
-import AuthPage from "../components/auth/AuthPage";
-import SigninComp from "../components/auth/SigninComp";
+import AuthPage from "../components/UserLogIn/AuthPage";
+import SigninComp from "../components/UserLogIn/SigninComp";
 
 export default function SignInPage() {
   return (

@@ -32,12 +32,6 @@ export default function SigninComp() {
     }
   }
 
-  useEffect(() => {
-    if (sessionStorage.getItem("auth")) {
-      navigate("/");
-    }
-  }, []);
-
   return (
     <div>
       <div className="logo-comp">

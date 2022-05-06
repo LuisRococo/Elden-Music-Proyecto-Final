@@ -66,6 +66,7 @@ async function login(req, res, next) {
 
     user = {
       userName: user.user_name,
+      isAdmin: user.is_admin,
       token,
     };
 

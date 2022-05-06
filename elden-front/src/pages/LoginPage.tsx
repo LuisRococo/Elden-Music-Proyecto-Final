@@ -1,6 +1,6 @@
 import React from "react";
-import AuthPage from "../components/auth/AuthPage";
-import LoginComp from "../components/auth/LoginComp";
+import AuthPage from "../components/UserLogIn/AuthPage";
+import LoginComp from "../components/UserLogIn/LoginComp";
 
 export default function LogInPage() {
   return (
