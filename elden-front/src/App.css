@@ -13,18 +13,19 @@
 }
 /*ERROR MSJ*/
 .error-msj {
-  position: absolute;
+  position: fixed;
   left: 0; 
   right: 0; 
   pointer-events: none;
   display: flex;
   justify-content: center;
+  z-index: 5;
 }
 
 /*REPRODUCTOR*/
 .player-btn {
   display: inline-block;
-  position: absolute;
+  position: fixed;
   bottom: 30px;
   right: 30px;
   width: 120px;
@@ -33,6 +34,7 @@
   border-radius: 12px;
   padding: 5px;
   cursor: pointer;
+  z-index: 3;
 }
 
 .player-btn__img {
@@ -140,4 +142,20 @@
 .logo-comp--nv p{
   font-size: 1.3rem;
   font-weight: bold;
+}
+
+/*SECTION HEADER*/
+.sec-header {
+  background-image: url("./img/section-bg.jpg");
+  min-height: 250px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 40px;
+}
+
+.sec-header h3 {
+  font-size: 3rem;
+  color: white;
+
 }

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Typography, Divider, Link } from "@mui/material";
-import { Password } from "@mui/icons-material";
 import { Button, SxProps, TextField } from "@mui/material";
 import LogoImg from "../../img/logo.png";
 import { fetchSignin } from "../../util/requests";

@@ -4,15 +4,16 @@ const {
   getSinger,
   updateSinger,
   deleteSinger,
-  createSinger
+  createSinger,
 } = require("../controller/singerController");
+const { verifyAdminAuth } = require("../util/auth");
 const router = express.Router();
 
 router.get("/", getSingers);
 
 router.get("/:_id", getSinger);
 
-router.post("/", createSinger);
+router.post("/", verifyAdminAuth, createSinger);
 
 router.delete("/", deleteSinger);
 

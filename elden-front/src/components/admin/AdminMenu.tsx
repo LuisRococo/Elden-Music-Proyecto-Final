@@ -17,14 +17,30 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/store";
 import { hide } from "../../redux/reducers/adminDrawerReducer";
+import { Link } from "react-router-dom";
 
 export default function AdminMenu() {
   const dispatch = useDispatch();
   const drawerOpen = useSelector((status: RootState) => {
     return status.drawer.open;
   });
-
   const drawerWidth = 240;
+
+  const adminPages = [
+    {
+      name: "Artists",
+      url: "admin/artists",
+    },
+    {
+      name: "Albums",
+      url: "admin/albums",
+    },
+    {
+      name: "Songs",
+      url: "admin/songs",
+    },
+  ];
+
   return (
     <Drawer
       sx={{
@@ -35,7 +51,7 @@ export default function AdminMenu() {
           boxSizing: "border-box",
         },
       }}
-      anchor="left"
+      anchor="right"
       open={drawerOpen}
     >
       <Toolbar />
@@ -44,7 +60,7 @@ export default function AdminMenu() {
         <IconButton
           size="large"
           aria-label="delete"
-          sx={{ float: "right", marginRight: "10px", marginBottom: "30px" }}
+          sx={{ float: "left", marginLeft: "10px", marginBottom: "30px" }}
           onClick={() => {
             dispatch(hide());
           }}
@@ -65,13 +81,21 @@ export default function AdminMenu() {
       </List>
       <Divider />
       <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
+        {adminPages.map((page, index) => (
+          <Link
+            onClick={() => {
+              dispatch(hide());
+            }}
+            to={page.url}
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <ListItem button key={"drawer-admin-" + index}>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText primary={page.name} />
+            </ListItem>
+          </Link>
         ))}
       </List>
     </Drawer>

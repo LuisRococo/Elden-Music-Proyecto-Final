@@ -1,39 +1,34 @@
 const { getErrorAnswer, getSuccessAnswer } = require("../util/util");
 const getDataBaseConnection = require("../db/dbConnect");
+const Singer = require("../db/models/singerModel");
+const File = require("../db/models/fileModel");
 
 async function getSingers(req, res, next) {
   try {
-    const jsonRes = {};
-    const conn = await getDataBaseConnection();
-    const [rows] =
-      await conn.execute(`select json_arrayagg (result) as res from (
-      select json_object (
-        "id", u.id_genre
-      ) as result
-      from tbl_genre as u
-    ) as result`);
-
-    await conn.end();
-    res.json(rows[0]);
+    const response = await Singer.findAll({
+      include: [
+        {
+          model: File,
+        },
+      ],
+    });
+    res.json(JSON.stringify(response));
   } catch (error) {
     next(error);
   }
 }
 
 async function createSinger(req, res, next) {
+  const { singerName, stageName, nationality, image } = req.body;
   try {
-    const { singerName, stageName, nationality, image } = req.body;
-    const conn = await getDataBaseConnection();
-    await conn.execute("insert into tbl_file (file) values (?)", [image]);
-    let [rows] = await conn.execute("select LAST_INSERT_ID() as 'idImage'");
-    const idImage = rows[0].idImage;
+    const dbImage = await File.create({ file_content: image });
 
-    [rows] = await conn.execute(
-      "insert into tbl_singer (singer_name, nationality, id_image, stage_name) values (?, ?, ?, ?)",
-      [singerName, nationality, idImage]
-    );
-
-    await conn.end();
+    await Singer.create({
+      singer_name: singerName,
+      stage_name: stageName,
+      nationality: nationality,
+      id_image: dbImage.id_file,
+    });
     res.json(getSuccessAnswer());
   } catch (error) {
     next(error);
@@ -67,7 +62,7 @@ async function deleteSinger(req, res, next) {
 
     const conn = await getDataBaseConnection();
     await conn.execute("delete from tbl_singer where id_singer = ?", [
-      idSinger
+      idSinger,
     ]);
 
     res.json(getSuccessAnswer());
@@ -102,5 +97,5 @@ module.exports = {
   createSinger,
   getSinger,
   deleteSinger,
-  updateSinger
+  updateSinger,
 };

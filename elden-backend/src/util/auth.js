@@ -31,12 +31,12 @@ async function judgeToken(req, res, next, shouldBeAdmin) {
       res.json(getErrorAnswer(401, "Unauthorized"));
     } else {
       if (decode && typeof decode !== "boolean") {
-        if (!shouldBeAdmin || decode.isAdmin === true) {
-          req.body.decode = decode;
-          next();
-        } else {
+        if (shouldBeAdmin && decode.isAdmin === true) {
           res.status(403);
           res.json(getErrorAnswer(403, "forbidden"));
+        } else {
+          req.body.decode = decode;
+          next();
         }
       } else {
         res.status(401);

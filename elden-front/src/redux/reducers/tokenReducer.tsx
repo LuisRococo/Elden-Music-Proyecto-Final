@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const sessionToken = sessionStorage.getItem("auth");
-const initialState = sessionToken ? sessionToken : null;
+const initialState = sessionToken ? JSON.parse(sessionToken) : null;
 
 export const tokenSlice = createSlice({
   name: "token",

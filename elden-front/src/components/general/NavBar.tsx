@@ -18,7 +18,8 @@ import profileImg from "../../img/profile.png";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteToken } from "../../redux/reducers/tokenReducer";
 import { RootState } from "../../redux/store";
-import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import LibraryMusicRoundedIcon from "@mui/icons-material/LibraryMusicRounded";
+import { show } from "../../redux/reducers/adminDrawerReducer";
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -90,7 +91,7 @@ const ResponsiveAppBar = () => {
 
   return (
     <AppBar position="static">
-      <Container maxWidth="lg" sx={{ padding: "10px" }}>
+      <Container maxWidth="lg" sx={{ paddingY: "10px" }}>
         <Toolbar disableGutters>
           <Link href="/" sx={{ mr: 2, display: { xs: "none", md: "flex" } }}>
             <div className="logo-comp--nv">
@@ -168,8 +169,14 @@ const ResponsiveAppBar = () => {
           {token ? (
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <Box>
-                <IconButton size="large" aria-label="delete" onClick={() => {}}>
-                  <MenuRoundedIcon />
+                <IconButton
+                  size="large"
+                  aria-label="delete"
+                  onClick={() => {
+                    dispatch(show());
+                  }}
+                >
+                  <LibraryMusicRoundedIcon fontSize="inherit" />
                 </IconButton>
               </Box>
               <Box sx={{ flexGrow: 0, display: "flex" }}>

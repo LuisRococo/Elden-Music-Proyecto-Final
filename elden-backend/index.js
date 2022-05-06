@@ -41,5 +41,6 @@ app.use((error, req, res, next) => {
 
 //INIT
 app.listen(port, async () => {
+  require("./src/db/init");
   console.log(`Servidor activo en http://localhost:${port}`);
 });
