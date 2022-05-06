@@ -9,8 +9,6 @@ export default function ErrorMsj() {
   const dispatch = useDispatch();
   const [hideTimeOut, setHideTimeOut] = useState(null);
 
-  useEffect(() => {}, []);
-
   useEffect(() => {
     if (error) {
       if (hideTimeOut) {
