@@ -1,13 +1,13 @@
 import { Button, Fab } from "@mui/material";
 import React from "react";
 
-export default function UploadButton({ title, updateFile }) {
+export default function UploadButton({ title, updateFile, name }) {
   return (
-    <label htmlFor="upload-photo">
+    <label htmlFor={name}>
       <input
         style={{ display: "none" }}
-        id="upload-photo"
-        name="upload-photo"
+        id={name}
+        name={name}
         type="file"
         onChange={updateFile}
         required

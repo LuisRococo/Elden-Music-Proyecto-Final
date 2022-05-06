@@ -72,20 +72,38 @@ async function deleteSinger(req, res, next) {
 
 async function updateSinger(req, res, next) {
   try {
-    const { idSinger, singerName, lastName, stageName, image, nationality } =
-      req.body;
+    const { idSinger, singerName, stageName, image, nationality } = req.body;
 
-    if (!_id) {
+    if (!idSinger) {
       res.status(400).json(getErrorAnswer(400, "Identificator is needed"));
       return;
     }
 
-    const singer = await Singer.findByIdAndUpdate(
-      _id,
-      { name, lastName, stageName, image, nationality },
-      { new: true }
-    );
-    res.json(singer);
+    //FIND AND CHECK IF SINGER EXISTS
+    const singer = await Singer.findOne({ where: { id_singer: idSinger } });
+    if (!singer) {
+      res.status(404).json(getErrorAnswer(404, "Singer was not found"));
+      return;
+    }
+
+    //UPDATE IMAGE
+    const fileImage = await File.findOne({
+      where: { id_file: singer.id_image },
+    });
+    fileImage.set({
+      file_content: image,
+    });
+    await fileImage.save();
+
+    //CHANGE SINGER
+    singer.set({
+      singer_name: singerName,
+      stage_name: stageName,
+      nationality: nationality,
+    });
+    await singer.save();
+
+    res.json(getSuccessAnswer(200, "Singer Updated"));
   } catch (error) {
     next(error);
   }

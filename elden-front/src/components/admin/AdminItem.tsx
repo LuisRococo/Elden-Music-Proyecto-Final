@@ -7,6 +7,8 @@ export default function AdminItem({
   idImage,
   idItem,
   deleteItem = null,
+  updateItem = null,
+  seeMoreItem = null,
 }) {
   const [image, setImage] = useState(null);
 
@@ -36,7 +38,7 @@ export default function AdminItem({
             idItem={idItem}
             seeItem={null}
             deleteItem={deleteItem}
-            updateItem={null}
+            updateItem={updateItem}
           />
         </div>
       </div>
@@ -47,17 +49,28 @@ export default function AdminItem({
 function CrudButtons({ idItem, seeItem, deleteItem, updateItem }) {
   return (
     <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-      <Button
-        sx={{ marginX: "5px" }}
-        color="error"
-        variant="contained"
-        onClick={() => {
-          deleteItem(idItem);
-        }}
-      >
-        Delete
-      </Button>
-      <Button sx={{ marginX: "5px" }}>Update</Button>
+      {deleteItem && (
+        <Button
+          sx={{ marginX: "5px" }}
+          color="error"
+          variant="contained"
+          onClick={() => {
+            deleteItem(idItem);
+          }}
+        >
+          Delete
+        </Button>
+      )}
+      {updateItem && (
+        <Button
+          sx={{ marginX: "5px" }}
+          onClick={() => {
+            updateItem(idItem);
+          }}
+        >
+          Update
+        </Button>
+      )}
       <Button sx={{ marginX: "5px" }}>See More</Button>
     </Box>
   );

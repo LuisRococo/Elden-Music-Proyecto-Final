@@ -17,6 +17,6 @@ router.post("/", verifyAdminAuth, createSinger);
 
 router.delete("/", verifyAdminAuth, deleteSinger);
 
-router.put("/", updateSinger);
+router.put("/", verifyAdminAuth, updateSinger);
 
 module.exports = router;

@@ -68,3 +68,17 @@ export async function requestDeleteSinger (idSinger, token) {
 
     return response;
 }
+
+
+export async function requestUpdateArtist (idSinger, singerName, stageName, nationality, image, token) {
+    const body = {
+        idSinger, singerName, stageName, nationality, image
+    }
+    const response = await fetch(URL_DIR + "/api/singers", {
+        body: JSON.stringify(body),
+        method: "PUT",
+        headers: {     "Content-Type": "application/json", "authorization": "Bearer "+token   }
+    });
+
+    return response;
+}
