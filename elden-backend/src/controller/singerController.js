@@ -6,13 +6,13 @@ const File = require("../db/models/fileModel");
 async function getSingers(req, res, next) {
   try {
     const response = await Singer.findAll({
-      include: [
-        {
-          model: File,
-        },
-      ],
+      // include: [
+      //   {
+      //     model: File,
+      //   },
+      // ],
     });
-    res.json(JSON.stringify(response));
+    res.json(response);
   } catch (error) {
     next(error);
   }
@@ -60,10 +60,9 @@ async function deleteSinger(req, res, next) {
       return;
     }
 
-    const conn = await getDataBaseConnection();
-    await conn.execute("delete from tbl_singer where id_singer = ?", [
-      idSinger,
-    ]);
+    const singer = await Singer.findOne({ where: { id_singer: idSinger } });
+    await Singer.destroy({ where: { id_singer: idSinger } });
+    await File.destroy({ where: { id_file: singer.id_image } });
 
     res.json(getSuccessAnswer());
   } catch (error) {

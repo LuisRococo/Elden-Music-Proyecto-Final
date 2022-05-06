@@ -39,3 +39,32 @@ export async function requestCreateSinger (singerName, stageName, nationality, i
 
     return response;
 }
+
+export async function fetchSingers () {
+    const response = await fetch(URL_DIR + "/api/singers", {
+        method: "GET",
+    });
+
+    return response;
+}
+
+export async function fetchFileBase64 (idFile) {
+    const response = await fetch(URL_DIR + `/api/files/${idFile}`, {
+        method: "GET",
+    });
+
+    return response;
+}
+
+export async function requestDeleteSinger (idSinger, token) {
+    const body = {
+        idSinger
+    }
+    const response = await fetch(URL_DIR + "/api/singers", {
+        body: JSON.stringify(body),
+        method: "DELETE",
+        headers: {     "Content-Type": "application/json", "authorization": "Bearer "+token   }
+    });
+
+    return response;
+}

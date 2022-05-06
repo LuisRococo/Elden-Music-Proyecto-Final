@@ -7,14 +7,20 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import { Box } from "@mui/system";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import AdminItem from "../components/admin/AdminItem";
 import SectionHeader from "../components/general/SectionHeader";
 import UploadButton from "../components/general/UploadButton";
 import { showError, showSuccess } from "../redux/reducers/errorReducer";
 import { RootState } from "../redux/store";
 import { toBase64 } from "../util/other";
-import { requestCreateSinger } from "../util/requests";
+import {
+  fetchSingers,
+  requestCreateSinger,
+  requestDeleteSinger,
+} from "../util/requests";
 
 export default function AdminArtistPage() {
   const [file, setFile] = useState();
@@ -23,6 +29,7 @@ export default function AdminArtistPage() {
   const [artistNationality, setArtistNationality] = useState("");
   const dispatch = useDispatch();
   const token: any = useSelector((status: RootState) => status.token.token);
+  const [artists, setArtists] = useState(null);
 
   function updateFile(e) {
     setFile(e.target.files[0]);
@@ -35,8 +42,6 @@ export default function AdminArtistPage() {
 
       const base64Img = await toBase64(file);
 
-      console.info(token);
-
       const res = await requestCreateSinger(
         artistName,
         stageName,
@@ -47,6 +52,7 @@ export default function AdminArtistPage() {
 
       if (res.status === 200) {
         dispatch(showSuccess("Artist Registered"));
+        getAllSingers();
       } else {
         dispatch(showError("error - Check your data"));
       }
@@ -54,6 +60,27 @@ export default function AdminArtistPage() {
       dispatch(showError("Unexpected error - Try later"));
     }
   }
+
+  async function deleteSinger(idSinger) {
+    const res = await requestDeleteSinger(idSinger, token.token);
+    if (res.status === 200) {
+      getAllSingers();
+      dispatch(showSuccess("Artist deleted"));
+    } else {
+      dispatch(showError("Error - Something bad happened"));
+    }
+  }
+
+  async function getAllSingers() {
+    const res = await fetchSingers();
+    const jsonRes = await res.json();
+
+    if (res.status === 200) setArtists(jsonRes);
+  }
+
+  useEffect(() => {
+    getAllSingers();
+  }, []);
 
   return (
     <div>
@@ -133,7 +160,29 @@ export default function AdminArtistPage() {
           </form>
         </Paper>
 
-        <Divider sx={{ marginY: "20px" }} />
+        <Divider sx={{ marginY: "40px" }} />
+
+        {artists ? (
+          <>
+            {artists.map((artist, key) => {
+              return (
+                <AdminItem
+                  key={`admin-items-${key}`}
+                  idImage={artist.id_image}
+                  title={artist.singer_name}
+                  deleteItem={deleteSinger}
+                  idItem={artist.id_singer}
+                />
+              );
+            })}
+          </>
+        ) : (
+          <Typography
+            sx={{ fontWeight: "bold", fontSize: "1.4rem", textAlign: "center" }}
+          >
+            "There are no artists"
+          </Typography>
+        )}
       </Container>
     </div>
   );

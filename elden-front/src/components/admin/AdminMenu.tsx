@@ -83,6 +83,7 @@ export default function AdminMenu() {
       <List>
         {adminPages.map((page, index) => (
           <Link
+            key={`admin-menu-${index}`}
             onClick={() => {
               dispatch(hide());
             }}

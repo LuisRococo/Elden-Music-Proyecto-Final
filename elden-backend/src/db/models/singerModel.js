@@ -26,6 +26,11 @@ const Singer = sequelize.define(
     id_image: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
+      onDelete: "cascade",
+      references: {
+        model: File, // name of Target model
+        key: "id_file", // key in Target model that we're referencing
+      },
     },
   },
   {

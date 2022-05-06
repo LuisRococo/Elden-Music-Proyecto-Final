@@ -15,7 +15,7 @@ router.get("/:_id", getSinger);
 
 router.post("/", verifyAdminAuth, createSinger);
 
-router.delete("/", deleteSinger);
+router.delete("/", verifyAdminAuth, deleteSinger);
 
 router.put("/", updateSinger);
 
