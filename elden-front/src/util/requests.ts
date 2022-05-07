@@ -114,3 +114,29 @@ export async function requestCreateAlbums (albumName, releaseDate, isSingle, idS
 
     return response;
 }
+
+//SONG
+
+export async function requestCreateSong (songName, duration, previewSongFile, songFile, idAlbum) {
+    const body = {
+        songName, duration, previewSongFile, songFile, idAlbum
+    }
+
+    const token = getTokenPrepared();
+
+    const response = await fetch(URL_DIR + "/api/songs", {
+        body: JSON.stringify(body),
+        method: "POST",
+        headers: {     "Content-Type": "application/json", "authorization": token   }
+    });
+
+    return response;
+}
+
+export async function fetchSongs () {
+    const response = await fetch(URL_DIR + "/api/songs", {
+        method: "GET",
+    });
+
+    return response;
+}

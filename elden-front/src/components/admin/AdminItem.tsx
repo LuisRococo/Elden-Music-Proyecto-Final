@@ -30,7 +30,7 @@ export default function AdminItem({
         {image && (
           <div className="admin-item__img-cont">
             <img
-              className={squareImage && "admin-item__img-cont--square-img"}
+              className={squareImage ? "admin-item__img-cont--square-img" : ""}
               src={image}
               alt="artist image"
             />

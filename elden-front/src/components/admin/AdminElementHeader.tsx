@@ -10,8 +10,6 @@ export default function AdminElementHeader({ idImage, title }) {
   }
 
   useEffect(() => {
-    console.info("fefnerfnejknerkfnejfkfnjr");
-
     getImage();
   }, [title]);
 

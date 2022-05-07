@@ -25,6 +25,7 @@ import {
 import AdminElementHeader from "../components/admin/AdminElementHeader";
 import { showError, showSuccess } from "../redux/reducers/errorReducer";
 import { toBase64 } from "../util/other";
+import { Key } from "@mui/icons-material";
 
 export default function AdminAlbumPage() {
   const dispatch = useDispatch();
@@ -54,13 +55,15 @@ export default function AdminAlbumPage() {
   function incrustSingerAlbums(albums) {
     return albums.map((album, index) => {
       return (
-        <AdminItem
-          idImage={album.id_image}
-          idItem={album.id_album}
-          key={`singer-album-${index}`}
-          title={album.album_name}
-          squareImage={true}
-        />
+        <div key={`singer-album-x-${index}`}>
+          <AdminItem
+            idImage={album.id_image}
+            idItem={album.id_album}
+            key={`singer-album-${index}`}
+            title={album.album_name}
+            squareImage={true}
+          />
+        </div>
       );
     });
   }
@@ -88,7 +91,6 @@ export default function AdminAlbumPage() {
 
   function changeFormCreateValues(fieldName, value) {
     setFormCreateValues({ ...formCreateValues, [fieldName]: value });
-    console.info(formCreateValues);
   }
 
   async function createAlbum(e) {
@@ -255,9 +257,9 @@ export default function AdminAlbumPage() {
             <>
               {singers.map((singer, key) => {
                 return (
-                  <>
+                  <div key={`nulo-admin-album-x-${key}`}>
                     <AdminItemParent
-                      key={`item-parent-${key}`}
+                      key={`item-parent-x-${key}`}
                       addItem={showCreateAlbumForm}
                       title={singer.singer_name}
                       desc={singer.stage_name}
@@ -266,7 +268,7 @@ export default function AdminAlbumPage() {
                     />
 
                     {incrustSingerAlbums(singer.Albums)}
-                  </>
+                  </div>
                 );
               })}
             </>

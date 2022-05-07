@@ -44,9 +44,8 @@ async function createSong(req, res, next) {
     await Song.create({
       song_name: songName,
       duration: duration,
-      previewSongFile: previewSongDb,
-      id_preview_song_file: previewSongFile.id_file,
-      id_song_file: songFile.id_file,
+      id_preview_song_file: previewSongDb.id_file,
+      id_song_file: SongDb.id_file,
       id_album: idAlbum,
     });
     res.json(getSuccessAnswer(200, "Song created"));

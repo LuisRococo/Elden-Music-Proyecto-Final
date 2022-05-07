@@ -26,7 +26,7 @@ export default function AdminItemParent({
       <div className="artist-hd">
         {image64 && (
           <img
-            className={squareImage && "admin-element-hd--square-img"}
+            className={squareImage ? "admin-element-hd--square-img" : ""}
             src={image64}
             alt="artist image"
           />

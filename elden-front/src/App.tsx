@@ -8,6 +8,7 @@ import SignInPage from "./pages/SignInPage";
 import ErrorMsj from "./components/general/ErrorMsj";
 import AdminMenu from "./components/admin/AdminMenu";
 import AdminArtistPage from "./pages/AdminArtistPage";
+import AdminSongPage from "./pages/AdminSongPage";
 import ProtectRoute from "./components/other/ProtectRoute";
 import ProtectRouteIfLoggedIn from "./components/other/ProtectRouteIfLoggedIn";
 import AdminAlbumPage from "./pages/AdminAlbumPage";
@@ -55,6 +56,15 @@ function App() {
           element={
             <ProtectRoute adminPermissions={true}>
               <AdminAlbumPage />
+            </ProtectRoute>
+          }
+        />
+
+        <Route
+          path="/admin/songs"
+          element={
+            <ProtectRoute adminPermissions={true}>
+              <AdminSongPage />
             </ProtectRoute>
           }
         />
