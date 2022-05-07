@@ -113,6 +113,7 @@ export default function AdminAlbumPage() {
         dispatch(showSuccess("Album created"));
         getSingers();
         setFormCreateValues(getCreateFormAlbumClear());
+        setSelectedArtist(null);
       }
     } catch (error) {
       dispatch(showError("Error, check your values"));

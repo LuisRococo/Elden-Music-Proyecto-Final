@@ -111,6 +111,7 @@ export default function AdminAlbumPage() {
         dispatch(showSuccess("song created"));
         getAlbums();
         setFormCreateValues(getCreateFormSongClear());
+        setSelectedAlbum(null);
       }
     } catch (error) {
       console.info(error);
