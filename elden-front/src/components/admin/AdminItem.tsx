@@ -9,6 +9,7 @@ export default function AdminItem({
   deleteItem = null,
   updateItem = null,
   seeMoreItem = null,
+  squareImage = false,
 }) {
   const [image, setImage] = useState(null);
 
@@ -28,7 +29,11 @@ export default function AdminItem({
       <div className="admin-item">
         {image && (
           <div className="admin-item__img-cont">
-            <img src={image} alt="artist image" />
+            <img
+              className={squareImage && "admin-item__img-cont--square-img"}
+              src={image}
+              alt="artist image"
+            />
           </div>
         )}
         <div className="admin-item__content">

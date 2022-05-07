@@ -26,13 +26,9 @@ export default function LoginComp() {
         dispatch(showError("Incorrect data - Check your info"));
       } else {
         dispatch(addToken(await res.json()));
-
-        dispatch(hideError());
         navigate("/");
       }
     } catch (e) {
-      console.info(e);
-
       dispatch(showError("Unexpected error - Try later"));
     }
   }

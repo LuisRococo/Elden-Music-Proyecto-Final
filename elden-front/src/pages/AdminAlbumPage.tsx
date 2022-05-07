@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Checkbox,
   Container,
@@ -10,17 +11,18 @@ import {
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import AdminArtistHeader from "../components/admin/AdminArtistHeader";
 import AdminForm from "../components/admin/AdminForm";
 import AdminItem from "../components/admin/AdminItem";
 import SectionHeader from "../components/general/SectionHeader";
 import UploadButton from "../components/general/UploadButton";
 import { RootState } from "../redux/store";
-import { fetchAlbums } from "../util/requests";
+import { fetchAlbums, fetchSingers } from "../util/requests";
 
 export default function AdminAlbumPage() {
   const dispatch = useDispatch();
   const token: any = useSelector((status: RootState) => status.token.token);
-  const [albums, setAlbums] = useState(null);
+  const [singers, setSingers] = useState(null);
   const [formCreateValues, setFormCreateValues] = useState(
     getCreateFormAlbumClear()
   );
@@ -39,12 +41,25 @@ export default function AdminAlbumPage() {
     changeFormCreateValues("imageFile", e.target.files[0]);
   }
 
-  async function getAlbums() {
+  function incrustSingerAlbums(albums) {
+    return albums.map((album, index) => {
+      return (
+        <AdminItem
+          idImage={album.id_image}
+          idItem={album.id_album}
+          key={`singer-album-${index}`}
+          title={album.album_name}
+        />
+      );
+    });
+  }
+
+  async function getSingers() {
     try {
-      const res = await fetchAlbums();
+      const res = await fetchSingers();
 
       if (res.status === 200) {
-        setAlbums(await res.json());
+        setSingers(await res.json());
       }
     } catch (error) {}
   }
@@ -61,7 +76,7 @@ export default function AdminAlbumPage() {
 
   //USE EFFECTS
   useEffect(() => {
-    getAlbums();
+    getSingers();
   }, []);
 
   return (
@@ -137,29 +152,35 @@ export default function AdminAlbumPage() {
           </AdminForm>
         </Grid>
 
-        <Divider sx={{ marginY: "40px" }} />
-        {albums && albums.length !== 0 ? (
-          <>
-            {albums.map((album, key) => {
-              return (
-                <AdminItem
-                  key={`admin-items-${key}`}
-                  idImage={album.id_image}
-                  title={album.singer_name}
-                  deleteItem={null}
-                  idItem={album.id_singer}
-                  updateItem={null}
-                />
-              );
-            })}
-          </>
-        ) : (
-          <Typography
-            sx={{ fontWeight: "bold", fontSize: "1.4rem", textAlign: "center" }}
-          >
-            "There are no albums"
-          </Typography>
-        )}
+        <Box sx={{ marginTop: "50px" }}>
+          {singers && singers.length !== 0 ? (
+            <>
+              {singers.map((singer, key) => {
+                return (
+                  <>
+                    <AdminArtistHeader
+                      name={singer.singer_name}
+                      stageName={singer.stage_name}
+                      idImage={singer.id_image}
+                    />
+
+                    {incrustSingerAlbums(singer.Albums)}
+                  </>
+                );
+              })}
+            </>
+          ) : (
+            <Typography
+              sx={{
+                fontWeight: "bold",
+                fontSize: "1.4rem",
+                textAlign: "center",
+              }}
+            >
+              "There are no artists nor albums"
+            </Typography>
+          )}
+        </Box>
       </Container>
     </div>
   );

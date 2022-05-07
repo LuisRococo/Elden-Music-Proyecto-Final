@@ -181,6 +181,10 @@
   border-radius: 100px;
 }
 
+.admin-item__img-cont--square-img{
+  border-radius: 10px;
+}
+
 .admin-item__content{
   flex: 1;
 }
@@ -188,4 +192,57 @@
 .admin-item__title{
   font-size: 1.4rem;
   font-weight: bold;
+}
+
+/*ADMIN ELEMENT HEADER*/
+.admin-element-hd {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.admin-element-hd img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 100px;
+}
+
+.admin-element-hd p {
+  font-size: 1.6rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+/*ADMIN ARTIST HEADER*/
+.artist-hd {
+  margin: 20px 0;
+  display: flex;
+}
+
+.artist-hd img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 100px;
+  margin-right: 40px;
+}
+
+.artist-hd__name {
+  font-size: 1.7rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.artist-hd__stage-name {
+  font-size: 1.2rem;
+  font-style: italic;
+  color: #828282;
+}
+
+.artist-hd__info{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
