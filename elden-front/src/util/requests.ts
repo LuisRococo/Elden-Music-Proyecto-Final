@@ -99,14 +99,14 @@ export async function fetchAlbums () {
     return response;
 }
 
-export async function requestCreateAlbums (albumName, releaseDate, isSingle, idSinger, image) {
+export async function requestCreateAlbums (albumName, releaseDate, isSingle, idSinger, image, priceAlbum, priceSong) {
     const body = {
-        albumName, releaseDate, isSingle, idSinger, image
+        albumName, releaseDate, isSingle, idSinger, image, priceAlbum, priceSong
     }
 
     const token = getTokenPrepared();
 
-    const response = await fetch(URL_DIR + "/api/singers", {
+    const response = await fetch(URL_DIR + "/api/albums", {
         body: JSON.stringify(body),
         method: "POST",
         headers: {     "Content-Type": "application/json", "authorization": token   }

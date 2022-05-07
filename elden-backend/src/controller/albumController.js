@@ -1,5 +1,7 @@
 const Album = require("../db/models/albumModel");
+const File = require("../db/models/fileModel");
 const Singer = require("../db/models/singerModel");
+const Song = require("../db/models/songModel");
 const { getErrorAnswer, getSuccessAnswer } = require("../util/util");
 
 async function getAlbums(req, res, next) {
@@ -8,6 +10,9 @@ async function getAlbums(req, res, next) {
       include: [
         {
           model: Singer,
+        },
+        {
+          model: Song,
         },
       ],
     });
@@ -19,8 +24,15 @@ async function getAlbums(req, res, next) {
 
 async function createAlbum(req, res, next) {
   try {
-    const { albumName, releaseDate, isSingle, idSinger } = req.body;
-
+    const {
+      albumName,
+      releaseDate,
+      isSingle,
+      idSinger,
+      priceAlbum,
+      priceSong,
+      image,
+    } = req.body;
     //CREATE IMAGE
     const albumImageDb = await File.create({
       file_content: image,
@@ -31,7 +43,9 @@ async function createAlbum(req, res, next) {
       release_date: releaseDate,
       is_single: isSingle,
       id_singer: idSinger,
-      id_image: albumImageDb.id_image,
+      id_image: albumImageDb.id_file,
+      price_album: priceAlbum,
+      price_song: priceSong,
     });
     res.json(getSuccessAnswer(200, "Album created"));
   } catch (error) {

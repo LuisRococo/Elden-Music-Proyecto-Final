@@ -1,13 +1,7 @@
-import { Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { fetchFileBase64 } from "../../util/requests";
 
-export default function AdminElementHeader(
-  idImage,
-  title,
-  hide,
-  children = null
-) {
+export default function AdminElementHeader({ idImage, title }) {
   const [image64, setImage64] = useState(null);
 
   async function getImage() {
@@ -16,8 +10,10 @@ export default function AdminElementHeader(
   }
 
   useEffect(() => {
-    getImage;
-  }, []);
+    console.info("fefnerfnejknerkfnejfkfnjr");
+
+    getImage();
+  }, [title]);
 
   return (
     <div className="admin-element-hd">

@@ -1,6 +1,7 @@
 const Album = require("./models/albumModel");
 const File = require("./models/fileModel");
 const Singer = require("./models/singerModel");
+const Song = require("./models/songModel");
 
 //FILE
 File.hasMany(Singer, { foreignKey: "id_image" });
@@ -13,9 +14,7 @@ Singer.belongsTo(File, {
   onDelete: "cascade",
 });
 Singer.hasMany(Album, {
-  foreignKey: { name: "id_album", allowNull: false },
-  hooks: true,
-  onDelete: "cascade",
+  foreignKey: { name: "id_singer", allowNull: false },
 });
 
 //ALBUM
@@ -29,5 +28,24 @@ Album.belongsTo(File, {
   hooks: true,
   onDelete: "cascade",
 });
+Album.hasMany(Song, {
+  foreignKey: { name: "id_album", allowNull: false },
+});
 
+//SONG
+Song.belongsTo(File, {
+  foreignKey: { name: "id_preview_song_file", allowNull: false },
+  hooks: true,
+  onDelete: "cascade",
+});
+Song.belongsTo(File, {
+  foreignKey: { name: "id_song_file", allowNull: false },
+  hooks: true,
+  onDelete: "cascade",
+});
+Song.belongsTo(Album, {
+  foreignKey: { name: "id_album", allowNull: false },
+  hooks: true,
+  onDelete: "cascade",
+});
 module.exports = {};

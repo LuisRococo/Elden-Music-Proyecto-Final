@@ -3,6 +3,7 @@ const getDataBaseConnection = require("../db/dbConnect");
 const Singer = require("../db/models/singerModel");
 const File = require("../db/models/fileModel");
 const Album = require("../db/models/albumModel");
+const Song = require("../db/models/songModel");
 
 async function getSingers(req, res, next) {
   try {
@@ -10,6 +11,11 @@ async function getSingers(req, res, next) {
       include: [
         {
           model: Album,
+          include: [
+            {
+              model: Song,
+            },
+          ],
         },
       ],
     });
@@ -62,6 +68,8 @@ async function deleteSinger(req, res, next) {
     }
 
     const singer = await Singer.findOne({ where: { id_singer: idSinger } });
+    await sequelize.query("UPDATE users SET y = 42 WHERE x = 12");
+
     await Album.destroy({ where: { id_singer: singer.id_singer } });
     await Singer.destroy({ where: { id_singer: idSinger } });
     await File.destroy({ where: { id_file: singer.id_image } });

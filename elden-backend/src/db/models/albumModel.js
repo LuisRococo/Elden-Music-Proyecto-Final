@@ -44,6 +44,14 @@ const Album = sequelize.define(
         key: "id_file", // key in Target model that we're referencing
       },
     },
+    price_album: {
+      type: DataTypes.DOUBLE(8, 2),
+      allowNull: false,
+    },
+    price_song: {
+      type: DataTypes.DOUBLE(8, 2),
+      allowNull: false,
+    },
   },
   {
     // Other model options go here

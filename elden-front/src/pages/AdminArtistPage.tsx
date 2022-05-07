@@ -292,7 +292,7 @@ export default function AdminArtistPage() {
                   key={`admin-items-${key}`}
                   idImage={artist.id_image}
                   title={artist.singer_name}
-                  deleteItem={deleteSinger}
+                  // deleteItem={deleteSinger}
                   idItem={artist.id_singer}
                   updateItem={activateUpdateSinger}
                 />
