@@ -5,6 +5,7 @@ import { fetchFileBase64, fetchSinger } from "../util/requests";
 import { useNavigate } from "react-router-dom";
 import ItemCard, { ItemCardContainer } from "../components/general/ItemCard";
 import EmptyResults from "../components/EmptyResults";
+import SectionDivisor from "../components/general/SectionDivisor";
 
 export default function ArtistPage() {
   const [artist, setArtist] = useState(null);
@@ -43,6 +44,9 @@ export default function ArtistPage() {
 
       {artist && (
         <Container maxWidth="lg" sx={{ paddingY: "7%" }}>
+          <SectionDivisor title={"Top 5 Songs"} />
+
+          <SectionDivisor title={"Albums"} />
           {artist.Albums.length !== 0 && (
             <ItemCardContainer>
               {artist.Albums.map((album, key) => {
@@ -97,9 +101,17 @@ export function ArtistPageHeader({
 
             <Divider sx={{ marginY: "20px", backgroundColor: "white" }} />
 
-            <p className="artist-pg-hd__data">{stageName}</p>
-            <p className="artist-pg-hd__data">Albums: {albumsCant}</p>
-            <p className="artist-pg-hd__data">{nationality}</p>
+            <p className="artist-pg-hd__data">
+              <strong>Stage Name: </strong>
+              {stageName}
+            </p>
+            <p className="artist-pg-hd__data">
+              <strong>Albums: </strong> {albumsCant}
+            </p>
+            <p className="artist-pg-hd__data">
+              <strong>Nationality: </strong>
+              {nationality}
+            </p>
           </div>
         </div>
       </Container>

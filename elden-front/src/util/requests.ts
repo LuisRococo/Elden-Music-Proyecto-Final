@@ -149,3 +149,12 @@ export async function fetchSongs (limit = null) {
 
     return response;
 }
+
+/*TOP 5 SONGS*/
+export async function fetchTopSongs (idArtist) {
+    const response = await fetch(URL_DIR + `/api/artist-tops/${idArtist}`, {
+        method: "GET",
+    });
+
+    return response;
+}

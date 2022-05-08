@@ -16,7 +16,7 @@ export default function SectionDivisor({ title, url = null }) {
             <IconButton
               sx={{ marginLeft: "5px" }}
               color="primary"
-              aria-label="add to shopping cart"
+              aria-label="See more"
             >
               <AddCircleIcon fontSize="large" />
             </IconButton>

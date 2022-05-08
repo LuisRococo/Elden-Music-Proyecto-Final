@@ -6,7 +6,7 @@ import ItemCard, { ItemCardContainer } from "../general/ItemCard";
 import SectionDivisor from "../general/SectionDivisor";
 
 export default function HomeSongsSection() {
-  const limitSongs = 4;
+  const limitSongs = 6;
   const [songs, setSongs] = useState(null);
 
   async function getSongs() {
