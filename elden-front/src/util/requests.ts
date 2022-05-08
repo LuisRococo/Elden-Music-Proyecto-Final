@@ -45,8 +45,8 @@ export async function requestCreateSinger (singerName, stageName, nationality, i
     return response;
 }
 
-export async function fetchSingers () {
-    const response = await fetch(URL_DIR + "/api/singers", {
+export async function fetchSingers (limit = null) {
+    const response = await fetch(URL_DIR + `/api/singers${limit ? ("?limit="+limit): ""}`, {
         method: "GET",
     });
 

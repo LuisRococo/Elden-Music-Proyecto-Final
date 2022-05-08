@@ -8,17 +8,10 @@ async function getSongs(req, res, next) {
   try {
     const limit = req.query.limit;
     const query = {
-      // subQuery: false,
       include: [
-        // {
-        //   model: File,
-        // },
         {
           model: Album,
           include: [
-            // {
-            //   model: File,
-            // },
             {
               model: Singer,
             },

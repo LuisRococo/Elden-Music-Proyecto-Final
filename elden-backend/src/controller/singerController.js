@@ -7,7 +7,9 @@ const Song = require("../db/models/songModel");
 
 async function getSingers(req, res, next) {
   try {
-    const response = await Singer.findAll({
+    const limit = req.query.limit;
+
+    const queryOptions = {
       include: [
         {
           model: Album,
@@ -18,7 +20,11 @@ async function getSingers(req, res, next) {
           ],
         },
       ],
-    });
+    };
+
+    if (limit) queryOptions["limit"] = Number.parseInt(limit);
+
+    const response = await Singer.findAll(queryOptions);
     res.json(response);
   } catch (error) {
     next(error);

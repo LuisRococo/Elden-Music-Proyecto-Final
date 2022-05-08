@@ -20,6 +20,7 @@ import { deleteToken } from "../../redux/reducers/tokenReducer";
 import { RootState } from "../../redux/store";
 import LibraryMusicRoundedIcon from "@mui/icons-material/LibraryMusicRounded";
 import { show } from "../../redux/reducers/adminDrawerReducer";
+import { publicPages } from "../../util/pagesRoutes";
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -28,13 +29,6 @@ const ResponsiveAppBar = () => {
   let location = useLocation();
   const navigate = useNavigate();
   const token = useSelector((state: RootState) => state.token.token);
-
-  const pages = [
-    {
-      name: "HOME",
-      url: "/",
-    },
-  ];
 
   const pagesUser = [
     {
@@ -129,7 +123,7 @@ const ResponsiveAppBar = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
+              {publicPages.map((page) => (
                 <MenuItem
                   key={"navbar-item" + page.name}
                   onClick={handleCloseNavMenu}
@@ -153,7 +147,7 @@ const ResponsiveAppBar = () => {
           </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page, key) => (
+            {publicPages.map((page, key) => (
               <Link href={page.url} key={"navbar-item-2" + key}>
                 <Button
                   key={"navbar-item-2" + page.name}

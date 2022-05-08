@@ -1,6 +1,7 @@
 import { Box, Container } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { fetchSongs } from "../../util/requests";
+import EmptyResults from "../EmptyResults";
 import ItemCard, { ItemCardContainer } from "../general/ItemCard";
 import SectionDivisor from "./SectionDivisor";
 
@@ -25,8 +26,8 @@ export default function HomeSongsSection() {
   }, []);
 
   return (
-    <Box sx={{ marginY: "5%" }}>
-      <Container maxWidth="lg" sx={{ backgroundColor: "primary" }}>
+    <Box sx={{ paddingY: "7%", backgroundColor: "#f2f2f2" }}>
+      <Container maxWidth="lg">
         <SectionDivisor title="Songs" />
 
         {songs && (
@@ -45,6 +46,8 @@ export default function HomeSongsSection() {
             })}
           </ItemCardContainer>
         )}
+
+        {!songs && <EmptyResults />}
       </Container>
     </Box>
   );

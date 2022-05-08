@@ -10,6 +10,8 @@ export default function ItemCard({
   idImage,
   url,
   isSquare = false,
+  gridXS = 12,
+  gridMD = 6,
 }) {
   const [image64, setImage64] = useState(null);
 
@@ -28,7 +30,7 @@ export default function ItemCard({
   }, []);
 
   return (
-    <Grid item xs={12} md={6}>
+    <Grid item xs={gridXS} md={gridMD}>
       <Link to={url} style={{ textDecoration: "none" }}>
         <Paper sx={{ padding: "15px" }} elevation={8}>
           <div className="item-card">

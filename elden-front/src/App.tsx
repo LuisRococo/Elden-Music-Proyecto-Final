@@ -13,6 +13,8 @@ import ProtectRoute from "./components/other/ProtectRoute";
 import ProtectRouteIfLoggedIn from "./components/other/ProtectRouteIfLoggedIn";
 import AdminAlbumPage from "./pages/AdminAlbumPage";
 import Footer from "./components/general/Footer";
+import ArtistsPage from "./pages/ArtistsPage";
+import ArtistPage from "./pages/ArtistPage";
 
 function App() {
   return (
@@ -24,6 +26,10 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
+
+        <Route path="/artists" element={<ArtistsPage />} />
+
+        <Route path="/artist/:idArtist" element={<ArtistPage />} />
 
         <Route
           path="/login"
