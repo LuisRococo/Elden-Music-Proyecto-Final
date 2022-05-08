@@ -6,24 +6,30 @@ const { getErrorAnswer, getSuccessAnswer } = require("../util/util");
 
 async function getSongs(req, res, next) {
   try {
-    const albums = await Song.findAll({
+    const limit = req.query.limit;
+    const query = {
+      // subQuery: false,
       include: [
-        {
-          model: File,
-        },
+        // {
+        //   model: File,
+        // },
         {
           model: Album,
           include: [
+            // {
+            //   model: File,
+            // },
             {
-              model: File,
-            },
-            {
-              model: Song,
+              model: Singer,
             },
           ],
         },
       ],
-    });
+    };
+
+    if (limit) query["limit"] = Number.parseInt(limit);
+
+    const albums = await Song.findAll(query);
     res.json(albums);
   } catch (error) {
     next(error);

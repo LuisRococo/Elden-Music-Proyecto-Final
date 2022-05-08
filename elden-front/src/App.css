@@ -301,3 +301,36 @@
   align-items: center;
   text-align: center;
 }
+
+/*ITEM CARD*/
+.item-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.item-card__img-cont {
+  width: 120px;
+  margin-right: 20px;
+}
+
+.item-card__img-cont img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50px;
+}
+
+.item-card__img-cont--square-img {
+  border-radius: 5px !important;
+}
+
+.item-card__info-cont{
+  flex: 1;
+}
+
+.item-card__name{
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}

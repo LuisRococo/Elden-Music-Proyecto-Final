@@ -9,6 +9,7 @@ function getConnection() {
     host: dbHost,
     dialect: "mysql",
     port: dbPort,
+    logging: false,
   });
   return sequelize;
 }

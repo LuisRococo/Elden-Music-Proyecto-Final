@@ -133,8 +133,9 @@ export async function requestCreateSong (songName, duration, previewSongFile, so
     return response;
 }
 
-export async function fetchSongs () {
-    const response = await fetch(URL_DIR + "/api/songs", {
+export async function fetchSongs (limit = null) {
+    
+    const response = await fetch(URL_DIR + `/api/songs${limit ? ("?limit="+limit) : ""}`, {
         method: "GET",
     });
 
