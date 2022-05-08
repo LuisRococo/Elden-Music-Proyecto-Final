@@ -3,9 +3,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchSingers } from "../../util/requests";
 import EmptyResults from "../EmptyResults";
-import EmptyMessageCard from "../general/EmptyMessageCard";
 import ItemCard, { ItemCardContainer } from "../general/ItemCard";
-import SectionDivisor from "./SectionDivisor";
+import SectionDivisor from "../general/SectionDivisor";
 import concertImg from "../../img/concert-1.jpeg";
 
 export default function HomeArtistSection() {
@@ -49,7 +48,7 @@ export default function HomeArtistSection() {
             </Grid>
             <Grid item xs={12} md={6} display={{ xs: "block", md: "block" }}>
               <BigImageLink
-                text="Explore more arists"
+                text="Explore more artists"
                 background={concertImg}
                 url={`/artists`}
               />
@@ -57,7 +56,7 @@ export default function HomeArtistSection() {
           </ItemCardContainer>
         )}
 
-        {singers.length === 0 && <EmptyMessageCard />}
+        {singers.length === 0 && <EmptyResults />}
       </Container>
     </Box>
   );

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { fetchSongs } from "../../util/requests";
 import EmptyResults from "../EmptyResults";
 import ItemCard, { ItemCardContainer } from "../general/ItemCard";
-import SectionDivisor from "./SectionDivisor";
+import SectionDivisor from "../general/SectionDivisor";
 
 export default function HomeSongsSection() {
   const limitSongs = 4;

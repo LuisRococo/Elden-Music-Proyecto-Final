@@ -1,7 +1,6 @@
 import { Container } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
-import AdminElementHeader from "../components/admin/AdminElementHeader";
 import EmptyResults from "../components/EmptyResults";
 import ItemCard, { ItemCardContainer } from "../components/general/ItemCard";
 import SectionHeader from "../components/general/SectionHeader";
