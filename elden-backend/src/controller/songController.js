@@ -2,6 +2,7 @@ const Album = require("../db/models/albumModel");
 const File = require("../db/models/fileModel");
 const Singer = require("../db/models/singerModel");
 const Song = require("../db/models/songModel");
+const TopSingerSongs = require("../db/models/topSingerSongs");
 const { getErrorAnswer, getSuccessAnswer } = require("../util/util");
 
 async function getSongs(req, res, next) {
@@ -40,13 +41,26 @@ async function createSong(req, res, next) {
       file_content: songFile,
     });
 
-    await Song.create({
+    const song = await Song.create({
       song_name: songName,
       duration: duration,
       id_preview_song_file: previewSongDb.id_file,
       id_song_file: SongDb.id_file,
       id_album: idAlbum,
     });
+
+    //ADD SONG TO TOP
+    const idSinger = (await Album.findOne({ where: { id_album: idAlbum } }))
+      .id_singer;
+    const cantTopSongs = await TopSingerSongs.count({
+      where: { id_singer: idSinger },
+    });
+    if (cantTopSongs < 5) {
+      await TopSingerSongs.create({
+        id_singer: idSinger,
+        id_song: song.id_song,
+      });
+    }
     res.json(getSuccessAnswer(200, "Song created"));
   } catch (error) {
     next(error);

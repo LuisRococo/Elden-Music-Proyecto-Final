@@ -6,6 +6,7 @@ const albumRouter = require("./src/routes/albumRouter");
 const testRouter = require("./src/routes/testRoute");
 const fileRoute = require("./src/routes/fileRoute");
 const songRoute = require("./src/routes/songRoute");
+const singerTops = require("./src/routes/topSingerSongs");
 const { getErrorAnswer } = require("./src/util/util");
 var cors = require("cors");
 
@@ -35,6 +36,7 @@ apiRouter.use("/albums", albumRouter);
 apiRouter.use("/test", testRouter);
 apiRouter.use("/files", fileRoute);
 apiRouter.use("/songs", songRoute);
+apiRouter.use("/singer-tops", singerTops);
 app.use("/api", apiRouter);
 
 //error handler middleware

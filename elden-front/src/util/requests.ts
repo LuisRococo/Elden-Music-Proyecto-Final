@@ -152,7 +152,7 @@ export async function fetchSongs (limit = null) {
 
 /*TOP 5 SONGS*/
 export async function fetchTopSongs (idArtist) {
-    const response = await fetch(URL_DIR + `/api/artist-tops/${idArtist}`, {
+    const response = await fetch(URL_DIR + `/api/singer-tops/${idArtist}`, {
         method: "GET",
     });
 

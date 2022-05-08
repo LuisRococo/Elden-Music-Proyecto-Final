@@ -1,7 +1,7 @@
 import { Box, Container, Divider } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { fetchFileBase64, fetchSinger } from "../util/requests";
+import { fetchFileBase64, fetchSinger, fetchTopSongs } from "../util/requests";
 import { useNavigate } from "react-router-dom";
 import ItemCard, { ItemCardContainer } from "../components/general/ItemCard";
 import EmptyResults from "../components/EmptyResults";
@@ -9,6 +9,7 @@ import SectionDivisor from "../components/general/SectionDivisor";
 
 export default function ArtistPage() {
   const [artist, setArtist] = useState(null);
+  const [topSongs, setTopSongs] = useState([]);
   const { idArtist } = useParams();
   const navigate = useNavigate();
 
@@ -26,8 +27,16 @@ export default function ArtistPage() {
     navigate("/");
   }
 
+  async function getTopSongs() {
+    try {
+      const res = await fetchTopSongs(idArtist);
+      if (res.status === 200) setTopSongs(await res.json());
+    } catch (error) {}
+  }
+
   useEffect(() => {
     getArtist();
+    getTopSongs();
   }, []);
 
   return (
@@ -45,7 +54,26 @@ export default function ArtistPage() {
       {artist && (
         <Container maxWidth="lg" sx={{ paddingY: "7%" }}>
           <SectionDivisor title={"Top 5 Songs"} />
+          <Box sx={{ marginBottom: "40px" }}>
+            {topSongs.length !== 0 && (
+              <ItemCardContainer>
+                {topSongs.map((song, key) => {
+                  return (
+                    <ItemCard
+                      title={song.Song.song_name}
+                      detail={song.Song.Album.album_name}
+                      idImage={song.Song.Album.id_image}
+                      isSquare={true}
+                      url={""}
+                      key={`artist-page-top-song-${key}`}
+                    />
+                  );
+                })}
+              </ItemCardContainer>
+            )}
 
+            {topSongs.length === 0 && <EmptyResults />}
+          </Box>
           <SectionDivisor title={"Albums"} />
           {artist.Albums.length !== 0 && (
             <ItemCardContainer>

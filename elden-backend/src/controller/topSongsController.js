@@ -2,32 +2,37 @@ const Album = require("../db/models/albumModel");
 const File = require("../db/models/fileModel");
 const Singer = require("../db/models/singerModel");
 const Song = require("../db/models/songModel");
+const TopSingerSongs = require("../db/models/topSingerSongs");
 
-async function getTopSongs(req, res, next) {
+async function getTopSongsSinger(req, res, next) {
   try {
-    const limit = req.query.limit;
+    const { idSinger } = req.params;
     const query = {
+      where: {
+        id_singer: idSinger,
+      },
       include: [
         {
-          model: Album,
+          model: Singer,
+        },
+        {
+          model: Song,
           include: [
             {
-              model: Singer,
+              model: Album,
             },
           ],
         },
       ],
     };
 
-    if (limit) query["limit"] = Number.parseInt(limit);
-
-    const albums = await Song.findAll(query);
-    res.json(albums);
+    const songs = await TopSingerSongs.findAll(query);
+    res.json(songs);
   } catch (error) {
     next(error);
   }
 }
 
 module.exports = {
-  getTopSongs,
+  getTopSongsSinger,
 };
