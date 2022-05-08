@@ -251,3 +251,53 @@
   flex-direction: column;
   justify-content: center;
 }
+
+/*LAND PAGE*/
+.land-page {
+  height: 90vh;
+  background:
+        linear-gradient(
+          rgba(0, 0, 0, 0.5), 
+          rgba(0, 0, 0, 0.5)
+        ),
+        url("./img//land-page-bg-1.jpeg");
+  background-color: #d16e17;
+  /* background-image: url("https://cutewallpaper.org/21/musical-wallpaper/Jazz-Trombone-Music-Background-Wallpaper-Scroll-Wallpapers.jpg"); */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.land-page__img{
+  width: 100%;
+}
+
+.land-page__info{
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  flex-direction: column;
+  margin: auto;
+}
+
+.land-page__content {
+  height: 100%;
+  display: flex;
+}
+
+.land-page__title {
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.land-page__info{
+  color: white;
+  font-size: 1.6rem;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
