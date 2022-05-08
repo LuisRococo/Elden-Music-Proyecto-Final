@@ -53,6 +53,14 @@ export async function fetchSingers (limit = null) {
     return response;
 }
 
+export async function fetchSinger (idSinger) {
+    const response = await fetch(URL_DIR + `/api/singers/${idSinger}}`, {
+        method: "GET",
+    });
+
+    return response;
+}
+
 export async function fetchFileBase64 (idFile) {
     const response = await fetch(URL_DIR + `/api/files/${idFile}`, {
         method: "GET",

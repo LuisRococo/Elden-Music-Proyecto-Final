@@ -425,3 +425,46 @@ footer {
   font-weight: bold;
   margin-bottom: 20px;
 }
+
+/*ARTIST PAGE HEADER*/
+.artist-pg-hd {
+  background:
+        linear-gradient(
+          rgba(0, 0, 0, 0.5), 
+          rgba(0, 0, 0, 0.5)
+        ),
+        url("./img//artist-bg-1.jpeg");
+  background-color: #2f2f2f;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.artist-pg-hd__cont{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.artist-pg-hd__cont img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 100px;
+  margin-right: 30px;
+}
+.artist-pg-hd__title{
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+}
+
+.artist-pg-hd__data{
+  color: #c2c2c2;
+  font-size: 1.2;
+  font-weight: 400;
+}
+
+.artist-pg-hd__info {
+  flex: 1;
+}

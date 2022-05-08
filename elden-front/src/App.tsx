@@ -15,6 +15,7 @@ import AdminAlbumPage from "./pages/AdminAlbumPage";
 import Footer from "./components/general/Footer";
 import ArtistsPage from "./pages/ArtistsPage";
 import ArtistPage from "./pages/ArtistPage";
+import ScrollToTop from "./components/other/ScrollToTop";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <NavBar />
       <Player />
       <AdminMenu />
+      <ScrollToTop />
 
       <Routes>
         <Route path="/" element={<HomePage />} />

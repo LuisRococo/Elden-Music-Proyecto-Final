@@ -35,7 +35,7 @@ export default function ArtistsPage() {
                 <ItemCard
                   title={artist.singer_name}
                   detail={`Albums Quantity: ${artist.Albums.length}`}
-                  url={""}
+                  url={`/artist/${artist.id_singer}`}
                   idImage={artist.id_image}
                   key={`song-sec-item-${key}`}
                   isSquare={true}

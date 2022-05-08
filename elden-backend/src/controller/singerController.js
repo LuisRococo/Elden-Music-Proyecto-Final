@@ -50,14 +50,28 @@ async function createSinger(req, res, next) {
 
 async function getSinger(req, res, next) {
   try {
-    const { _id } = req.params;
+    const { idSinger } = req.params;
 
-    if (!_id) {
+    if (!idSinger) {
       res.status(400).json(getErrorAnswer(400, "Identificator is needed"));
       return;
     }
 
-    const singer = await Singer.findById(_id);
+    const singer = await Singer.findOne({
+      where: {
+        id_singer: idSinger,
+      },
+      include: [
+        {
+          model: Album,
+          include: [
+            {
+              model: Song,
+            },
+          ],
+        },
+      ],
+    });
     res.json(singer);
   } catch (error) {
     next(error);

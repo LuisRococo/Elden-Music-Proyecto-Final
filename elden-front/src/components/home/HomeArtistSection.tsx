@@ -26,7 +26,7 @@ export default function HomeArtistSection() {
   return (
     <Box sx={{ paddingY: "7%" }}>
       <Container maxWidth="lg" sx={{ backgroundColor: "primary" }}>
-        <SectionDivisor title="Singers" />
+        <SectionDivisor title="Singers" url={"artists"} />
 
         {singers.length !== 0 && (
           <ItemCardContainer>
@@ -38,7 +38,7 @@ export default function HomeArtistSection() {
                       title={singer.singer_name}
                       detail={singer.stage_name}
                       idImage={singer.id_image}
-                      url={""}
+                      url={`/artist/${singer.id_singer}`}
                       key={`home-artist-sec-artists-${key}`}
                       gridXS={12}
                       gridMD={12}
@@ -47,11 +47,11 @@ export default function HomeArtistSection() {
                 })}
               </Grid>
             </Grid>
-            <Grid item xs={6} md={6} display={{ xs: "none", md: "block" }}>
+            <Grid item xs={12} md={6} display={{ xs: "block", md: "block" }}>
               <BigImageLink
                 text="Explore more arists"
                 background={concertImg}
-                url={""}
+                url={`/artists`}
               />
             </Grid>
           </ItemCardContainer>

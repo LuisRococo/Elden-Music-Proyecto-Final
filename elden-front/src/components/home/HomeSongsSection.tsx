@@ -28,7 +28,7 @@ export default function HomeSongsSection() {
   return (
     <Box sx={{ paddingY: "7%", backgroundColor: "#f2f2f2" }}>
       <Container maxWidth="lg">
-        <SectionDivisor title="Songs" />
+        <SectionDivisor title="Songs" url={"/artists"} />
 
         {songs && (
           <ItemCardContainer>

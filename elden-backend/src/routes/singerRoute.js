@@ -11,7 +11,7 @@ const router = express.Router();
 
 router.get("/", getSingers);
 
-router.get("/:_id", getSinger);
+router.get("/:idSinger", getSinger);
 
 router.post("/", verifyAdminAuth, createSinger);
 
