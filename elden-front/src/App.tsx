@@ -12,6 +12,7 @@ import AdminSongPage from "./pages/AdminSongPage";
 import ProtectRoute from "./components/other/ProtectRoute";
 import ProtectRouteIfLoggedIn from "./components/other/ProtectRouteIfLoggedIn";
 import AdminAlbumPage from "./pages/AdminAlbumPage";
+import Footer from "./components/general/Footer";
 
 function App() {
   return (
@@ -69,6 +70,8 @@ function App() {
           }
         />
       </Routes>
+
+      <Footer />
     </Router>
   );
 }
