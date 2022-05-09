@@ -32,6 +32,7 @@ async function createAlbum(req, res, next) {
       priceAlbum,
       priceSong,
       image,
+      priceAlbumDigital,
     } = req.body;
     //CREATE IMAGE
     const albumImageDb = await File.create({
@@ -46,6 +47,7 @@ async function createAlbum(req, res, next) {
       id_image: albumImageDb.id_file,
       price_album: priceAlbum,
       price_song: priceSong,
+      price_album_digital: priceAlbumDigital,
     });
     res.json(getSuccessAnswer(200, "Album created"));
   } catch (error) {

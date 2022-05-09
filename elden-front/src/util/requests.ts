@@ -107,9 +107,9 @@ export async function fetchAlbums () {
     return response;
 }
 
-export async function requestCreateAlbums (albumName, releaseDate, isSingle, idSinger, image, priceAlbum, priceSong) {
+export async function requestCreateAlbums (albumName, releaseDate, isSingle, idSinger, image, priceAlbum, priceSong, priceAlbumDigital) {
     const body = {
-        albumName, releaseDate, isSingle, idSinger, image, priceAlbum, priceSong
+        albumName, releaseDate, isSingle, idSinger, image, priceAlbum, priceSong, priceAlbumDigital
     }
 
     const token = getTokenPrepared();

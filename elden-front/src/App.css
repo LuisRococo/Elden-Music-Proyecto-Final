@@ -318,7 +318,7 @@
   width: 120px;
   height: 120px;
   object-fit: cover;
-  border-radius: 50px;
+  border-radius: 100%;
 }
 
 .item-card__img-cont--square-img {
@@ -403,6 +403,7 @@ footer {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  border-radius: 10px;
 }
 
 .big-img-link__content{
@@ -413,6 +414,7 @@ footer {
   align-items: center;
   flex-direction: column;
   background-color: #3a3a3a66;
+  border-radius: 10px;
 }
 
 .big-img-link__content:hover{

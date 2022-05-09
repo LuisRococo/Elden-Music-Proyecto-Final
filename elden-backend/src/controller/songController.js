@@ -4,6 +4,7 @@ const Singer = require("../db/models/singerModel");
 const Song = require("../db/models/songModel");
 const TopSingerSongs = require("../db/models/topSingerSongs");
 const { getErrorAnswer, getSuccessAnswer } = require("../util/util");
+const { doesAlbumAcceptsMoreSongs } = require("../util/dbUtil");
 
 async function getSongs(req, res, next) {
   try {
@@ -33,7 +34,19 @@ async function getSongs(req, res, next) {
 async function createSong(req, res, next) {
   try {
     const { songName, duration, previewSongFile, songFile, idAlbum } = req.body;
-    //CREATE IMAGE
+
+    if (!(await doesAlbumAcceptsMoreSongs(idAlbum))) {
+      res
+        .status(400)
+        .json(
+          getErrorAnswer(
+            400,
+            "This album is single and does not accepts more songs"
+          )
+        );
+      return;
+    }
+
     const previewSongDb = await File.create({
       file_content: previewSongFile,
     });
@@ -50,8 +63,8 @@ async function createSong(req, res, next) {
     });
 
     //ADD SONG TO TOP
-    const idSinger = (await Album.findOne({ where: { id_album: idAlbum } }))
-      .id_singer;
+    const album = await Album.findOne({ where: { id_album: idAlbum } });
+    const idSinger = album.id_singer;
     const cantTopSongs = await TopSingerSongs.count({
       where: { id_singer: idSinger },
     });

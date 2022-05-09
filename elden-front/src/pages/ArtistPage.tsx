@@ -121,7 +121,7 @@ export function ArtistPageHeader({
 
   return (
     <div className="artist-pg-hd">
-      <Container maxWidth="lg" sx={{ paddingY: "30px" }}>
+      <Container maxWidth="lg" sx={{ paddingY: "50px" }}>
         <div className="artist-pg-hd__cont">
           {image && <img src={image} alt="artist-image" />}
           <div className="artist-pg-hd__info">

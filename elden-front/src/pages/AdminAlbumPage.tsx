@@ -45,6 +45,7 @@ export default function AdminAlbumPage() {
       imageFile: null,
       priceSong: "",
       priceAlbum: "",
+      priceAlbumDigital: "",
     };
   }
 
@@ -106,7 +107,8 @@ export default function AdminAlbumPage() {
         formCreateValues.idSinger,
         base64Img,
         formCreateValues.priceAlbum,
-        formCreateValues.priceSong
+        formCreateValues.priceSong,
+        formCreateValues.priceAlbumDigital
       );
 
       if (res.status === 200) {
@@ -223,7 +225,7 @@ export default function AdminAlbumPage() {
                   <Grid item xs={12} md={6}>
                     <TextField
                       sx={{ width: "100%" }}
-                      label="Price Album"
+                      label="Price Song"
                       variant="outlined"
                       required={true}
                       type={"number"}
@@ -238,6 +240,29 @@ export default function AdminAlbumPage() {
                         changeFormCreateValues("priceSong", e.target.value);
                       }}
                       value={formCreateValues.priceSong}
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <TextField
+                      sx={{ width: "100%" }}
+                      label="Digital Album Song"
+                      variant="outlined"
+                      required={true}
+                      type={"number"}
+                      InputProps={{
+                        inputProps: {
+                          max: 2000,
+                          min: 0,
+                          step: 0.01,
+                        },
+                      }}
+                      onChange={(e) => {
+                        changeFormCreateValues(
+                          "priceAlbumDigital",
+                          e.target.value
+                        );
+                      }}
+                      value={formCreateValues.priceAlbumDigital}
                     />
                   </Grid>
                 </Grid>

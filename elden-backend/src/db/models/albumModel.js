@@ -52,6 +52,10 @@ const Album = sequelize.define(
       type: DataTypes.DOUBLE(8, 2),
       allowNull: false,
     },
+    price_album_digital: {
+      type: DataTypes.DOUBLE(8, 2),
+      allowNull: false,
+    },
   },
   {
     // Other model options go here

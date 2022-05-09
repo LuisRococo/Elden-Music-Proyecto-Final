@@ -112,10 +112,10 @@ export default function AdminAlbumPage() {
         getAlbums();
         setFormCreateValues(getCreateFormSongClear());
         setSelectedAlbum(null);
+      } else {
+        dispatch(showError("Error, check your values"));
       }
     } catch (error) {
-      console.info(error);
-
       dispatch(showError("Error, check your values"));
     }
   }
