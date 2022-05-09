@@ -99,6 +99,14 @@ export async function requestUpdateArtist (idSinger, singerName, stageName, nati
 }
 
 //ALBUMS
+export async function fetchAlbum (idAlbum) {
+    const response = await fetch(URL_DIR + `/api/albums/${idAlbum}`, {
+        method: "GET",
+    });
+
+    return response;
+}
+
 export async function fetchAlbums () {
     const response = await fetch(URL_DIR + "/api/albums", {
         method: "GET",

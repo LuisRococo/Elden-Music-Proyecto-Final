@@ -37,7 +37,7 @@ export default function HomeSongsSection() {
                 <ItemCard
                   title={song.song_name}
                   detail={song.Album.album_name}
-                  url={""}
+                  url={`/album/${song.Album.id_album}`}
                   idImage={song.Album.id_image}
                   key={`song-sec-item-${key}`}
                   isSquare={true}

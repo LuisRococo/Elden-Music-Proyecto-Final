@@ -10,6 +10,7 @@ import {
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import AdminForm from "../components/admin/AdminForm";
 import AdminItem from "../components/admin/AdminItem";
 import SectionHeader from "../components/general/SectionHeader";
@@ -35,6 +36,7 @@ export default function AdminArtistPage() {
   const dispatch = useDispatch();
   const token: any = useSelector((status: RootState) => status.token.token);
   const [artists, setArtists] = useState(null);
+  const navigate = useNavigate();
 
   function updateFile(e) {
     setFile(e.target.files[0]);
@@ -293,6 +295,9 @@ export default function AdminArtistPage() {
                   idImage={artist.id_image}
                   title={artist.singer_name}
                   // deleteItem={deleteSinger}
+                  seeMoreItem={(idItem) => {
+                    navigate(`/artist/${idItem}`);
+                  }}
                   idItem={artist.id_singer}
                   updateItem={activateUpdateSinger}
                 />

@@ -1,5 +1,6 @@
 import { Box, Button, Divider, Paper } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { fetchFileBase64 } from "../../util/requests";
 
 export default function AdminItem({
@@ -41,7 +42,7 @@ export default function AdminItem({
           <Divider sx={{ marginY: "20px" }} />
           <CrudButtons
             idItem={idItem}
-            seeItem={null}
+            seeItem={seeMoreItem}
             deleteItem={deleteItem}
             updateItem={updateItem}
           />
@@ -76,7 +77,16 @@ function CrudButtons({ idItem, seeItem, deleteItem, updateItem }) {
           Update
         </Button>
       )}
-      <Button sx={{ marginX: "5px" }}>See More</Button>
+      {seeItem && (
+        <Button
+          sx={{ marginX: "5px" }}
+          onClick={() => {
+            seeItem(idItem);
+          }}
+        >
+          See More
+        </Button>
+      )}
     </Box>
   );
 }

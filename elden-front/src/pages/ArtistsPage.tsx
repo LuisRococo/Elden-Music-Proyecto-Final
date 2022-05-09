@@ -37,7 +37,7 @@ export default function ArtistsPage() {
                   url={`/artist/${artist.id_singer}`}
                   idImage={artist.id_image}
                   key={`song-sec-item-${key}`}
-                  isSquare={true}
+                  isSquare={false}
                 />
               );
             })}

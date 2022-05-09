@@ -26,6 +26,7 @@ import AdminElementHeader from "../components/admin/AdminElementHeader";
 import { showError, showSuccess } from "../redux/reducers/errorReducer";
 import { toBase64 } from "../util/other";
 import { Key } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 export default function AdminAlbumPage() {
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ export default function AdminAlbumPage() {
     getCreateFormAlbumClear()
   );
   const [selectedArtist, setSelectedArtist] = useState(null);
+  const navigate = useNavigate();
 
   function getCreateFormAlbumClear() {
     return {
@@ -63,6 +65,9 @@ export default function AdminAlbumPage() {
             key={`singer-album-${index}`}
             title={album.album_name}
             squareImage={true}
+            seeMoreItem={() => {
+              navigate(`/album/${album.id_album}`);
+            }}
           />
         </div>
       );

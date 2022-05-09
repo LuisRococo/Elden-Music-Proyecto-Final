@@ -57,14 +57,14 @@ async function createAlbum(req, res, next) {
 
 async function getAlbum(req, res, next) {
   try {
-    const { _id } = req.params;
+    const { idAlbum } = req.params;
 
-    if (!_id) {
+    if (!idAlbum) {
       res.status(400).json(getErrorAnswer(400, "Identificator is needed"));
       return;
     }
 
-    const album = await Album.findById(_id);
+    const album = await Album.findOne({ id_album: idAlbum });
     res.json(album);
   } catch (error) {
     next(error);

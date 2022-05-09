@@ -16,6 +16,7 @@ import Footer from "./components/general/Footer";
 import ArtistsPage from "./pages/ArtistsPage";
 import ArtistPage from "./pages/ArtistPage";
 import ScrollToTop from "./components/other/ScrollToTop";
+import AlbumPage from "./pages/AlbumPage";
 
 function App() {
   return (
@@ -32,6 +33,8 @@ function App() {
         <Route path="/artists" element={<ArtistsPage />} />
 
         <Route path="/artist/:idArtist" element={<ArtistPage />} />
+
+        <Route path="/album/:idAlbum" element={<AlbumPage />} />
 
         <Route
           path="/login"

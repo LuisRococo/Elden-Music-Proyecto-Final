@@ -64,7 +64,7 @@ export default function ArtistPage() {
                       detail={song.Song.Album.album_name}
                       idImage={song.Song.Album.id_image}
                       isSquare={true}
-                      url={""}
+                      url={`/album/${song.Song.Album.id_album}`}
                       key={`artist-page-top-song-${key}`}
                     />
                   );
@@ -84,7 +84,7 @@ export default function ArtistPage() {
                     detail={`Songs: ${album.Songs.length}`}
                     idImage={album.id_image}
                     isSquare={true}
-                    url={""}
+                    url={`/album/${album.id_album}`}
                     key={`artist-page-album-${key}`}
                   />
                 );

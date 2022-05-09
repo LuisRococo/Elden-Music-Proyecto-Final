@@ -10,7 +10,7 @@ const { verifyAdminAuth } = require("../util/auth");
 
 router.get("/", getAlbums);
 
-router.get("/", getAlbum);
+router.get("/:idAlbum", getAlbum);
 
 router.post("/", verifyAdminAuth, createAlbum);
 
