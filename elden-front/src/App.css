@@ -473,7 +473,7 @@ footer {
 }
 
 /*ALBUM HEADER*/
-.album-header{
+.album-hd{
   background-color: #ce9300;
   background:
         linear-gradient(
@@ -485,4 +485,60 @@ footer {
   background-repeat: no-repeat;
   background-size: cover;
   padding: 50px 0;
+  color: white;
+}
+
+.album-hd-content{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.album-hd-content img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 20px;
+}
+
+.album-hd__data{
+  flex: 1;
+}
+
+.album-hd__title{
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 7px;
+}
+
+.album-hd__artist {
+  font-style: italic;
+  font-size: 1.2rem;
+}
+
+.album-hd__main{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.album-hd__main-data-item{
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.album-hd__main-data-item p {
+  margin-left: 15px;
+}
+
+/*SONG ITEM*/
+.song-item__time {
+  margin: 0 10px;
+}
+
+.song-item__name{
+  margin: 0 10px;
 }

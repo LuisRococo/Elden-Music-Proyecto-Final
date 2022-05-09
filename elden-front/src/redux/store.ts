@@ -3,13 +3,15 @@ import errorReducer from "./reducers/errorReducer";
 import playerReducer from "./reducers/playerReducer";
 import tokenReducer from "./reducers/tokenReducer";
 import adminDrawerReducer from "./reducers/adminDrawerReducer";
-import thunkMiddleware from 'redux-thunk'
+import thunkMiddleware from 'redux-thunk';
+import shoppingCarReducer from "./reducers/shoppingCarReducer";
 
 export const rootReduxer = combineReducers({
   player: playerReducer,
   token: tokenReducer,
   error: errorReducer,
-  drawer: adminDrawerReducer
+  drawer: adminDrawerReducer,
+  shoppingCar: shoppingCarReducer
 });
 
 const store = configureStore({

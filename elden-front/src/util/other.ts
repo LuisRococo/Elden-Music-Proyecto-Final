@@ -11,12 +11,22 @@ async function toBase64(file) {
     });
   }
 
-  function getTokenPrepared () {
-    return "Bearer " + store.getState().token?.token?.token;
+function getTokenPrepared () {
+  return "Bearer " + store.getState().token?.token?.token;
+}
+
+function doesItemAlreadyExists(items, idItem, isSong) {
+  for (let index = 0; index < items.length; index++) {
+    const item = items[index];
+    if (item.isSong === isSong && item.idItem === idItem) return true;
   }
+  return false;
+}
 
 export {
     URL_DIR,
     toBase64,
-    getTokenPrepared
+    getTokenPrepared,
+    doesItemAlreadyExists
 }
+

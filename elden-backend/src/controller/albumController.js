@@ -64,7 +64,20 @@ async function getAlbum(req, res, next) {
       return;
     }
 
-    const album = await Album.findOne({ id_album: idAlbum });
+    const album = await Album.findOne({
+      id_album: idAlbum,
+      include: [
+        {
+          model: Singer,
+        },
+        {
+          model: Song,
+        },
+      ],
+      where: {
+        id_album: idAlbum,
+      },
+    });
     res.json(album);
   } catch (error) {
     next(error);
