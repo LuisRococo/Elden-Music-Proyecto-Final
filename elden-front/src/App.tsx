@@ -80,6 +80,8 @@ function App() {
             </ProtectRoute>
           }
         />
+
+        <Route path="*" element={<HomePage />} />
       </Routes>
 
       <Footer />

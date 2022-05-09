@@ -471,3 +471,18 @@ footer {
 .artist-pg-hd__info {
   flex: 1;
 }
+
+/*ALBUM HEADER*/
+.album-header{
+  background-color: #ce9300;
+  background:
+        linear-gradient(
+          rgba(0, 0, 0, 0.5), 
+          rgba(0, 0, 0, 0.5)
+        ),
+        url("./img/concert-wallpaper-2.jpeg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 50px 0;
+}
