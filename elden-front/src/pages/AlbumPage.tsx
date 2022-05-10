@@ -14,6 +14,10 @@ export default function AlbumPage() {
   const navigate = useNavigate();
   const [virtual, setVirtual] = useState(true);
 
+  function toggleVirtual() {
+    setVirtual(!virtual);
+  }
+
   async function getAlbum() {
     try {
       const res = await fetchAlbum(idAlbum);
@@ -21,10 +25,14 @@ export default function AlbumPage() {
         const resObj = await res.json();
         if (resObj) {
           setAlbum(resObj);
+          if (resObj.is_single) {
+            setVirtual(false);
+          }
           return;
         }
       }
     } catch (error) {}
+
     navigate("/");
   }
 
@@ -42,6 +50,7 @@ export default function AlbumPage() {
             isVirtual={virtual}
             albumName={album.album_name}
             singerName={album.Singer.singer_name}
+            toggleVirtual={toggleVirtual}
             price={virtual ? album.price_album_digital : album.price_album}
           />
           <Container maxWidth={"lg"} sx={{ paddingY: "5%" }}>

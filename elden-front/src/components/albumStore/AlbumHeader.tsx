@@ -12,6 +12,7 @@ export default function AlbumHeader({
   isVirtual,
   isSingle,
   price,
+  toggleVirtual,
 }) {
   const [image, setImage] = useState(null);
 
@@ -48,13 +49,16 @@ export default function AlbumHeader({
                 </div>
               </div>
               <div>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  sx={{ marginX: "5px" }}
-                >
-                  Ver Virtual
-                </Button>
+                {!isSingle && (
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    sx={{ marginX: "5px" }}
+                    onClick={toggleVirtual}
+                  >
+                    {isVirtual ? "See Physical" : "see Virtual"}
+                  </Button>
+                )}
                 <Button
                   variant="contained"
                   color="success"
