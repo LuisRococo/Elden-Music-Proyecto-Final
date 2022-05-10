@@ -20,6 +20,7 @@ import { RootState } from "../../redux/store";
 import LibraryMusicRoundedIcon from "@mui/icons-material/LibraryMusicRounded";
 import { show } from "../../redux/reducers/adminDrawerReducer";
 import { publicPages } from "../../util/pagesRoutes";
+import { removeSong } from "../../redux/reducers/playerReducer";
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -46,6 +47,7 @@ const ResponsiveAppBar = () => {
   function logout() {
     handleCloseUserMenu();
     dispatch(deleteToken());
+    dispatch(removeSong());
     navigate("/");
   }
 

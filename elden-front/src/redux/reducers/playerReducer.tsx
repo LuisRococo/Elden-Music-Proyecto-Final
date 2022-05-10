@@ -8,7 +8,7 @@ const initialState = oherInfo
     }
   : {
       song: null,
-      other: { expanded: false },
+      other: { expanded: false, volume: 1 },
     };
 
 export const playerSlice = createSlice({
@@ -23,6 +23,10 @@ export const playerSlice = createSlice({
     },
     reducePlayer: (state) => {
       state.player.other.expanded = false;
+      persistOtherInfo(state.player.other);
+    },
+    changeVolume: (state, action) => {
+      state.player.other.volume = action.payload;
       persistOtherInfo(state.player.other);
     },
     setSong: (state, action) => {
@@ -46,6 +50,7 @@ function persistOtherInfo(info) {
 }
 
 // Action creators are generated for each case reducer function
-export const { expandPlayer, reducePlayer, setSong } = playerSlice.actions;
+export const { expandPlayer, reducePlayer, setSong, changeVolume, removeSong } =
+  playerSlice.actions;
 
 export default playerSlice.reducer;

@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import { useDispatch, useSelector } from "react-redux";
-import { reducePlayer } from "../../../redux/reducers/playerReducer";
+import {
+  changeVolume,
+  reducePlayer,
+} from "../../../redux/reducers/playerReducer";
 import { RootState } from "../../../redux/store";
 import { fetchFileBase64 } from "../../../util/requests";
 
@@ -36,6 +39,11 @@ export default function PlayerControl() {
     }
   }, [player]);
 
+  function onVolumeChange(e) {
+    const volume = e.target.volume;
+    dispatch(changeVolume(volume));
+  }
+
   return (
     <div
       className={
@@ -55,8 +63,10 @@ export default function PlayerControl() {
       </div>
       <div className="player-ctl__comp-cont">
         <AudioPlayer
+          onVolumeChange={onVolumeChange}
           showJumpControls={false}
-          src={player.song && player.song.file}
+          src={player.song ? player.song.file : ""}
+          volume={player.other.volume}
         />
       </div>
     </div>
