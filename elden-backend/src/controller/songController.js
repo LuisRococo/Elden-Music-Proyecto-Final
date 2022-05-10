@@ -93,7 +93,19 @@ async function getSong(req, res, next) {
       return;
     }
 
-    const song = await Song.findById(idSong);
+    const song = await Song.findOne({
+      where: { id_song: idSong },
+      include: [
+        {
+          model: Album,
+          include: [
+            {
+              model: Singer,
+            },
+          ],
+        },
+      ],
+    });
     res.json(song);
   } catch (error) {
     next(error);

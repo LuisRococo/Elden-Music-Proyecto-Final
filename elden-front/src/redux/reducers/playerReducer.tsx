@@ -2,8 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const oherInfo = localStorage.getItem("player");
 const initialState = oherInfo
-  ? { song: null, other: JSON.parse(oherInfo) }
-  : { song: null, other: { expanded: false } };
+  ? {
+      song: null,
+      other: JSON.parse(oherInfo),
+    }
+  : {
+      song: null,
+      other: { expanded: false },
+    };
 
 export const playerSlice = createSlice({
   name: "player",
@@ -20,7 +26,17 @@ export const playerSlice = createSlice({
       persistOtherInfo(state.player.other);
     },
     setSong: (state, action) => {
-      state.player.song = action.payload;
+      const { song, singer, songName, idSong, idImage } = action.payload;
+      state.player.song = {
+        file: song,
+        singer: singer,
+        songName: songName,
+        idSong: idSong,
+        idImage: idImage,
+      };
+    },
+    removeSong: (state) => {
+      state.player.song = null;
     },
   },
 });

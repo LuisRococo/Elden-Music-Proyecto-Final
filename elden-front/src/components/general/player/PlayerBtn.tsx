@@ -9,7 +9,9 @@ export default function PlayerBtn() {
   const dispatch = useDispatch();
   return (
     <div
-      className={"player-btn " + (player.other.expanded ? "hidden" : "")}
+      className={
+        "player-btn " + (player.other.expanded || !player.song ? "hidden" : "")
+      }
       onClick={() => {
         dispatch(expandPlayer());
       }}

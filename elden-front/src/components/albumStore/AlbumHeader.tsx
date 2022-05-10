@@ -1,32 +1,50 @@
 import { Button, Container, Divider } from "@mui/material";
 import { Box } from "@mui/system";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AlbumIcon from "@mui/icons-material/Album";
 import AutoAwesomeMotionIcon from "@mui/icons-material/AutoAwesomeMotion";
+import { fetchFileBase64 } from "../../util/requests";
 
-export default function AlbumHeader({ idAlbum }) {
+export default function AlbumHeader({
+  idImage,
+  albumName,
+  singerName,
+  isVirtual,
+  isSingle,
+  price,
+}) {
+  const [image, setImage] = useState(null);
+
+  async function getImage() {
+    const res = await fetchFileBase64(idImage);
+    if (res.status === 200) {
+      setImage((await res.json()).file_content);
+    }
+  }
+
+  useEffect(() => {
+    getImage();
+  }, []);
+
   return (
     <div className="album-hd">
       <Container maxWidth="lg">
         <div className="album-hd-content">
-          <img
-            src="https://resources.tidal.com/images/3b2a7625/f1cc/41d8/b3f9/897cacc911b0/640x640.jpg"
-            alt=""
-          />
+          {image && <img src={image} alt="" />}
           <div className="album-hd__data">
-            <h2 className="album-hd__title">Album Nombre</h2>
-            <p className="album-hd__artist">Juan Alvarez</p>
+            <h2 className="album-hd__title">{albumName}</h2>
+            <p className="album-hd__artist">{singerName}</p>
             <Divider sx={{ backgroundColor: "white", marginY: "20px" }} />
 
             <div className="album-hd__main">
               <div className="album-hd__main-data">
                 <div className="album-hd__main-data-item">
                   <AlbumIcon />
-                  <p>Virtual</p>
+                  <p>{isVirtual ? "Virtual" : "Physical"}</p>
                 </div>
                 <div className="album-hd__main-data-item">
                   <AutoAwesomeMotionIcon />
-                  <p>Single</p>
+                  <p>{isSingle ? "Single" : "No single"}</p>
                 </div>
               </div>
               <div>
@@ -42,7 +60,7 @@ export default function AlbumHeader({ idAlbum }) {
                   color="success"
                   sx={{ marginX: "5px" }}
                 >
-                  Comprar $345.24
+                  Comprar ${price}
                 </Button>
               </div>
             </div>

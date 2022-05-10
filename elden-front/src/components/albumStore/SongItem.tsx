@@ -3,12 +3,18 @@ import React from "react";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import { IconButton, Paper } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import { fetchFileSongBase64 } from "../../util/requests";
+import { fetchFileSongBase64, fetchSong } from "../../util/requests";
 import { useDispatch } from "react-redux";
 import { showError } from "../../redux/reducers/errorReducer";
 import { expandPlayer, setSong } from "../../redux/reducers/playerReducer";
 
-export default function SongItem({ idSong, nameSong, duration }) {
+export default function SongItem({
+  idSong,
+  nameSong,
+  singerName,
+  duration,
+  idImage,
+}) {
   const dispatch = useDispatch();
   async function playSong() {
     try {
@@ -16,11 +22,21 @@ export default function SongItem({ idSong, nameSong, duration }) {
       if (res.status === 200) {
         const song = await res.json();
         dispatch(expandPlayer());
-        dispatch(setSong(song.file_content));
+        dispatch(
+          setSong({
+            song: song.file_content,
+            songName: nameSong,
+            singer: singerName,
+            idSong: idSong,
+            idImage: idImage,
+          })
+        );
       } else {
         dispatch(showError("Music cannot be played"));
       }
     } catch (error) {
+      console.info(error);
+
       dispatch(showError("Music cannot be played"));
     }
   }

@@ -12,6 +12,7 @@ export default function AlbumPage() {
   const [album, setAlbum] = useState(null);
   const { idAlbum } = useParams();
   const navigate = useNavigate();
+  const [virtual, setVirtual] = useState(true);
 
   async function getAlbum() {
     try {
@@ -35,7 +36,14 @@ export default function AlbumPage() {
     <Box sx={{ minHeight: "100vh", backgroundColor: "#f2f2f2" }}>
       {album && (
         <>
-          <AlbumHeader idAlbum={album.id_album} />
+          <AlbumHeader
+            idImage={album.id_image}
+            isSingle={album.is_single}
+            isVirtual={virtual}
+            albumName={album.album_name}
+            singerName={album.Singer.singer_name}
+            price={virtual ? album.price_album_digital : album.price_album}
+          />
           <Container maxWidth={"lg"} sx={{ paddingY: "5%" }}>
             <SectionDivisor title="Songs" url={null} />
 
@@ -44,10 +52,12 @@ export default function AlbumPage() {
                 {album.Songs.map((song, key) => {
                   return (
                     <SongItem
+                      singerName={album.Singer.singer_name}
                       idSong={song.id_song}
                       nameSong={song.song_name}
                       duration={song.duration}
                       key={`album-song-${key}`}
+                      idImage={album.id_image}
                     />
                   );
                 })}
