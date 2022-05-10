@@ -10,6 +10,37 @@ async function verifyClientAuth(req, res, next) {
   judgeToken(req, res, next, false);
 }
 
+//este codigo pudo haber estado mejor
+async function laterAuth(req, res, next) {
+  try {
+    let token = req.headers["authorization"];
+
+    if (token) {
+      token = token.split(" ")[1];
+      if (!token) {
+        req.body.decode = null;
+        next();
+      } else {
+        jwt.verify(token, AUTH_SECRET_KEY, (err, decode) => {
+          if (!err) {
+            req.body.decode = decode;
+            next();
+          } else {
+            req.body.decode = null;
+            next();
+          }
+        });
+      }
+    } else {
+      req.body.decode = null;
+      next();
+    }
+  } catch (error) {
+    req.body.decode = null;
+    next();
+  }
+}
+
 async function judgeToken(req, res, next, shouldBeAdmin) {
   let token = req.headers["authorization"];
 
@@ -46,4 +77,4 @@ async function judgeToken(req, res, next, shouldBeAdmin) {
   });
 }
 
-module.exports = { verifyAdminAuth, verifyClientAuth };
+module.exports = { verifyAdminAuth, verifyClientAuth, laterAuth };

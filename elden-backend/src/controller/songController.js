@@ -49,9 +49,13 @@ async function createSong(req, res, next) {
 
     const previewSongDb = await File.create({
       file_content: previewSongFile,
+      is_song: true,
+      is_song_complete: false,
     });
     const SongDb = await File.create({
       file_content: songFile,
+      is_song: true,
+      is_song_complete: true,
     });
 
     const song = await Song.create({

@@ -61,14 +61,6 @@ export async function fetchSinger (idSinger) {
     return response;
 }
 
-export async function fetchFileBase64 (idFile) {
-    const response = await fetch(URL_DIR + `/api/files/${idFile}`, {
-        method: "GET",
-    });
-
-    return response;
-}
-
 export async function requestDeleteSinger (idSinger) {
     const body = {
         idSinger
@@ -162,6 +154,25 @@ export async function fetchSongs (limit = null) {
 export async function fetchTopSongs (idArtist) {
     const response = await fetch(URL_DIR + `/api/singer-tops/${idArtist}`, {
         method: "GET",
+    });
+
+    return response;
+}
+
+//FILES
+export async function fetchFileBase64 (idFile) {
+    const response = await fetch(URL_DIR + `/api/files/${idFile}`, {
+        method: "GET",
+    });
+
+    return response;
+}
+
+export async function fetchFileSongBase64 (idSong) {
+    const token = getTokenPrepared();
+    const response = await fetch(URL_DIR + `/api/files/songs/${idSong}`, {
+        method: "GET",
+        headers: {     "Content-Type": "application/json", "authorization": token   }
     });
 
     return response;

@@ -15,6 +15,15 @@ const File = sequelize.define(
       type: DataTypes.TEXT("medium"),
       allowNull: false,
     },
+    is_song: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+    },
+    is_song_complete: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
   },
   {
     // Other model options go here

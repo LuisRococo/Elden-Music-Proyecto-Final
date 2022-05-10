@@ -3,6 +3,8 @@ const File = require("./models/fileModel");
 const Singer = require("./models/singerModel");
 const Song = require("./models/songModel");
 const TopSingerSongs = require("./models/topSingerSongs");
+const UserSong = require("./models/userSongModel");
+const User = require("./models/userModel");
 
 //FILE
 File.hasMany(Singer, { foreignKey: "id_image" });
@@ -58,6 +60,18 @@ TopSingerSongs.belongsTo(Singer, {
   onDelete: "cascade",
 });
 TopSingerSongs.belongsTo(Song, {
+  foreignKey: { name: "id_song", allowNull: false },
+  hooks: true,
+  onDelete: "cascade",
+});
+
+/*USER SONG*/
+UserSong.belongsTo(User, {
+  foreignKey: { name: "id_user", allowNull: false },
+  hooks: true,
+  onDelete: "cascade",
+});
+UserSong.belongsTo(Song, {
   foreignKey: { name: "id_song", allowNull: false },
   hooks: true,
   onDelete: "cascade",

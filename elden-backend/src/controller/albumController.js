@@ -37,6 +37,7 @@ async function createAlbum(req, res, next) {
     //CREATE IMAGE
     const albumImageDb = await File.create({
       file_content: image,
+      is_song: false,
     });
 
     await Album.create({

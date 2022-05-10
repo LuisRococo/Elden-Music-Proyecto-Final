@@ -34,7 +34,7 @@ async function getSingers(req, res, next) {
 async function createSinger(req, res, next) {
   const { singerName, stageName, nationality, image } = req.body;
   try {
-    const dbImage = await File.create({ file_content: image });
+    const dbImage = await File.create({ file_content: image, is_song: false });
 
     await Singer.create({
       singer_name: singerName,
@@ -118,7 +118,7 @@ async function updateSinger(req, res, next) {
 
     //UPDATE IMAGE
     const fileImage = await File.findOne({
-      where: { id_file: singer.id_image },
+      where: { id_file: singer.id_image, is_song: false },
     });
     fileImage.set({
       file_content: image,
