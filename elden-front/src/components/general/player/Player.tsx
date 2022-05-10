@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import PlayerBtn from "./PlayerBtn";
+import PlayerControl from "./PlayerControl";
 
 export default function Player() {
-  const [showPlayer, setShowPlayer] = useState(false);
-
   return (
     <>
-      <PlayerBtn showPlayer={showPlayer} setShowPlayer={setShowPlayer} />
+      <PlayerBtn />
+      <PlayerControl />
     </>
   );
 }

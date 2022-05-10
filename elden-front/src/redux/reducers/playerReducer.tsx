@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const oherInfo = localStorage.getItem("otherInfo");
+const oherInfo = localStorage.getItem("player");
 const initialState = oherInfo
   ? { song: null, other: JSON.parse(oherInfo) }
   : { song: null, other: { expanded: false } };
@@ -8,25 +8,25 @@ const initialState = oherInfo
 export const playerSlice = createSlice({
   name: "player",
   initialState: {
-    shoppingCar: initialState,
+    player: initialState,
   },
   reducers: {
     expandPlayer: (state) => {
-      state.shoppingCar.other.expanded = true;
-      persistOtherInfo(state.shoppingCar.other);
+      state.player.other.expanded = true;
+      persistOtherInfo(state.player.other);
     },
     reducePlayer: (state) => {
-      state.shoppingCar.other.expanded = false;
-      persistOtherInfo(state.shoppingCar.other);
+      state.player.other.expanded = false;
+      persistOtherInfo(state.player.other);
     },
     setSong: (state, action) => {
-      state.shoppingCar.song = action.payload;
+      state.player.song = action.payload;
     },
   },
 });
 
 function persistOtherInfo(info) {
-  localStorage.setItem("player", info);
+  localStorage.setItem("player", JSON.stringify(info));
 }
 
 // Action creators are generated for each case reducer function

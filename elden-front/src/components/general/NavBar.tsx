@@ -12,8 +12,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import LogoImg from "../../img/logo.png";
-import { useLocation, useNavigate } from "react-router-dom";
-import { Link } from "@mui/material";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import profileImg from "../../img/profile.png";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteToken } from "../../redux/reducers/tokenReducer";
@@ -87,12 +86,14 @@ const ResponsiveAppBar = () => {
     <AppBar position="static">
       <Container maxWidth="lg" sx={{ paddingY: "10px" }}>
         <Toolbar disableGutters>
-          <Link href="/" sx={{ mr: 2, display: { xs: "none", md: "flex" } }}>
-            <div className="logo-comp--nv">
-              <img src={LogoImg} alt="" className="logo-comp__img--nv" />
-              <p>Elden Music</p>
-            </div>
-          </Link>
+          <Box sx={{ mr: 2, display: { xs: "none", md: "flex" } }}>
+            <Link style={{ textDecoration: "none" }} to="/">
+              <div className="logo-comp--nv">
+                <img src={LogoImg} alt="" className="logo-comp__img--nv" />
+                <p>Elden Music</p>
+              </div>
+            </Link>
+          </Box>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -128,27 +129,32 @@ const ResponsiveAppBar = () => {
                   key={"navbar-item" + page.name}
                   onClick={handleCloseNavMenu}
                 >
-                  <Link href={page.url} sx={{ textAlign: "center" }}>
-                    <Typography textAlign="center">{page.name}</Typography>
-                  </Link>
+                  <Box sx={{ textAlign: "center" }}>
+                    <Link style={{ textDecoration: "none" }} to={page.url}>
+                      <Typography textAlign="center">{page.name}</Typography>
+                    </Link>
+                  </Box>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
 
-          <Link
-            href="/"
-            sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
-          >
-            <div className="logo-comp--nv">
-              <img src={LogoImg} alt="" className="logo-comp__img--nv" />
-              <p>Elden Music</p>
-            </div>
-          </Link>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <Link style={{ textDecoration: "none" }} to="/">
+              <div className="logo-comp--nv">
+                <img src={LogoImg} alt="" className="logo-comp__img--nv" />
+                <p>Elden Music</p>
+              </div>
+            </Link>
+          </Box>
 
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {publicPages.map((page, key) => (
-              <Link href={page.url} key={"navbar-item-2" + key}>
+              <Link
+                style={{ textDecoration: "none" }}
+                to={page.url}
+                key={"navbar-item-2" + key}
+              >
                 <Button
                   key={"navbar-item-2" + page.name}
                   onClick={handleCloseNavMenu}
@@ -216,7 +222,7 @@ const ResponsiveAppBar = () => {
                 justifyContent: "right",
               }}
             >
-              <Link href={"/login"}>
+              <Link style={{ textDecoration: "none" }} to={"/login"}>
                 <Button sx={{ my: 2, color: "white", display: "block" }}>
                   Log In
                 </Button>

@@ -17,11 +17,7 @@ import AdminItem from "../components/admin/AdminItem";
 import SectionHeader from "../components/general/SectionHeader";
 import UploadButton from "../components/general/UploadButton";
 import { RootState } from "../redux/store";
-import {
-  fetchAlbums,
-  fetchSingers,
-  requestCreateAlbums,
-} from "../util/requests";
+import { fetchSingers, requestCreateAlbums } from "../util/requests";
 import AdminElementHeader from "../components/admin/AdminElementHeader";
 import { showError, showSuccess } from "../redux/reducers/errorReducer";
 import { toBase64 } from "../util/other";
@@ -30,7 +26,6 @@ import { useNavigate } from "react-router-dom";
 
 export default function AdminAlbumPage() {
   const dispatch = useDispatch();
-  const token: any = useSelector((status: RootState) => status.token.token);
   const [singers, setSingers] = useState(null);
   const [formCreateValues, setFormCreateValues] = useState(
     getCreateFormAlbumClear()

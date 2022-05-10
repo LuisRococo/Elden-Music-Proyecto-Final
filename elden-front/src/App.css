@@ -542,3 +542,40 @@ footer {
 .song-item__name{
   margin: 0 10px;
 }
+
+/*PLAYER*/
+.player-ctl {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  padding-left: 20px;
+  padding-bottom: 50px;
+  z-index: 2;
+  max-width: 700px;
+}
+
+.player-ctl__comp-cont{
+  max-width: 700px;
+}
+
+.player-cli__info-cont{
+  display: flex;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.player-cli__info-cont img {
+  width: 180px;
+}
+
+.player-cli__info-section{
+  background-color: #dcdcdcce;
+  padding: 10px;
+  color: #6b6b6b;
+}
+.player-ctl__song-name{
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 4px;
+}

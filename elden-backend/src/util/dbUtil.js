@@ -36,7 +36,7 @@ async function getCorrspondingSongVersion(token, idSong) {
 
   const userSong = await UserSong.findOne({
     where: {
-      id_user: idUser,
+      id_user: token.id_user,
       id_song: idSong,
     },
   });

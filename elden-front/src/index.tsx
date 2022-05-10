@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import { ThemeProvider } from "@emotion/react";
 import { themeOptions } from "./components/other/MaterialTheme";
+import Player from "./components/general/player/Player";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
