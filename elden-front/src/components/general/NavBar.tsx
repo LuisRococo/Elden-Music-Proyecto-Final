@@ -30,13 +30,6 @@ const ResponsiveAppBar = () => {
   const navigate = useNavigate();
   const token = useSelector((state: RootState) => state.token.token);
 
-  const pagesUser = [
-    {
-      name: "My Songs",
-      url: "/",
-    },
-  ];
-
   const settings = [
     {
       name: "Logout",
@@ -69,6 +62,7 @@ const ResponsiveAppBar = () => {
     setAnchorElNav(event.currentTarget);
   };
   const handleOpenUserMenu = (event) => {
+    dispatch(show());
     setAnchorElUser(event.currentTarget);
   };
 
@@ -187,33 +181,6 @@ const ResponsiveAppBar = () => {
                     <Avatar alt="Remy Sharp" src={profileImg} />
                   </IconButton>
                 </Tooltip>
-                <Menu
-                  sx={{ mt: "45px" }}
-                  id="menu-appbar"
-                  anchorEl={anchorElUser}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
-                >
-                  {settings.map((setting) => (
-                    <MenuItem
-                      key={"navbar-settings" + setting.name}
-                      onClick={() => {
-                        setting.action();
-                      }}
-                    >
-                      <Typography textAlign="center">{setting.name}</Typography>
-                    </MenuItem>
-                  ))}
-                </Menu>
               </Box>
             </Box>
           ) : (

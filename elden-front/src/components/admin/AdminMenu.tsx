@@ -17,7 +17,10 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/store";
 import { hide } from "../../redux/reducers/adminDrawerReducer";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { removeSong } from "../../redux/reducers/playerReducer";
+import { deleteToken } from "../../redux/reducers/tokenReducer";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 export default function AdminMenu() {
   const dispatch = useDispatch();
@@ -25,6 +28,7 @@ export default function AdminMenu() {
     return status.drawer.open;
   });
   const drawerWidth = 240;
+  const navigate = useNavigate();
 
   const adminPages = [
     {
@@ -40,6 +44,13 @@ export default function AdminMenu() {
       url: "admin/songs",
     },
   ];
+
+  function logout() {
+    dispatch(removeSong());
+    dispatch(deleteToken());
+    navigate("/");
+    dispatch(hide());
+  }
 
   return (
     <Drawer
@@ -69,17 +80,7 @@ export default function AdminMenu() {
         </IconButton>
       </Box>
       <Divider />
-      <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
+
       <List>
         {adminPages.map((page, index) => (
           <Link
@@ -98,6 +99,21 @@ export default function AdminMenu() {
             </ListItem>
           </Link>
         ))}
+
+        <Divider sx={{ marginY: "20px" }} />
+
+        <ListItem
+          sx={{ color: "#bb0000" }}
+          button
+          onClick={() => {
+            logout();
+          }}
+        >
+          <ListItemIcon>
+            <LogoutIcon color="error" />
+          </ListItemIcon>
+          <ListItemText primary="Log Out" />
+        </ListItem>
       </List>
     </Drawer>
   );
