@@ -2,6 +2,7 @@ const Album = require("../db/models/albumModel");
 const Song = require("../db/models/songModel");
 const { getConnection } = require("../db/dbSequelizeconn");
 const UserSong = require("../db/models/userSongModel");
+const File = require("../db/models/fileModel");
 
 async function doesAlbumAcceptsMoreSongs(idAlbum) {
   const album = await Album.findOne({ where: { id_album: idAlbum } });
@@ -21,9 +22,17 @@ async function doesUserOwnsSong(idUser, idSong) {
   return userSong !== null;
 }
 
-async function getCorrspondingSongVersion(idUser, idSong) {
+async function getCorrspondingSongVersion(token, idSong) {
   const song = await Song.findOne({ where: { id_song: idSong } });
   if (!song) return null;
+
+  const previewSong = await File.findOne({
+    where: { id_file: song.id_preview_song_file },
+  });
+
+  if (!token) {
+    return previewSong;
+  }
 
   const userSong = await UserSong.findOne({
     where: {
@@ -33,9 +42,7 @@ async function getCorrspondingSongVersion(idUser, idSong) {
   });
 
   if (!userSong) {
-    return await File.findOne({
-      where: { id_file: song.id_preview_song_file },
-    });
+    return previewSong;
   } else {
     return await File.findOne({
       where: { id_file: song.id_song_file },

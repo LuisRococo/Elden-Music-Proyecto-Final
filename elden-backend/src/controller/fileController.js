@@ -1,6 +1,9 @@
 const { getErrorAnswer, getSuccessAnswer } = require("../util/util");
 const File = require("../db/models/fileModel");
-const { doesUserOwnsSong } = require("../util/dbUtil");
+const {
+  doesUserOwnsSong,
+  getCorrspondingSongVersion,
+} = require("../util/dbUtil");
 
 async function getFile(req, res, next) {
   try {
@@ -31,7 +34,7 @@ async function getSong(req, res, next) {
     const { decode } = req.body;
     const { idSong } = req.params;
 
-    res.json(getCorrspondingSongVersion(decode.id_user, idSong));
+    res.json(await getCorrspondingSongVersion(decode, idSong));
   } catch (error) {
     next(error);
   }
