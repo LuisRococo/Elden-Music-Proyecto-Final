@@ -6,7 +6,7 @@ import { RootState } from "../../redux/store";
 export default function ProtectRoute({ adminPermissions, children }) {
   const token = useSelector((state: RootState) => state.token.token);
 
-  if (!token || token.isAdmin !== adminPermissions) {
+  if (!token || (adminPermissions && !token.isAdmin)) {
     return <Navigate to="/" replace />;
   }
 

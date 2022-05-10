@@ -17,6 +17,7 @@ import ArtistsPage from "./pages/ArtistsPage";
 import ArtistPage from "./pages/ArtistPage";
 import ScrollToTop from "./components/other/ScrollToTop";
 import AlbumPage from "./pages/AlbumPage";
+import ShoppingCarPage from "./pages/ShoppingCarPage";
 
 function App() {
   return (
@@ -77,6 +78,15 @@ function App() {
           element={
             <ProtectRoute adminPermissions={true}>
               <AdminSongPage />
+            </ProtectRoute>
+          }
+        />
+
+        <Route
+          path="/shopping-car"
+          element={
+            <ProtectRoute adminPermissions={false}>
+              <ShoppingCarPage />
             </ProtectRoute>
           }
         />

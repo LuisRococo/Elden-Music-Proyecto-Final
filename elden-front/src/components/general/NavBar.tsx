@@ -21,6 +21,7 @@ import LibraryMusicRoundedIcon from "@mui/icons-material/LibraryMusicRounded";
 import { show } from "../../redux/reducers/adminDrawerReducer";
 import { publicPages } from "../../util/pagesRoutes";
 import { removeSong } from "../../redux/reducers/playerReducer";
+import LocalGroceryStoreIcon from "@mui/icons-material/LocalGroceryStore";
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -172,7 +173,7 @@ const ResponsiveAppBar = () => {
                     dispatch(show());
                   }}
                 >
-                  <LibraryMusicRoundedIcon fontSize="inherit" />
+                  <LocalGroceryStoreIcon fontSize="large" />
                 </IconButton>
               </Box>
               <Box sx={{ flexGrow: 0, display: "flex" }}>

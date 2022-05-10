@@ -13,6 +13,7 @@ export default function AlbumPage() {
   const { idAlbum } = useParams();
   const navigate = useNavigate();
   const [virtual, setVirtual] = useState(true);
+  const [isAlbumBought, setIsAlbumBought] = useState(false);
 
   function toggleVirtual() {
     setVirtual(!virtual);
@@ -35,6 +36,8 @@ export default function AlbumPage() {
 
     navigate("/");
   }
+
+  async function getIsAlbumBought() {}
 
   useEffect(() => {
     getAlbum();
