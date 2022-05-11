@@ -13,17 +13,17 @@ export const shoppingCarSlice = createSlice({
     addSong: (state, action: PayloadAction<any>) => {
       const idItem = action.payload.idItem;
       const isVirtual = action.payload.isVirtual;
-      if (doesItemAlreadyExists(state.shoppingCar, idItem, true)) {
+      if (!doesItemAlreadyExists(state.shoppingCar, idItem, true)) {
         state.shoppingCar.push(createShopItem(idItem, true, isVirtual));
-        localStorage.setItem("shoppingCar", state.shoppingCar);
+        localStorage.setItem("shoppingCar", JSON.stringify(state.shoppingCar));
       }
     },
     addAlbum: (state, action: PayloadAction<any>) => {
       const idItem = action.payload.idItem;
       const isVirtual = action.payload.isVirtual;
-      if (doesItemAlreadyExists(state.shoppingCar, idItem, false))
+      if (!doesItemAlreadyExists(state.shoppingCar, idItem, false))
         state.shoppingCar.push(createShopItem(idItem, false, isVirtual));
-      localStorage.setItem("shoppingCar", state.shoppingCar);
+      localStorage.setItem("shoppingCar", JSON.stringify(state.shoppingCar));
     },
     removeItem: (state, action: PayloadAction<any>) => {
       const idItem = action.payload.idItem;
@@ -31,15 +31,18 @@ export const shoppingCarSlice = createSlice({
 
       for (let index = 0; index < state.shoppingCar.length; index++) {
         const car = state.shoppingCar[index];
-        if (car.isSong === isSong && car.idSong === idItem) {
+        if (car.isSong === isSong && car.idItem === idItem) {
           state.shoppingCar.splice(index, 1);
-          localStorage.setItem("shoppingCar", state.shoppingCar);
+          localStorage.setItem(
+            "shoppingCar",
+            JSON.stringify(state.shoppingCar)
+          );
         }
       }
     },
     deleteAll: (state) => {
       state.shoppingCar = [];
-      localStorage.setItem("shoppingCar", state.shoppingCar);
+      localStorage.setItem("shoppingCar", JSON.stringify(state.shoppingCar));
     },
   },
 });
@@ -49,6 +52,7 @@ function createShopItem(idItem, isSong, isVirtual) {
 }
 
 // Action creators are generated for each case reducer function
-export const { deleteAll } = shoppingCarSlice.actions;
+export const { deleteAll, addSong, removeItem, addAlbum } =
+  shoppingCarSlice.actions;
 
 export default shoppingCarSlice.reducer;

@@ -170,7 +170,7 @@ const ResponsiveAppBar = () => {
                   size="large"
                   aria-label="delete"
                   onClick={() => {
-                    dispatch(show());
+                    navigate("/shopping-car");
                   }}
                 >
                   <LocalGroceryStoreIcon fontSize="large" />

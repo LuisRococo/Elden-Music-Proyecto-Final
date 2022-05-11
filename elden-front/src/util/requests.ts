@@ -186,3 +186,46 @@ export async function fetchFileSongBase64 (idSong) {
 
     return response;
 }
+
+//SERIVES
+export async function fetchUserSongs () {
+    const token = getTokenPrepared();
+    const response =await fetch(URL_DIR + `/api/services/user-songs`, {
+        method: "GET",
+        headers: {     "Content-Type": "application/json", "authorization": token   }
+    });
+
+    return response;
+}
+
+export async function requestBuySong (idSongs) {
+    const token = getTokenPrepared();
+
+    const body = {
+        songs: idSongs
+    }
+
+    const response =await fetch(URL_DIR + `/api/services/buy-songs`, {
+        method: "POST",
+        headers: {     "Content-Type": "application/json", "authorization": token   },
+        body: JSON.stringify(body)
+    });
+
+    return response;
+}
+
+export async function fetchIsSongBought (idSong) {
+    const token = getTokenPrepared();
+
+    const body = {
+        idsong: idSong
+    }
+
+    const response =await fetch(URL_DIR + `/api/services/is-song-bought`, {
+        method: "GET",
+        headers: {     "Content-Type": "application/json", "authorization": token   },
+        body: JSON.stringify(body)
+    });
+
+    return response;
+}

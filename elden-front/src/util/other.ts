@@ -16,9 +16,12 @@ function getTokenPrepared () {
 }
 
 function doesItemAlreadyExists(items, idItem, isSong) {
+
   for (let index = 0; index < items.length; index++) {
     const item = items[index];
-    if (item.isSong === isSong && item.idItem === idItem) return true;
+    
+    
+    if (item.isSong === isSong && item.idItem == idItem) return true;
   }
   return false;
 }
