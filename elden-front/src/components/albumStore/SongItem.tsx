@@ -91,7 +91,7 @@ export default function SongItem({
   }
 
   function storeInShoppingCar() {
-    dispatch(addSong({ idItem: idSong, isVirtual: false }));
+    dispatch(addSong({ idItem: idSong, isVirtual: false, price: priceSong }));
   }
 
   function removeFromShoppingCar() {

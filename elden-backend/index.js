@@ -8,6 +8,7 @@ const fileRoute = require("./src/routes/fileRoute");
 const songRoute = require("./src/routes/songRoute");
 const singerTops = require("./src/routes/topSingerSongs");
 const servicesRoute = require("./src/routes/servicesRoute");
+const addressRoute = require("./src/routes/addressRoute");
 const { getErrorAnswer } = require("./src/util/util");
 var cors = require("cors");
 
@@ -38,6 +39,7 @@ apiRouter.use("/test", testRouter);
 apiRouter.use("/files", fileRoute);
 apiRouter.use("/songs", songRoute);
 apiRouter.use("/singer-tops", singerTops);
+apiRouter.use("/addresses", addressRoute);
 apiRouter.use("/services", servicesRoute);
 app.use("/api", apiRouter);
 

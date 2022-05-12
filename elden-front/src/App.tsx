@@ -18,6 +18,8 @@ import ArtistPage from "./pages/ArtistPage";
 import ScrollToTop from "./components/other/ScrollToTop";
 import AlbumPage from "./pages/AlbumPage";
 import ShoppingCarPage from "./pages/ShoppingCarPage";
+import PaymentPage from "./pages/PaymentPage";
+import AddressPage from "./pages/AddressPage";
 
 function App() {
   return (
@@ -87,6 +89,24 @@ function App() {
           element={
             <ProtectRoute adminPermissions={false}>
               <ShoppingCarPage />
+            </ProtectRoute>
+          }
+        />
+
+        <Route
+          path="/payment-page"
+          element={
+            <ProtectRoute adminPermissions={false}>
+              <PaymentPage />
+            </ProtectRoute>
+          }
+        />
+
+        <Route
+          path="/address-management"
+          element={
+            <ProtectRoute adminPermissions={false}>
+              <AddressPage />
             </ProtectRoute>
           }
         />

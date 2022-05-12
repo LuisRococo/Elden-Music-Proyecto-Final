@@ -31,13 +31,6 @@ const ResponsiveAppBar = () => {
   const navigate = useNavigate();
   const token = useSelector((state: RootState) => state.token.token);
 
-  const settings = [
-    {
-      name: "Logout",
-      action: logout,
-    },
-  ];
-
   function logout() {
     handleCloseUserMenu();
     dispatch(deleteToken());

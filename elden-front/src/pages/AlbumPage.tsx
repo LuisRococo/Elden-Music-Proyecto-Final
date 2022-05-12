@@ -23,7 +23,13 @@ export default function AlbumPage() {
   const dispatch = useDispatch();
 
   function addAlbumOnCar() {
-    dispatch(addAlbum({ idItem: idAlbum, isSong: false }));
+    dispatch(
+      addAlbum({
+        idItem: idAlbum,
+        isSong: false,
+        price: virtual ? album.price_album_digital : album.price_album,
+      })
+    );
     removeAllAlbumSongFromShoppingCar();
   }
 

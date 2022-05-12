@@ -30,6 +30,8 @@ export default function AdminMenu() {
   const drawerWidth = 240;
   const navigate = useNavigate();
 
+  const loginPages = [{ name: "Addresses", url: "address-management" }];
+
   const adminPages = [
     {
       name: "Artists",
@@ -82,6 +84,26 @@ export default function AdminMenu() {
       <Divider />
 
       <List>
+        {loginPages.map((page, index) => (
+          <Link
+            key={`admin-menu-${index}`}
+            onClick={() => {
+              dispatch(hide());
+            }}
+            to={page.url}
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <ListItem button key={"drawer-admin-" + index}>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText primary={page.name} />
+            </ListItem>
+          </Link>
+        ))}
+
+        <Divider sx={{ marginY: "20px" }} />
+
         {adminPages.map((page, index) => (
           <Link
             key={`admin-menu-${index}`}

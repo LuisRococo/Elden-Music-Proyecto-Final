@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import logoImg from "../../img/logo.png";
 
 export default function Footer() {
-  const hideInRoutes = ["/login", "/signin"];
+  const hideInRoutes = ["/login", "/signin", "/payment-page"];
   const location = useLocation();
 
   function shouldElementHide(actualPath) {

@@ -150,9 +150,9 @@ export async function fetchSongs (limit = null) {
     return response;
 }
 
-export async function fetchSong () {
+export async function fetchSong (idSong) {
     
-    const response = await fetch(URL_DIR + `/api/songs`, {
+    const response = await fetch(URL_DIR + `/api/songs/${idSong}`, {
         method: "GET",
     });
 
@@ -223,6 +223,61 @@ export async function fetchIsSongBought (idSong) {
 
     const response =await fetch(URL_DIR + `/api/services/is-song-bought`, {
         method: "GET",
+        headers: {     "Content-Type": "application/json", "authorization": token   },
+        body: JSON.stringify(body)
+    });
+
+    return response;
+}
+
+//ADDRESSES
+export async function fetchUserAddresses () {
+    const token = getTokenPrepared();
+
+    const response =await fetch(URL_DIR + `/api/addresses`, {
+        method: "GET",
+        headers: {  "authorization": token   },
+    });
+
+    return response;
+}
+
+export async function fetchDefaultUserAddress () {
+    const token = getTokenPrepared();
+
+    const response =await fetch(URL_DIR + `/api/addresses/default`, {
+        method: "GET",
+        headers: {  "authorization": token   },
+    });
+
+    return response;
+}
+
+export async function requestCreateAddress (address) {
+    const token = getTokenPrepared();
+
+    const body = {
+        address
+    }
+
+    const response =await fetch(URL_DIR + `/api/addresses`, {
+        method: "POST",
+        headers: {     "Content-Type": "application/json", "authorization": token   },
+        body: JSON.stringify(body)
+    });
+
+    return response;
+}
+
+export async function requestDeleteAddress (id_address) {
+    const token = getTokenPrepared();
+
+    const body = {
+        id_address
+    }
+
+    const response =await fetch(URL_DIR + `/api/addresses`, {
+        method: "DELETE",
         headers: {     "Content-Type": "application/json", "authorization": token   },
         body: JSON.stringify(body)
     });
