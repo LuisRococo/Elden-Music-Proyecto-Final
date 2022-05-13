@@ -21,6 +21,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { removeSong } from "../../redux/reducers/playerReducer";
 import { deleteToken } from "../../redux/reducers/tokenReducer";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { deleteAll } from "../../redux/reducers/shoppingCarReducer";
 
 export default function AdminMenu() {
   const dispatch = useDispatch();
@@ -30,7 +31,10 @@ export default function AdminMenu() {
   const drawerWidth = 240;
   const navigate = useNavigate();
 
-  const loginPages = [{ name: "Addresses", url: "address-management" }];
+  const loginPages = [
+    { name: "Addresses", url: "address-management" },
+    { name: "My Songs", url: "my-songs" },
+  ];
 
   const adminPages = [
     {
@@ -50,6 +54,7 @@ export default function AdminMenu() {
   function logout() {
     dispatch(removeSong());
     dispatch(deleteToken());
+    dispatch(deleteAll());
     navigate("/");
     dispatch(hide());
   }

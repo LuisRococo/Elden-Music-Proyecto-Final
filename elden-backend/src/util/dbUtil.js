@@ -50,8 +50,27 @@ async function getCorrspondingSongVersion(token, idSong) {
   }
 }
 
+async function buyAlbum(idAlbum, idUser) {
+  try {
+    const album = await Album.findOne({
+      where: { id_album: idAlbum },
+      include: {
+        model: Song,
+      },
+    });
+    const songs = album.Songs;
+    for (let index = 0; index < songs.length; index++) {
+      const song = songs[index];
+      await UserSong.create({ id_user: idUser, id_song: song.id_song });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 module.exports = {
   doesAlbumAcceptsMoreSongs,
   doesUserOwnsSong,
   getCorrspondingSongVersion,
+  buyAlbum,
 };

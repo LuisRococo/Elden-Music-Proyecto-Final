@@ -40,18 +40,16 @@ export default function LoginComp() {
         <p>Elden Music</p>
       </div>
       <div className="auth-card">
-        <h4>
-          <Typography
-            sx={{
-              fontWeight: "bold",
-              marginTop: "20px",
-              textAlign: "center",
-            }}
-            variant="h5"
-          >
-            Login
-          </Typography>
-        </h4>
+        <Typography
+          sx={{
+            fontWeight: "bold",
+            marginTop: "20px",
+            textAlign: "center",
+          }}
+          variant="h5"
+        >
+          Login
+        </Typography>
         <Divider light={false} sx={{ marginY: "20px" }} />
 
         <form

@@ -633,7 +633,38 @@ footer {
 
 /*PAYMENT PAGE*/
 .pay-pg {
-  background-color: #212121;
-  background-image: url("./img/bg-disk-1.png");
+  background-color: #e4e4e4;
+  /* background-image: url("./img/bg-disk-1.png"); */
   min-height: 100vh;
+}
+
+/*USER SONG*/
+.user-song {
+  display: flex;
+}
+
+.user-song img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  margin-right: 30px;
+}
+
+.user-song__title{
+  font-weight: bold;
+  font-size: 1.6rem;
+  margin-bottom: 5px;
+}
+
+.user-song__singer{
+  font-size: 1.1rem;
+}
+
+.user-song__info-cont{
+  flex:1;
+}
+
+.user-song__ctl-cont {
+  display: flex;
+  justify-content: flex-end;
 }

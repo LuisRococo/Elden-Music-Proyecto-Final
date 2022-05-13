@@ -6,3 +6,8 @@ export const publicPages =[{
     name: "Artists",
     url: "/artists"
 }]
+
+export const loggedPages = [{
+    name: "My Songs",
+    url: "/my-songs"
+}];

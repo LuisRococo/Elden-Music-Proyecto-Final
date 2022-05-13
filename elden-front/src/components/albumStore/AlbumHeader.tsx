@@ -3,7 +3,7 @@ import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import AlbumIcon from "@mui/icons-material/Album";
 import AutoAwesomeMotionIcon from "@mui/icons-material/AutoAwesomeMotion";
-import { fetchFileBase64 } from "../../util/requests";
+import { fetchFileBase64, fetchIsAlbumBought } from "../../util/requests";
 import { RootState } from "../../redux/store";
 import { useSelector } from "react-redux";
 import { doesItemAlreadyExists } from "../../util/other";
@@ -23,6 +23,7 @@ export default function AlbumHeader({
   const shoppingCar = useSelector(
     (state: RootState) => state.shoppingCar.shoppingCar
   );
+  const [isBought, setIsBought] = useState(false);
 
   async function getImage() {
     const res = await fetchFileBase64(idImage);
@@ -31,12 +32,21 @@ export default function AlbumHeader({
     }
   }
 
+  async function isAlbumBought() {
+    try {
+      const res = await fetchIsAlbumBought(idAlbum);
+
+      if (res.status === 200) setIsBought((await res.json()).result);
+    } catch (error) {}
+  }
+
   useEffect(() => {
     getImage();
+    isAlbumBought();
   }, []);
 
   function shouldShowBuyIcon() {
-    return !doesItemAlreadyExists(shoppingCar, idAlbum, false);
+    return !doesItemAlreadyExists(shoppingCar, idAlbum, false) && !isBought;
   }
 
   return (

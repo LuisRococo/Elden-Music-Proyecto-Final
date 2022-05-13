@@ -198,11 +198,11 @@ export async function fetchUserSongs () {
     return response;
 }
 
-export async function requestBuySong (idSongs) {
+export async function requestBuyItems (items) {
     const token = getTokenPrepared();
 
     const body = {
-        songs: idSongs
+        items
     }
 
     const response =await fetch(URL_DIR + `/api/services/buy-songs`, {
@@ -217,14 +217,21 @@ export async function requestBuySong (idSongs) {
 export async function fetchIsSongBought (idSong) {
     const token = getTokenPrepared();
 
-    const body = {
-        idsong: idSong
-    }
 
-    const response =await fetch(URL_DIR + `/api/services/is-song-bought`, {
+    const response =await fetch(URL_DIR + `/api/services/is-song-bought/${idSong}`, {
         method: "GET",
         headers: {     "Content-Type": "application/json", "authorization": token   },
-        body: JSON.stringify(body)
+    });
+
+    return response;
+}
+
+export async function fetchIsAlbumBought (idAlbum) {
+    const token = getTokenPrepared();
+
+    const response =await fetch(URL_DIR + `/api/services/is-album-bought/${idAlbum}`, {
+        method: "GET",
+        headers: {     "Content-Type": "application/json", "authorization": token   },
     });
 
     return response;

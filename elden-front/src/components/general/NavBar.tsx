@@ -19,7 +19,7 @@ import { deleteToken } from "../../redux/reducers/tokenReducer";
 import { RootState } from "../../redux/store";
 import LibraryMusicRoundedIcon from "@mui/icons-material/LibraryMusicRounded";
 import { show } from "../../redux/reducers/adminDrawerReducer";
-import { publicPages } from "../../util/pagesRoutes";
+import { publicPages, loggedPages } from "../../util/pagesRoutes";
 import { removeSong } from "../../redux/reducers/playerReducer";
 import LocalGroceryStoreIcon from "@mui/icons-material/LocalGroceryStore";
 
@@ -30,13 +30,6 @@ const ResponsiveAppBar = () => {
   let location = useLocation();
   const navigate = useNavigate();
   const token = useSelector((state: RootState) => state.token.token);
-
-  function logout() {
-    handleCloseUserMenu();
-    dispatch(deleteToken());
-    dispatch(removeSong());
-    navigate("/");
-  }
 
   function shouldBeHidden(actualLocation) {
     for (let index = 0; index < routesToHide.length; index++) {
@@ -64,10 +57,6 @@ const ResponsiveAppBar = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
   if (shouldBeHidden(location.pathname)) {
     return null;
   }
@@ -84,7 +73,6 @@ const ResponsiveAppBar = () => {
               </div>
             </Link>
           </Box>
-
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -114,6 +102,7 @@ const ResponsiveAppBar = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
+              {/* MOVILE ITEMS */}
               {publicPages.map((page) => (
                 <MenuItem
                   key={"navbar-item" + page.name}
@@ -126,9 +115,26 @@ const ResponsiveAppBar = () => {
                   </Box>
                 </MenuItem>
               ))}
+              {token && (
+                <Box>
+                  {loggedPages.map((page) => (
+                    <MenuItem
+                      key={"navbar-item" + page.name}
+                      onClick={handleCloseNavMenu}
+                    >
+                      <Box sx={{ textAlign: "center" }}>
+                        <Link style={{ textDecoration: "none" }} to={page.url}>
+                          <Typography textAlign="center">
+                            {page.name}
+                          </Typography>
+                        </Link>
+                      </Box>
+                    </MenuItem>
+                  ))}
+                </Box>
+              )}
             </Menu>
           </Box>
-
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <Link style={{ textDecoration: "none" }} to="/">
               <div className="logo-comp--nv">
@@ -137,7 +143,7 @@ const ResponsiveAppBar = () => {
               </div>
             </Link>
           </Box>
-
+          {/* DESKTOP ITEMS */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {publicPages.map((page, key) => (
               <Link
@@ -154,8 +160,27 @@ const ResponsiveAppBar = () => {
                 </Button>
               </Link>
             ))}
-          </Box>
 
+            {token && (
+              <Box>
+                {loggedPages.map((page, key) => (
+                  <Link
+                    style={{ textDecoration: "none" }}
+                    to={page.url}
+                    key={"navbar-item-2" + key}
+                  >
+                    <Button
+                      key={"navbar-item-2" + page.name}
+                      onClick={handleCloseNavMenu}
+                      sx={{ my: 2, color: "white", display: "block" }}
+                    >
+                      {page.name}
+                    </Button>
+                  </Link>
+                ))}
+              </Box>
+            )}
+          </Box>
           {token ? (
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <Box>
