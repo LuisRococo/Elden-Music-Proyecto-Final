@@ -3,6 +3,8 @@ const Song = require("../db/models/songModel");
 const { getConnection } = require("../db/dbSequelizeconn");
 const UserSong = require("../db/models/userSongModel");
 const File = require("../db/models/fileModel");
+const { Op } = require("sequelize");
+const Singer = require("../db/models/singerModel");
 
 async function doesAlbumAcceptsMoreSongs(idAlbum) {
   const album = await Album.findOne({ where: { id_album: idAlbum } });
@@ -68,9 +70,46 @@ async function buyAlbum(idAlbum, idUser) {
   }
 }
 
+//SEARCH
+async function searchSongByName(name) {
+  const songs = await Song.findAll({
+    include: [
+      {
+        model: Album,
+        include: [
+          {
+            model: Singer,
+          },
+        ],
+      },
+    ],
+    where: {
+      song_name: { [Op.like]: `%${name}%` },
+    },
+  });
+  return songs;
+}
+
+async function searchAlbumByName(name) {
+  const albums = await Album.findAll({
+    include: [
+      {
+        model: Singer,
+      },
+      { model: Song },
+    ],
+    where: {
+      album_name: { [Op.like]: `%${name}%` },
+    },
+  });
+  return albums;
+}
+
 module.exports = {
   doesAlbumAcceptsMoreSongs,
   doesUserOwnsSong,
   getCorrspondingSongVersion,
   buyAlbum,
+  searchSongByName,
+  searchAlbumByName,
 };

@@ -1,6 +1,10 @@
 const { getErrorAnswer, getSuccessAnswer } = require("../util/util");
 const File = require("../db/models/fileModel");
-const { buyAlbum } = require("../util/dbUtil");
+const {
+  buyAlbum,
+  searchSongByName,
+  searchAlbumByName,
+} = require("../util/dbUtil");
 const UserSong = require("../db/models/userSongModel");
 const Song = require("../db/models/songModel");
 const Album = require("../db/models/albumModel");
@@ -104,9 +108,25 @@ async function isAlbumBougth(req, res, next) {
   }
 }
 
+/*SEARCH*/
+async function searchByName(req, res, next) {
+  try {
+    const { name } = req.params;
+    const response = { songs: [], albums: [] };
+    const songs = await searchSongByName(name);
+    const albums = await searchAlbumByName(name);
+    response.songs = songs;
+    response.albums = albums;
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   getUserSongs,
   buyItems,
   isSongBought,
   isAlbumBougth,
+  searchByName,
 };
