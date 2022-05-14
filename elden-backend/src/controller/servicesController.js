@@ -4,6 +4,8 @@ const {
   buyAlbum,
   searchSongByName,
   searchAlbumByName,
+  searchSongBySinger,
+  searchAlbumBySinger,
 } = require("../util/dbUtil");
 const UserSong = require("../db/models/userSongModel");
 const Song = require("../db/models/songModel");
@@ -11,6 +13,7 @@ const Album = require("../db/models/albumModel");
 const Singer = require("../db/models/singerModel");
 const { getConnection } = require("../db/dbSequelizeconn");
 const getDataBaseConnection = require("../db/dbConnect");
+const { Op, where } = require("sequelize");
 
 async function getUserSongs(req, res, next) {
   try {
@@ -112,12 +115,83 @@ async function isAlbumBougth(req, res, next) {
 async function searchByName(req, res, next) {
   try {
     const { name } = req.params;
+    let { order } = req.query;
+    order = order === null ? true : false;
     const response = { songs: [], albums: [] };
+
     const songs = await searchSongByName(name);
     const albums = await searchAlbumByName(name);
+
     response.songs = songs;
     response.albums = albums;
+
     res.json(response);
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function searchBySinger(req, res, next) {
+  try {
+    const { name } = req.params;
+    let { order } = req.query;
+    order = order === null ? true : false;
+    const response = { songs: [], albums: [] };
+
+    const songs = await searchSongBySinger(name, order);
+    const albums = await searchAlbumBySinger(name, order);
+
+    response.songs = songs;
+    response.albums = albums;
+
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function searchBySinger(req, res, next) {
+  try {
+    const { name } = req.params;
+    let { order } = req.query;
+    order = order === null ? true : false;
+    const response = { songs: [], albums: [] };
+
+    const songs = await searchSongBySinger(name, order);
+    const albums = await searchAlbumBySinger(name, order);
+
+    response.songs = songs;
+    response.albums = albums;
+
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function searchByAlbum(req, res, next) {
+  try {
+    const { name } = req.params;
+    let { order } = req.query;
+    order = order === null ? true : false;
+    const whereOpt = name
+      ? {
+          album_name: { [Op.like]: `%${name}%` },
+        }
+      : null;
+
+    const albums = await Album.findAll({
+      include: [
+        {
+          model: Singer,
+        },
+        { model: Song },
+      ],
+      where: whereOpt,
+      order: [["release_date", order ? "ASC" : "DESC"]],
+    });
+
+    res.json(albums);
   } catch (error) {
     next(error);
   }
@@ -129,4 +203,6 @@ module.exports = {
   isSongBought,
   isAlbumBougth,
   searchByName,
+  searchBySinger,
+  searchByAlbum,
 };

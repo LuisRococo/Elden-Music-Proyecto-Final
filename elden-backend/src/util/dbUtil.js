@@ -3,7 +3,7 @@ const Song = require("../db/models/songModel");
 const { getConnection } = require("../db/dbSequelizeconn");
 const UserSong = require("../db/models/userSongModel");
 const File = require("../db/models/fileModel");
-const { Op } = require("sequelize");
+const { Op, where } = require("sequelize");
 const Singer = require("../db/models/singerModel");
 
 async function doesAlbumAcceptsMoreSongs(idAlbum) {
@@ -71,7 +71,12 @@ async function buyAlbum(idAlbum, idUser) {
 }
 
 //SEARCH
-async function searchSongByName(name) {
+async function searchSongByName(name, order) {
+  const whereOpt = name
+    ? {
+        song_name: { [Op.like]: `%${name}%` },
+      }
+    : null;
   const songs = await Song.findAll({
     include: [
       {
@@ -83,25 +88,74 @@ async function searchSongByName(name) {
         ],
       },
     ],
-    where: {
-      song_name: { [Op.like]: `%${name}%` },
-    },
+    where: whereOpt,
+    order: [[Album, "release_date", order ? "ASC" : "DESC"]],
   });
   return songs;
 }
 
-async function searchAlbumByName(name) {
-  const albums = await Album.findAll({
+async function searchAlbumByName(name, order) {
+  const whereOpt = name
+    ? {
+        album_name: { [Op.like]: `%${name}%` },
+      }
+    : null;
+  const opt = {
     include: [
       {
         model: Singer,
       },
       { model: Song },
     ],
-    where: {
-      album_name: { [Op.like]: `%${name}%` },
-    },
-  });
+    where: whereOpt,
+    order: [["release_date", order ? "ASC" : "DESC"]],
+  };
+
+  const albums = await Album.findAll(opt);
+  return albums;
+}
+
+async function searchSongBySinger(name, order) {
+  const whereOpt = name
+    ? { "$Album.Singer.singer_name$": { [Op.like]: `%${name}%` } }
+    : null;
+  const opt = {
+    include: [
+      {
+        model: Album,
+        include: [
+          {
+            model: Singer,
+          },
+        ],
+      },
+    ],
+
+    where: whereOpt,
+    order: [[Album, "release_date", order ? "ASC" : "DESC"]],
+  };
+
+  return await Song.findAll(opt);
+}
+
+async function searchAlbumBySinger(name, order) {
+  const whereOpt = name
+    ? {
+        "$Singer.singer_name$": { [Op.like]: `%${name}%` },
+      }
+    : null;
+  const opt = {
+    include: [
+      {
+        model: Singer,
+      },
+      { model: Song },
+    ],
+    order: [["release_date", order ? "ASC" : "DESC"]],
+    where: whereOpt,
+  };
+
+  const albums = await Album.findAll(opt);
   return albums;
 }
 
@@ -112,4 +166,6 @@ module.exports = {
   buyAlbum,
   searchSongByName,
   searchAlbumByName,
+  searchAlbumBySinger,
+  searchSongBySinger,
 };
