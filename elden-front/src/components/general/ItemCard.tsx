@@ -27,7 +27,7 @@ export default function ItemCard({
 
   useEffect(() => {
     getImage64();
-  }, []);
+  }, [title]);
 
   return (
     <Grid item xs={gridXS} md={gridMD}>

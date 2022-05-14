@@ -114,8 +114,7 @@ async function isAlbumBougth(req, res, next) {
 /*SEARCH*/
 async function searchByName(req, res, next) {
   try {
-    const { name } = req.params;
-    let { order } = req.query;
+    let { order, name } = req.query;
     order = order === null ? true : false;
     const response = { songs: [], albums: [] };
 
@@ -133,8 +132,7 @@ async function searchByName(req, res, next) {
 
 async function searchBySinger(req, res, next) {
   try {
-    const { name } = req.params;
-    let { order } = req.query;
+    let { order, name } = req.query;
     order = order === null ? true : false;
     const response = { songs: [], albums: [] };
 
@@ -152,8 +150,7 @@ async function searchBySinger(req, res, next) {
 
 async function searchBySinger(req, res, next) {
   try {
-    const { name } = req.params;
-    let { order } = req.query;
+    let { order, name } = req.query;
     order = order === null ? true : false;
     const response = { songs: [], albums: [] };
 
@@ -171,9 +168,9 @@ async function searchBySinger(req, res, next) {
 
 async function searchByAlbum(req, res, next) {
   try {
-    const { name } = req.params;
-    let { order } = req.query;
+    let { order, name } = req.query;
     order = order === null ? true : false;
+    const response = { songs: [], albums: [] };
     const whereOpt = name
       ? {
           album_name: { [Op.like]: `%${name}%` },
@@ -191,7 +188,9 @@ async function searchByAlbum(req, res, next) {
       order: [["release_date", order ? "ASC" : "DESC"]],
     });
 
-    res.json(albums);
+    response.albums = albums;
+
+    res.json(response);
   } catch (error) {
     next(error);
   }

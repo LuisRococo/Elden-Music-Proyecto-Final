@@ -291,3 +291,25 @@ export async function requestDeleteAddress (id_address) {
 
     return response;
 }
+
+//SEARCH
+export async function fetchSearchName (name, order) {
+    const response =await fetch(URL_DIR + `/api/services/search-by-name?order=${order}&name=${name}`, {
+        method: "GET",
+    });
+    return response;
+}
+
+export async function fetchSearchSinger (name, order) {
+    const response =await fetch(URL_DIR + `/api/services/search-by-singer?order=${order}&name=${name}`, {
+        method: "GET",
+    });
+    return response;
+}
+
+export async function fetchSearchAlbums (name, order) {
+    const response =await fetch(URL_DIR + `/api/services/search-albums?order=${order}&name=${name}`, {
+        method: "GET",
+    });
+    return response;
+}

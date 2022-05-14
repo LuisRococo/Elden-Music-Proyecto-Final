@@ -5,6 +5,9 @@ export const publicPages =[{
 {
     name: "Artists",
     url: "/artists"
+},{
+    name: "Search",
+    url: "/search"
 }]
 
 export const loggedPages = [{

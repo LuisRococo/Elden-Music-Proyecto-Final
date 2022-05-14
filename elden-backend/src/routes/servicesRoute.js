@@ -20,10 +20,10 @@ router.get("/is-song-bought/:idSong", verifyClientAuth, isSongBought);
 router.get("/is-album-bought/:idAlbum", verifyClientAuth, isAlbumBougth);
 
 //SEARCH
-router.get("/search-by-name/:name", searchByName);
+router.get("/search-by-name", searchByName);
 
-router.get("/search-by-singer/:name", searchBySinger);
+router.get("/search-by-singer", searchBySinger);
 
-router.get("/search-albums/:name", searchByAlbum);
+router.get("/search-albums", searchByAlbum);
 
 module.exports = router;

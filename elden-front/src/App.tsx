@@ -21,6 +21,7 @@ import ShoppingCarPage from "./pages/ShoppingCarPage";
 import PaymentPage from "./pages/PaymentPage";
 import AddressPage from "./pages/AddressPage";
 import MySongsPage from "./pages/MySongsPage";
+import SearchPage from "./pages/SearchPage";
 
 function App() {
   return (
@@ -39,6 +40,8 @@ function App() {
         <Route path="/artist/:idArtist" element={<ArtistPage />} />
 
         <Route path="/album/:idAlbum" element={<AlbumPage />} />
+
+        <Route path="/search" element={<SearchPage />} />
 
         <Route
           path="/login"
