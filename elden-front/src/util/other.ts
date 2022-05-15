@@ -1,6 +1,6 @@
 import store from "../redux/store";
 
-const URL_DIR = "http://3.218.67.164:10026";
+const URL_DIR = "http://3.218.67.164:11026";
 // const URL_DIR = "http://localhost:8000";
 
 async function toBase64(file) {

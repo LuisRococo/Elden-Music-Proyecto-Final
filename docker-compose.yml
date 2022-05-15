@@ -33,7 +33,7 @@ services:
       - ./elden-backend:/usr/app/elden-server
       - /usr/app/elden-server/node_modules
     ports:
-      - "10026:8000"
+      - "11026:8000"
     depends_on:
       - elden_db_26
     environment:
@@ -56,11 +56,9 @@ services:
       - ./elden-front:/usr/app/elden-front
       - /usr/app/elden-front/node_modules
     ports:
-      - "11026:3000"
+      - "10026:3000"
     depends_on:
       - elden_back_26
-    environment:
-      - "ELDEN_BACK_URL=http://3.218.67.164:10026"
 
 
 networks:

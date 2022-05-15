@@ -60,7 +60,7 @@ export default function LoginComp() {
         >
           <TextField
             id="standard-basic"
-            label="Username or Email"
+            label="Username"
             variant="standard"
             sx={{ marginBottom: "15px" }}
             required={true}
