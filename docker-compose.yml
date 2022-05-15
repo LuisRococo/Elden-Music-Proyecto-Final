@@ -1,0 +1,27 @@
+version: '3.3'
+services:
+  elden_db_26:
+    image: mysql:8.0.28
+    restart: always
+    container_name: "elden_db_26"
+    environment:
+      MYSQL_DATABASE: 'db_elden_music'
+      MYSQL_USER: 'elden'
+      MYSQL_PASSWORD: 'root'
+      MYSQL_ROOT_PASSWORD: 'rootroot'
+    ports:
+      # <Port exposed> : < MySQL Port running inside container>
+      - 10026:3306
+    # expose:
+      # Opens port 3306 on the container
+      # - '11026'
+      # Where our data will be persisted
+    networks:
+      - our-library-net
+    volumes:
+      - /home/luis_pena/proyecto-final-musica/mysql:/var/lib/mysql
+      - /home/luis_pena/proyecto-final-musica/Elden-Music-Proyecto-Final/init.sql:/docker-entrypoint-initdb.d/init.sql
+networks:
+  our-library-net:
+    external: true
+    driver: bridge
