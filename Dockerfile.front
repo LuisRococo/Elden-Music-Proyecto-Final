@@ -1,0 +1,6 @@
+FROM node:16
+
+WORKDIR /usr/app/elden-front
+COPY ./elden-front/package.json .
+RUN npm install
+COPY ./elden-front/ .

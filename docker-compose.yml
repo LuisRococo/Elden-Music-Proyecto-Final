@@ -1,5 +1,7 @@
 version: '3.3'
 services:
+  
+  
   elden_db_26:
     image: mysql:8.0.28
     restart: always
@@ -11,14 +13,18 @@ services:
       MYSQL_ROOT_PASSWORD: 'rootroot'
     ports:
       # <Port exposed> : < MySQL Port running inside container>
-      - 10026:3306
+      - 9026:3306
     networks:
       - our-library-net
     volumes:
       - /home/luis_pena/proyecto-final-musica/mysql:/var/lib/mysql
       - /home/luis_pena/proyecto-final-musica/Elden-Music-Proyecto-Final/init.sql:/docker-entrypoint-initdb.d/init.sql
+  
+  
   elden_back_26:
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile.back
     container_name: "elden_back_26"
     command: npm run start
     networks:
@@ -27,7 +33,7 @@ services:
       - ./elden-backend:/usr/app/elden-server
       - /usr/app/elden-server/node_modules
     ports:
-      - "11026:8000"
+      - "10026:8000"
     depends_on:
       - elden_db_26
     environment:
@@ -36,6 +42,27 @@ services:
       - "MYSQL_PASSWORD=rootroot"
       - "MYSQL_HOST=elden_db_26"
       - "MYSQL_PORT=3306"
+
+
+  elden_front_26:
+    build:
+      context: .
+      dockerfile: Dockerfile.front
+    container_name: "elden_front_26"
+    command: npm run start
+    networks:
+      - our-library-net
+    volumes:
+      - ./elden-front:/usr/app/elden-front
+      - /usr/app/elden-front/node_modules
+    ports:
+      - "11026:3000"
+    depends_on:
+      - elden_back_26
+    environment:
+      - "ELDEN_BACK_URL=http://3.218.67.164:10026"
+
+
 networks:
   our-library-net:
     external: true
