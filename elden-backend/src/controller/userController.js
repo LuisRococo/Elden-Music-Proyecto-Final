@@ -61,7 +61,7 @@ async function login(req, res, next) {
         is_admin: user.is_admin,
       },
       AUTH_SECRET_KEY,
-      { expiresIn: "3h" }
+      { expiresIn: "12h" }
     );
 
     user = {

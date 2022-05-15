@@ -1,5 +1,0 @@
-2. En algunos deletes faltara eliminar dependencias quizas
-3. album cambio isSingle debe de validarse (update)
-
-CHECADO:
-1. En update ver que onda con lo del update, ver si si se modifican todos o solo unos valores
