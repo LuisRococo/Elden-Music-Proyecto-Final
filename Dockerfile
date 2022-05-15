@@ -1,4 +1,9 @@
 FROM node:16
 
-WORKDIR /usr/src/elden-back
+WORKDIR /usr/app/elden-server
+COPY ./elden-backend/package.json .
+RUN npm install
+COPY ./elden-backend .
 
+
+# CMD ["sleep","infinity"]

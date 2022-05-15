@@ -12,15 +12,30 @@ services:
     ports:
       # <Port exposed> : < MySQL Port running inside container>
       - 10026:3306
-    # expose:
-      # Opens port 3306 on the container
-      # - '11026'
-      # Where our data will be persisted
     networks:
       - our-library-net
     volumes:
       - /home/luis_pena/proyecto-final-musica/mysql:/var/lib/mysql
       - /home/luis_pena/proyecto-final-musica/Elden-Music-Proyecto-Final/init.sql:/docker-entrypoint-initdb.d/init.sql
+  elden_back_26:
+    build: .
+    container_name: "elden_back_26"
+    command: npm run start
+    networks:
+      - our-library-net
+    volumes:
+      - ./elden-backend:/usr/app/elden-server
+      - /usr/app/elden-server/node_modules
+    ports:
+      - "11026:8000"
+    depends_on:
+      - elden_db_26
+    environment:
+      - "MSQL_DB=db_elden_music"
+      - "MYSQL_USER=root"
+      - "MYSQL_PASSWORD=rootroot"
+      - "MYSQL_HOST=elden_db_26"
+      - "MYSQL_PORT=3306"
 networks:
   our-library-net:
     external: true

@@ -102,3 +102,7 @@ primary: #a015e6
 *****server
 npm install -g serve
   serve -s build
+
+COMMANDS
+docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name_or_id
+docker rmi [id] !!!eliminar imagenes
