@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Typography, Divider, Link } from "@mui/material";
+import { Typography, Divider } from "@mui/material";
 import { Password } from "@mui/icons-material";
 import { Button, SxProps, TextField } from "@mui/material";
 import LogoImg from "../../img/logo.png";
 import { fetchLogin } from "../../util/requests";
 import { hideError, showError } from "../../redux/reducers/errorReducer";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { addToken } from "../../redux/reducers/tokenReducer";
 import { RootState } from "../../redux/store";
 
@@ -92,7 +92,14 @@ export default function LoginComp() {
             Log In
           </Button>
 
-          <Link sx={{ textAlign: "right" }} href="/signin">
+          <Link
+            style={{
+              textAlign: "right",
+              color: "#d16e17",
+              textDecoration: "none",
+            }}
+            to="/signin"
+          >
             Sign In
           </Link>
         </form>
