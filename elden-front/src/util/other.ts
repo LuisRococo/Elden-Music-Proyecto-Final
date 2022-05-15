@@ -1,8 +1,7 @@
 import store from "../redux/store";
 
-console.log(process.env);
-
-const URL_DIR = process.env.ELDEN_BACK_URL || "http://3.218.67.164:10026";
+const URL_DIR = "http://3.218.67.164:10026";
+// const URL_DIR = "http://localhost:8000";
 
 async function toBase64(file) {
     return new Promise((resolve, reject) => {

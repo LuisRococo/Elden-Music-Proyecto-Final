@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.6a09fe0b.css",
+    "main.js": "/static/js/main.1a71f37e.js",
+    "static/js/787.705f6ac8.chunk.js": "/static/js/787.705f6ac8.chunk.js",
+    "static/media/music-disk.gif": "/static/media/music-disk.e45844af417df794b47a.gif",
+    "static/media/404-img.png": "/static/media/404-img.ff0d156563dc43eb38a6.png",
+    "static/media/land-page-bg-1.jpeg": "/static/media/land-page-bg-1.8f4bfb75304aa3306b7c.jpeg",
+    "static/media/concert-1.jpeg": "/static/media/concert-1.f77da5a73f9da6d950a7.jpeg",
+    "static/media/artist-bg-1.jpeg": "/static/media/artist-bg-1.266335fe60bed664fae3.jpeg",
+    "static/media/concert-wallpaper-2.jpeg": "/static/media/concert-wallpaper-2.3df8d0109fbfd2030cf9.jpeg",
+    "static/media/profile.png": "/static/media/profile.98df88ac9511b355a676.png",
+    "static/media/section-bg.jpg": "/static/media/section-bg.dee70286dea9ec027eeb.jpg",
+    "static/media/white-headphones.webp": "/static/media/white-headphones.3eefd8c08acec6e9cbec.webp",
+    "static/media/logo.png": "/static/media/logo.b0aa2f3ec795c3e4311c.png",
+    "static/media/flash-sale.gif": "/static/media/flash-sale.d952506cbb8974b8fe14.gif",
+    "index.html": "/index.html",
+    "main.6a09fe0b.css.map": "/static/css/main.6a09fe0b.css.map",
+    "main.1a71f37e.js.map": "/static/js/main.1a71f37e.js.map",
+    "787.705f6ac8.chunk.js.map": "/static/js/787.705f6ac8.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6a09fe0b.css",
+    "static/js/main.1a71f37e.js"
+  ]
+}

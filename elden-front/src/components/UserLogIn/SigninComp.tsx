@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Typography, Divider, Link } from "@mui/material";
+import { Typography, Divider } from "@mui/material";
 import { Button, SxProps, TextField } from "@mui/material";
 import LogoImg from "../../img/logo.png";
 import { fetchSignin } from "../../util/requests";
 import { hideError, showError } from "../../redux/reducers/errorReducer";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function SigninComp() {
   const [userName, setUserName] = useState("");
@@ -39,18 +39,16 @@ export default function SigninComp() {
         <p>Elden Music</p>
       </div>
       <div className="auth-card">
-        <h4>
-          <Typography
-            sx={{
-              fontWeight: "bold",
-              marginTop: "20px",
-              textAlign: "center",
-            }}
-            variant="h5"
-          >
-            Sign In
-          </Typography>
-        </h4>
+        <Typography
+          sx={{
+            fontWeight: "bold",
+            marginTop: "20px",
+            textAlign: "center",
+          }}
+          variant="h5"
+        >
+          Sign In
+        </Typography>
         <Divider light={false} sx={{ marginY: "20px" }} />
 
         <form
@@ -105,7 +103,14 @@ export default function SigninComp() {
           >
             Sign In
           </Button>
-          <Link sx={{ textAlign: "right" }} href="/login">
+          <Link
+            style={{
+              textAlign: "right",
+              color: "#d16e17",
+              textDecoration: "none",
+            }}
+            to={"/login"}
+          >
             Log In
           </Link>
         </form>
