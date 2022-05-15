@@ -12,6 +12,7 @@ const addressRoute = require("./src/routes/addressRoute");
 const playlistsRoute = require("./src/routes/PlaylistRoute");
 const playlistSongsRoute = require("./src/routes/playlistSongRoute");
 const { getErrorAnswer } = require("./src/util/util");
+const path = require("path");
 var cors = require("cors");
 
 //CONFIGURE
@@ -27,10 +28,11 @@ app.use(
   })
 );
 app.use(express.json({ limit: "16mb" }));
+app.use(express.static(path.join(__dirname, "src", "build")));
 
 //ROUTES
 app.get("/", (req, res) => {
-  res.send({ welcome: "Welcome to Elden Music API !!!" });
+  res.sendFile(path.join(__dirname, "build", "src", "index.html"));
 });
 
 apiRouter.use("/users", userRouter);
