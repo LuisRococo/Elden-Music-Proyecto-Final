@@ -32,8 +32,9 @@ export default function AdminMenu() {
   const navigate = useNavigate();
 
   const loginPages = [
-    { name: "Addresses", url: "address-management" },
-    { name: "My Songs", url: "my-songs" },
+    { name: "Addresses", url: "/address-management" },
+    { name: "My Songs", url: "/my-songs" },
+    { name: "My Playlists", url: "/playlists" },
   ];
 
   const adminPages = [

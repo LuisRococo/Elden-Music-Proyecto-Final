@@ -22,6 +22,7 @@ import PaymentPage from "./pages/PaymentPage";
 import AddressPage from "./pages/AddressPage";
 import MySongsPage from "./pages/MySongsPage";
 import SearchPage from "./pages/SearchPage";
+import PlaylistsPage from "./pages/PlaylistsPage";
 
 function App() {
   return (
@@ -120,6 +121,15 @@ function App() {
           element={
             <ProtectRoute adminPermissions={false}>
               <MySongsPage />
+            </ProtectRoute>
+          }
+        />
+
+        <Route
+          path="/playlists"
+          element={
+            <ProtectRoute adminPermissions={false}>
+              <PlaylistsPage />
             </ProtectRoute>
           }
         />

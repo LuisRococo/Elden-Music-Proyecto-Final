@@ -162,7 +162,7 @@ const ResponsiveAppBar = () => {
             ))}
 
             {token && (
-              <Box>
+              <>
                 {loggedPages.map((page, key) => (
                   <Link
                     style={{ textDecoration: "none" }}
@@ -178,7 +178,7 @@ const ResponsiveAppBar = () => {
                     </Button>
                   </Link>
                 ))}
-              </Box>
+              </>
             )}
           </Box>
           {token ? (

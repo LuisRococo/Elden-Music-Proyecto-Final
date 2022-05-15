@@ -9,6 +9,8 @@ const songRoute = require("./src/routes/songRoute");
 const singerTops = require("./src/routes/topSingerSongs");
 const servicesRoute = require("./src/routes/servicesRoute");
 const addressRoute = require("./src/routes/addressRoute");
+const playlistsRoute = require("./src/routes/PlaylistRoute");
+const playlistSongsRoute = require("./src/routes/playlistSongRoute");
 const { getErrorAnswer } = require("./src/util/util");
 var cors = require("cors");
 
@@ -41,6 +43,8 @@ apiRouter.use("/songs", songRoute);
 apiRouter.use("/singer-tops", singerTops);
 apiRouter.use("/addresses", addressRoute);
 apiRouter.use("/services", servicesRoute);
+apiRouter.use("/playlists", playlistsRoute);
+apiRouter.use("/playlist-songs", playlistSongsRoute);
 app.use("/api", apiRouter);
 
 //error handler middleware

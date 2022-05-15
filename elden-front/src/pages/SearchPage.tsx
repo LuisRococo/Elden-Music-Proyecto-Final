@@ -38,8 +38,8 @@ export default function SearchPage() {
                   <ItemCard
                     idImage={song.Album.id_image}
                     detail={song.Album.Singer.singer_name}
-                    title={song.Album.album_name}
-                    url={`/song/${song.Album.id_song}`}
+                    title={song.song_name}
+                    url={`/album/${song.Album.id_album}`}
                     isSquare={false}
                   />
                 </Box>

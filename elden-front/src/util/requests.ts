@@ -313,3 +313,72 @@ export async function fetchSearchAlbums (name, order) {
     });
     return response;
 }
+
+//PLAYLISTS
+export async function requestCreatePlaylist (name) {
+    const token = getTokenPrepared();
+
+    const body = {
+        name
+    }
+
+    const response =await fetch(URL_DIR + `/api/playlists`, {
+        method: "POST",
+        headers: {     "Content-Type": "application/json", "authorization": token   },
+        body: JSON.stringify(body)
+    });
+
+    return response;
+}
+
+export async function requestDeletePlaylist (id) {
+    const token = getTokenPrepared();
+
+    const response =await fetch(URL_DIR + `/api/playlists/${id}`, {
+        method: "POST",
+        headers: {     "Content-Type": "application/json", "authorization": token   },
+    });
+
+    return response;
+}
+
+export async function fetchUserPlaylists () {
+    const token = getTokenPrepared();
+    const response =await fetch(URL_DIR + `/api/playlists`, {
+        method: "GET",
+        headers: {     "Content-Type": "application/json", "authorization": token   },
+    });
+    return response;
+}
+
+export async function requestAddSongToPlaylist (idPlaylist, idSong) {
+    const token = getTokenPrepared();
+
+    const body = {
+        idPlaylist, idSong
+    }
+
+    const response =await fetch(URL_DIR + `/api/playlist-songs`, {
+        method: "POST",
+        headers: {     "Content-Type": "application/json", "authorization": token   },
+        body: JSON.stringify(body)
+    });
+
+    return response;
+}
+
+export async function requestRemoveSongToPlaylist (idPlaylist, idSong) {
+    const token = getTokenPrepared();
+
+    const body = {
+        idPlaylist, idSong
+    }
+
+    const response =await fetch(URL_DIR + `/api/playlist-songs`, {
+        method: "DELETE",
+        headers: {     "Content-Type": "application/json", "authorization": token   },
+        body: JSON.stringify(body)
+    });
+
+    return response;
+}

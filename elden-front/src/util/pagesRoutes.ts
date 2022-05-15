@@ -13,4 +13,7 @@ export const publicPages =[{
 export const loggedPages = [{
     name: "My Songs",
     url: "/my-songs"
+}, {
+    name: "My Playlists",
+    url: "/playlists"
 }];
