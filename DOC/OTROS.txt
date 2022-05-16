@@ -108,3 +108,24 @@ docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' cont
 docker rmi [id] !!!eliminar imagenes
 
 CONTENT
+`KRONOX
+    1
+        Dancing
+`Imagine dragons
+    1
+        believer
+        whetever it takes
+    2 Night visions
+        radioactive
+        demons
+`One republic
+    1 native
+        counting stars
+        secrets
+
+`Robin Schulz
+    1Invincible Friends
+        prayer in c
+    2 Sugar
+        sugar
+        
