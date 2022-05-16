@@ -16,7 +16,7 @@ const Song = sequelize.define(
       allowNull: false,
     },
     duration: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING(10),
       allowNull: false,
     },
     id_preview_song_file: {

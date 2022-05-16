@@ -167,7 +167,7 @@ export default function AdminAlbumPage() {
                       label="Duration (Minutes)"
                       variant="outlined"
                       required={true}
-                      type={"number"}
+                      type={"text"}
                       onChange={(e) => {
                         changeFormCreateValues("duration", e.target.value);
                       }}

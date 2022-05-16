@@ -53,7 +53,7 @@ create table tbl_album (
 create table tbl_song (
 	id_song int unsigned primary key auto_increment,
     song_name varchar(30) not null,
-    duration int not null,
+    duration VARCHAR(10) not null,
     id_preview_song_file int unsigned not null,
     id_song_file int unsigned not null,
     id_album int unsigned not null,
