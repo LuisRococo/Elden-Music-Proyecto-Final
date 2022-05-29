@@ -28,7 +28,7 @@ export default function UserSong({ idSong, idImage, songName, singerName }) {
       if (res.status === 200) {
         const params = {
           song: (await res.json()).file_content,
-          singerName,
+          singer: singerName,
           songName,
           idSong,
           idImage,
